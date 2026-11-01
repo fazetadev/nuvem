@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    letter-spacing: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+    letter-spacing: -0.015em;
+  }
+  .font-creepster {
+    font-family: 'Creepster', cursive;
+  }
+}
+
+/* Custom scrollbar in dark crimson */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #090406;
+}
+::-webkit-scrollbar-thumb {
+  background: #3f1017;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b91c1c;
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+::selection {
+  background: #dc2626;
+  color: #fff;
+}
+button:focus-visible, a:focus-visible, input:focus-visible {
+  outline: 2px solid #ef4444;
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* ===== Gamer Grid Pattern Theme (Zero Lag, 60 FPS) ===== */
+body {
+  background-color: #070305;
+  background-image:
+    linear-gradient(to right, rgba(220, 38, 38, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(220, 38, 38, 0.05) 1px, transparent 1px),
+    radial-gradient(1000px 500px at 50% 0%, rgba(220, 38, 38, 0.15), transparent 70%);
+  background-size: 32px 32px, 32px 32px, 100% 100%;
+}
+
+/* High-Performance Gamer Containers (No backdrop-filter = 60+ FPS rock-solid) */
+.glass-panel {
+  background: #100609;
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.glass-card {
+  background: #0f0508;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* Título degradado rojo Halloween */
+.title-grad-red {
+  background: linear-gradient(105deg, #ffffff 15%, #fca5a5 45%, #ef4444 75%, #dc2626 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+}
+
+.title-grad-halloween {
+  background: linear-gradient(105deg, #ffffff 10%, #fdba74 40%, #ef4444 75%, #b91c1c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+}
+
+/* Primary Blood Red Button with Glass Glow */
+.btn-blood {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #991b1b 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -8px 16px rgba(0, 0, 0, 0.25),
+    0 8px 24px rgba(220, 38, 38, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-blood:hover {
+  background: linear-gradient(135deg, #f87171 0%, #ef4444 50%, #b91c1c 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 12px 30px rgba(239, 68, 68, 0.6);
+  transform: translateY(-1px);
+}
+.btn-blood:active {
+  transform: translateY(0);
+}
+
+/* Active selected card border glow */
+.card-selected-red {
+  border: 2px solid #ef4444 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 0 0 1px rgba(239, 68, 68, 0.5),
+    0 10px 28px rgba(220, 38, 38, 0.4) !important;
+}
+
+.font-mono {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Aparición al hacer scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.reveal-in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+button, a {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+
+/* ===== OPTIMIZACIONES DE RENDIMIENTO MÓVIL (Cero lag, scroll fluido a 60/120fps) ===== */
+@media (max-width: 1024px), (pointer: coarse) {
+  body {
+    background-color: #070305 !important;
+    background-image:
+      linear-gradient(to right, rgba(220, 38, 38, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(220, 38, 38, 0.05) 1px, transparent 1px) !important;
+    background-size: 28px 28px, 28px 28px !important;
+  }
+  .glass-panel, .glass-card, [class*="backdrop-blur"] {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+}
