@@ -19,28 +19,28 @@ interface SlideItem {
   img: string;
 }
 
-// 3 noticias de Free Fire actualizadas
+// 3 banners actualizados por el usuario
 const SLIDES: SlideItem[] = [
   {
-    id: 'noticia1',
+    id: 'slide1',
     game: 'freefire',
-    title: 'Free Fire: AWM Abismo Cósmico',
-    sub: 'Próxima Arma Evo, disponible muy pronto',
-    img: IMAGES.noticia1,
-  },
-  {
-    id: 'noticia2',
-    game: 'freefire',
-    title: 'Free Fire: Pase Booyah & Diamantes',
+    title: 'Nuvem Store - Recargas Para Free Fire & Robux',
     sub: 'Recargas directas con entrega inmediata 24/7',
-    img: IMAGES.noticia2,
+    img: IMAGES.slide1,
   },
   {
-    id: 'noticia3',
+    id: 'slide2',
     game: 'freefire',
-    title: 'Free Fire: XM8 Calabaza Ardiente',
-    sub: 'Transmisión Final del 21 Oct al 1 Nov',
-    img: IMAGES.noticia3,
+    title: 'Nuvem Store - Recargas Para Free Fire & Robux',
+    sub: 'Precios justos en COP y atención rápida',
+    img: IMAGES.slide2,
+  },
+  {
+    id: 'slide3',
+    game: 'freefire',
+    title: 'Nuvem Store - Recargas Para Free Fire & Robux',
+    sub: 'Entrega en minutos sin intermediarios',
+    img: IMAGES.slide3,
   },
 ];
 

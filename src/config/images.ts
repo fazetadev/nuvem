@@ -5,15 +5,22 @@ export const IMAGES = {
   logoUrl: "https://i.ibb.co/yBk9zcqj/logo.png",
   diamond: "/images/diamantes.png",
   diamondUrl: "https://i.ibb.co/6c750gb7/diamantes.png",
-  noticia1: "/banners/noticia1.jpg",
-  noticia1Url: "https://i.ibb.co/cSpJ3nvc/a91cb409-fb50-481b-9215-db90beba7d2e.jpg",
-  noticia2: "/banners/freefire_halloween.jpg",
-  noticia2Url: "/banners/freefire_halloween.jpg",
-  noticia3: "/banners/noticia3.jpg",
-  noticia3Url: "https://i.ibb.co/fdT97KDY/466754fd-d615-48ad-93fa-0edd1cd5ad30.jpg",
+
+  // Banners del Slider / Carrusel actualizados por el usuario
+  slide1: "https://i.ibb.co/b5TdPbTp/34bb235165205574ef42b06cd29a4dc0-1.jpg",
+  slide1Url: "https://i.ibb.co/b5TdPbTp/34bb235165205574ef42b06cd29a4dc0-1.jpg",
+  slide2: "/banners/slide2.jpg",
+  slide2Url: "https://i.ibb.co/Z1MYFMJz/1793562698253-1.jpg",
+  slide3: "https://i.ibb.co/jknDhwFh/c6ab22c3f2867c3b3bf65bc015983518-1.jpg",
+  slide3Url: "https://i.ibb.co/jknDhwFh/c6ab22c3f2867c3b3bf65bc015983518-1.jpg",
+
+  // Compatibilidad hacia atrás
+  noticia1: "https://i.ibb.co/b5TdPbTp/34bb235165205574ef42b06cd29a4dc0-1.jpg",
+  noticia2: "/banners/slide2.jpg",
+  noticia3: "https://i.ibb.co/jknDhwFh/c6ab22c3f2867c3b3bf65bc015983518-1.jpg",
 
   // Logos de juegos e íconos complementarios
-  hero: "/banners/noticia1.jpg",
+  hero: "https://i.ibb.co/b5TdPbTp/34bb235165205574ef42b06cd29a4dc0-1.jpg",
   freefireLogo: "https://i.ibb.co/Q3CzSZSM/garena-free-fire-20192221291138-1.jpg",
   robux: "/images/robux.png",
   robloxLogo: "https://i.ibb.co/wNpbf3RR/Roblox-Logo-2022.jpg",
