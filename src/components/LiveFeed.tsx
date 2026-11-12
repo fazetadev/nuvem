@@ -1,20 +1,18 @@
 import React from 'react';
 
 const ITEMS = [
-  { kind: 'ff', text: 'Paquete 1.166 diamantes · listo para entrega' },
-  { kind: 'rb', text: 'Robux 400 · pedido confirmado' },
-  { kind: 'ok', text: 'Pago Nequi verificado' },
-  { kind: 'ff', text: '572 diamantes · en proceso' },
-  { kind: 'rb', text: 'Robux 800 · entrega por usuario' },
-  { kind: 'ok', text: 'Soporte respondió en menos de 2 min' },
-  { kind: 'ff', text: 'Paquete popular 1.166 · disponible' },
-  { kind: 'rb', text: 'Robux 1.700 · stock listo' },
-  { kind: 'ok', text: 'Bancolombia · sin comisión' },
-  { kind: 'ff', text: '6.160 diamantes · bono incluido' },
-  { kind: 'rb', text: 'Robux 100 · recarga rápida' },
-  { kind: 'ok', text: 'Sin contraseñas · solo ID o usuario' },
-  { kind: 'ff', text: '341 diamantes · bono activo' },
-  { kind: 'rb', text: 'Robux 4.500 · entrega prioritaria' },
+  { kind: 'ok', text: 'Pagos seguros · Nequi & Bancolombia' },
+  { kind: 'ok', text: 'Soporte 24/7 · respuesta rápida' },
+  { kind: 'ff', text: 'Diamantes baratos · mejor precio' },
+  { kind: 'rb', text: 'Robux baratos · entrega inmediata' },
+  { kind: 'ok', text: 'Venta de cuentas · verificadas' },
+  { kind: 'ok', text: 'Comprobante de diamantes · siempre' },
+  { kind: 'ok', text: 'Promociones activas · no te las pierdas' },
+  { kind: 'ff', text: 'Sin contraseñas · solo ID o usuario' },
+  { kind: 'rb', text: 'Recargas digitales · stock listo' },
+  { kind: 'ok', text: 'Entrega prioritaria · en minutos' },
+  { kind: 'ff', text: 'Bonos incluidos · más diamantes' },
+  { kind: 'rb', text: 'Robux oficial · 100% seguro' },
 ];
 
 function Row() {
@@ -33,12 +31,8 @@ function Row() {
 }
 
 export const LiveFeed: React.FC = () => (
-  <div className="live-feed" aria-label="Actividad de la tienda">
-    <div className="live-feed-badge">
-      <span className="live-dot" />
-      EN VIVO
-    </div>
-    <div className="live-feed-mask">
+  <div className="live-feed" aria-label="Ventajas de la tienda">
+    <div className="live-feed-mask full">
       <div className="live-feed-track">
         <Row />
         <Row />

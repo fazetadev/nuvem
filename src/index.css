@@ -183,46 +183,21 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   display: flex;
   align-items: center;
 }
-.live-feed-badge {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 9px;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  color: #ef3943;
-  padding: 0 12px 0 14px;
-  background: linear-gradient(90deg, #09070a 70%, transparent);
-  pointer-events: none;
-}
-.live-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #ef3943;
-  box-shadow: 0 0 10px #ef3943;
-  animation: pulse-dot 1.4s ease-in-out infinite;
-}
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.45; transform: scale(0.8); }
-}
 .live-feed-mask {
   width: 100%;
   overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent 0, #000 80px, #000 calc(100% - 24px), transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 80px, #000 calc(100% - 24px), transparent);
+  mask-image: linear-gradient(90deg, transparent 0, #000 24px, #000 calc(100% - 24px), transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 24px, #000 calc(100% - 24px), transparent);
+}
+.live-feed-mask.full {
+  mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 16px), transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 16px), transparent);
 }
 .live-feed-track {
   display: flex;
   width: max-content;
   gap: 0;
-  animation: marquee 40s linear infinite;
+  animation: marquee 42s linear infinite;
   will-change: transform;
 }
 .live-feed:hover .live-feed-track {
@@ -254,6 +229,20 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 .live-chip.rb { background: rgba(200,160,60,.12); color: #d4b45a; }
 .live-chip.ok { background: rgba(87,212,155,.12); color: #57d49b; }
 .live-text { font-weight: 600; }
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ef3943;
+  box-shadow: 0 0 10px #ef3943;
+  animation: pulse-dot 1.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.8); }
+}
 
 /* ─── HERO LAYOUT ─── */
 .hero-section {
@@ -466,6 +455,23 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   border-radius: inherit;
   background: radial-gradient(ellipse at 50% 0%, rgba(239, 48, 57, 0.12), transparent 60%);
   pointer-events: none;
+}
+/* Robux popular stays gold/yellow, never red */
+.theme-robux .package-card.is-popular {
+  border-color: #5a4a28;
+}
+.theme-robux .package-card.is-popular::before {
+  background: radial-gradient(ellipse at 50% 0%, rgba(200, 160, 60, 0.14), transparent 60%);
+}
+.theme-robux .package-card.is-popular:not(.is-selected) {
+  box-shadow: 0 0 0 1px rgba(184, 152, 64, 0.18), 0 8px 24px rgba(0, 0, 0, 0.35);
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 15%, rgba(184, 152, 64, 0.1), transparent 55%),
+    linear-gradient(165deg, #16140e 0%, #0e0c0a 100%);
+}
+.theme-robux .package-card.is-popular:hover:not(.is-selected) {
+  border-color: #7a6a38;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(184, 152, 64, 0.28);
 }
 
 .package-tag {
