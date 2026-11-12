@@ -247,25 +247,44 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 }
 
 .hero-intro { animation: fade-up 0.6s ease both; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #d0d0d8;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid #2a2030;
+  background: rgba(239, 48, 57, 0.08);
+  margin-bottom: 18px;
+}
 .hero-title {
-  font-size: clamp(36px, 5.5vw, 56px);
+  font-size: clamp(40px, 6vw, 60px);
   font-weight: 900;
-  line-height: 1.05;
-  margin: 0 0 24px;
+  line-height: 0.98;
+  margin: 0 0 14px;
   color: #fff;
   text-transform: uppercase;
   letter-spacing: -0.03em;
-  word-break: keep-all;
 }
 .hero-title em {
   font-style: normal;
   color: #ef3943;
-  text-shadow: 0 0 40px rgba(239, 48, 57, 0.45);
+  text-shadow: 0 0 48px rgba(239, 48, 57, 0.5);
+}
+.hero-sub {
+  margin: 0 0 22px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #9a9aa5;
+  max-width: 340px;
 }
 
 .hero-steps {
   list-style: none;
-  margin: 0 0 24px;
+  margin: 0 0 20px;
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -273,16 +292,26 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 }
 .hero-steps li {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
+}
+.hero-steps strong {
+  display: block;
   font-size: 13px;
-  color: #b0b0ba;
-  font-weight: 600;
+  font-weight: 800;
+  color: #e8e8ee;
+}
+.hero-steps small {
+  display: block;
+  font-size: 11px;
+  color: #6e6e78;
+  margin-top: 2px;
+  font-weight: 500;
 }
 .step-num {
-  width: 26px;
-  height: 26px;
-  border-radius: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
   background: linear-gradient(135deg, #ef3943, #b9182a);
   color: #fff;
   font-size: 12px;
@@ -291,46 +320,41 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   place-items: center;
   flex-shrink: 0;
   box-shadow: 0 4px 14px var(--red-glow);
+  margin-top: 1px;
 }
-
-.payment-badges { margin-top: 4px; }
-.pay-label {
-  display: block;
-  font-size: 9px;
-  font-weight: 900;
-  letter-spacing: 0.16em;
-  color: #6e6e78;
-  margin-bottom: 10px;
-}
-.pay-chips {
+.hero-trust-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
 }
-.pay-chips span {
-  padding: 7px 12px;
-  border-radius: 8px;
-  border: 1px solid #2a2a33;
-  background: #121218;
+.hero-trust-row span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 11px;
   font-weight: 700;
-  color: #c8c8d0;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  color: #a0a0aa;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #121218;
+  border: 1px solid #25252e;
 }
-.pay-chips span:hover {
-  border-color: #ef3943;
-  box-shadow: 0 0 12px rgba(239, 48, 57, 0.25);
-}
+.hero-trust-row svg { color: #ef6b73; }
 
 /* ─── PACKAGES ─── */
 .hero-catalog { animation: fade-up 0.7s ease both 0.08s; }
 .choose-label {
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 16px;
   flex-wrap: wrap;
+}
+.choose-label > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 .choose-label span {
   font-size: 12px;
@@ -339,11 +363,21 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   color: #e0e0e6;
 }
 .choose-label small {
-  font-size: 10px;
+  font-size: 11px;
   color: #6e6e78;
-  letter-spacing: 0.08em;
-  font-weight: 600;
+  letter-spacing: 0.02em;
+  font-weight: 500;
 }
+.choose-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #e8b84a;
+  letter-spacing: 0.04em;
+}
+.choose-meta svg { color: #e8b84a; }
 
 .packages-grid {
   display: grid;
@@ -1238,6 +1272,117 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   gap: 8px;
 }
 .footer-bottom b { color: #ef3943; }
+
+/* ─── BENEFITS + CTA ─── */
+.benefits-strip {
+  margin: 8px 0 40px;
+  padding: 28px 0;
+  border-top: 1px solid #1a1520;
+  border-bottom: 1px solid #1a1520;
+  background: linear-gradient(180deg, rgba(239, 48, 57, 0.03), transparent);
+}
+.benefits-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 640px) {
+  .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1000px) {
+  .benefits-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.benefit-card {
+  display: flex;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid #25252e;
+  background: linear-gradient(160deg, #14141c, #0e0e14);
+  transition: border-color 0.2s, transform 0.2s;
+}
+.benefit-card:hover {
+  border-color: #3a2830;
+  transform: translateY(-2px);
+}
+.benefit-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(239, 48, 57, 0.2), rgba(185, 24, 42, 0.1));
+  border: 1px solid rgba(239, 48, 57, 0.3);
+  display: grid;
+  place-items: center;
+  color: #ff6b75;
+  flex-shrink: 0;
+}
+.benefit-card strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 800;
+  color: #f0f0f4;
+  margin-bottom: 4px;
+}
+.benefit-card p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #8b8b96;
+}
+
+.cta-banner { margin-bottom: 48px; }
+.cta-banner-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 24px 26px;
+  border-radius: 18px;
+  border: 1px solid #3a2030;
+  background:
+    radial-gradient(ellipse 70% 120% at 0% 50%, rgba(239, 48, 57, 0.18), transparent 55%),
+    linear-gradient(120deg, #1a1014, #100c12);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+.cta-banner-inner h2 {
+  margin: 0 0 6px;
+  font-size: 22px;
+  font-weight: 900;
+  color: #fff;
+}
+.cta-banner-inner p {
+  margin: 0;
+  font-size: 13px;
+  color: #a0a0aa;
+}
+.cta-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.btn-ghost-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: 1px solid #286547;
+  background: #153d2e;
+  color: #7de3b0;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: 0.2s;
+}
+.btn-ghost-wa:hover {
+  background: #1b563f;
+  filter: brightness(1.05);
+}
+a.btn-continue {
+  text-decoration: none;
+}
 
 /* ─── MODALS (basic compatibility) ─── */
 .modal-backdrop {

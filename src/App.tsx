@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { ShieldCheck, Zap, LockKeyhole, ArrowRight, ArrowLeft } from 'lucide-react';
+import {
+  ShieldCheck,
+  Zap,
+  LockKeyhole,
+  ArrowRight,
+  ArrowLeft,
+  Clock,
+  MessageCircle,
+  Star,
+  BadgeCheck,
+} from 'lucide-react';
 import { Header } from './components/Header.tsx';
 import { PackagesGrid } from './components/PackagesGrid.tsx';
 import { CheckoutPanel } from './components/CheckoutPanel.tsx';
@@ -19,6 +29,7 @@ import {
   saveOrder,
   formatNumber,
   formatCOP,
+  getGeneralWhatsAppLink,
 } from './utils/rechargeLogic.ts';
 
 const DEFAULT_FF = DIAMOND_PACKAGES[3];
@@ -59,7 +70,10 @@ export default function App() {
   const handleBackToPackages = () => {
     setIsCheckoutVisible(false);
     setError(null);
-    window.setTimeout(() => document.getElementById('recargas')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+    window.setTimeout(
+      () => document.getElementById('recargas')?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
+      80
+    );
   };
 
   const handleProceed = () => {
@@ -102,7 +116,7 @@ export default function App() {
           particleCount: 90,
           spread: 72,
           origin: { y: 0.62 },
-          colors: ['#ef3039', '#b90f20', '#f7c56b', '#ffffff'],
+          colors: game === 'roblox' ? ['#e8b84a', '#f0c14b', '#ffffff', '#c9922a'] : ['#ef3039', '#b90f20', '#f7c56b', '#ffffff'],
         });
       } catch {
         /* optional */
@@ -117,76 +131,175 @@ export default function App() {
 
       <main className="flex-1">
         {!isCheckoutVisible && (
-          <section className="hero-section max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="hero-intro">
-              <h1 className="hero-title">
-                {game === 'roblox' ? (
-                  <>
-                    ROBLOX <em>RECHARGE</em>
-                  </>
-                ) : (
-                  <>
-                    FREE FIRE <em>RECHARGE</em>
-                  </>
-                )}
-              </h1>
-              <ol className="hero-steps">
-                <li>
-                  <span className="step-num">1</span>
-                  Elige tu paquete
-                </li>
-                <li>
-                  <span className="step-num">2</span>
-                  Paga con Nequi, Bancolombia o PayPal
-                </li>
-                <li>
-                  <span className="step-num">3</span>
-                  Recibe tus {game === 'roblox' ? 'Robux' : 'diamantes'} en minutos
-                </li>
-              </ol>
-              <div className="payment-badges">
-                <span className="pay-label">MÉTODOS DE PAGO</span>
-                <div className="pay-chips">
-                  <span>Nequi</span>
-                  <span>Bancolombia</span>
-                  <span>PayPal</span>
+          <>
+            <section className="hero-section max-w-6xl mx-auto px-4 sm:px-6">
+              <div className="hero-intro">
+                <div className="hero-badge">
+                  <span className="live-dot" />
+                  Entrega en minutos · Soporte real
                 </div>
-              </div>
-            </div>
-
-            <div className="hero-catalog" id="recargas">
-              <div className="choose-label">
-                <span>ELIGE TU RECARGA</span>
-                <small>ID → PAGO → ENTREGA</small>
-              </div>
-              <PackagesGrid
-                game={game}
-                selectedPackage={selectedPackage}
-                onSelectPackage={(pkg) => {
-                  setSelectedPackage(pkg);
-                  setError(null);
-                }}
-              />
-              <div className="hero-cta-row">
-                <div className="selected-summary">
-                  {selectedPackage ? (
+                <h1 className="hero-title">
+                  {game === 'roblox' ? (
                     <>
-                      <span className="sel-amount">
-                        {formatNumber(selectedPackage.diamonds)} {info.unit}
-                      </span>
-                      <span className="sel-price">{formatCOP(selectedPackage.priceCOP)}</span>
+                      ROBLOX
+                      <br />
+                      <em>RECHARGE</em>
                     </>
                   ) : (
-                    <span className="sel-empty">Selecciona un paquete</span>
+                    <>
+                      FREE FIRE
+                      <br />
+                      <em>RECHARGE</em>
+                    </>
                   )}
+                </h1>
+                <p className="hero-sub">
+                  Elige tu paquete, paga como quieras y recibe tus {game === 'roblox' ? 'Robux' : 'diamantes'} sin
+                  complicaciones. Sin contraseñas. Sin vueltas.
+                </p>
+
+                <ol className="hero-steps">
+                  <li>
+                    <span className="step-num">1</span>
+                    <div>
+                      <strong>Elige tu paquete</strong>
+                      <small>Precios claros, bonos incluidos</small>
+                    </div>
+                  </li>
+                  <li>
+                    <span className="step-num">2</span>
+                    <div>
+                      <strong>Paga fácil</strong>
+                      <small>Nequi · Bancolombia · PayPal</small>
+                    </div>
+                  </li>
+                  <li>
+                    <span className="step-num">3</span>
+                    <div>
+                      <strong>Recibe al instante</strong>
+                      <small>Entrega por WhatsApp en minutos</small>
+                    </div>
+                  </li>
+                </ol>
+
+                <div className="hero-trust-row">
+                  <span>
+                    <LockKeyhole size={14} /> Sin contraseña
+                  </span>
+                  <span>
+                    <Clock size={14} /> Rápido
+                  </span>
+                  <span>
+                    <BadgeCheck size={14} /> Seguro
+                  </span>
                 </div>
-                <button type="button" className="btn-continue" onClick={handleStartCheckout} disabled={!selectedPackage}>
-                  CONTINUAR
-                  <ArrowRight size={16} />
-                </button>
               </div>
-            </div>
-          </section>
+
+              <div className="hero-catalog" id="recargas">
+                <div className="choose-label">
+                  <div>
+                    <span>ELIGE TU RECARGA</span>
+                    <small>Selecciona un paquete para continuar</small>
+                  </div>
+                  <div className="choose-meta">
+                    <Star size={12} />
+                    Más vendido marcado
+                  </div>
+                </div>
+                <PackagesGrid
+                  game={game}
+                  selectedPackage={selectedPackage}
+                  onSelectPackage={(pkg) => {
+                    setSelectedPackage(pkg);
+                    setError(null);
+                  }}
+                />
+                <div className="hero-cta-row">
+                  <div className="selected-summary">
+                    {selectedPackage ? (
+                      <>
+                        <span className="sel-amount">
+                          {formatNumber(selectedPackage.diamonds)} {info.unit}
+                        </span>
+                        <span className="sel-price">{formatCOP(selectedPackage.priceCOP)}</span>
+                      </>
+                    ) : (
+                      <span className="sel-empty">Selecciona un paquete</span>
+                    )}
+                  </div>
+                  <button
+                    type="button"
+                    className="btn-continue"
+                    onClick={handleStartCheckout}
+                    disabled={!selectedPackage}
+                  >
+                    CONTINUAR
+                    <ArrowRight size={16} />
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <section className="benefits-strip">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6 benefits-grid">
+                <div className="benefit-card">
+                  <div className="benefit-icon">
+                    <Zap size={20} />
+                  </div>
+                  <div>
+                    <strong>Entrega rápida</strong>
+                    <p>Tus {game === 'roblox' ? 'Robux' : 'diamantes'} en minutos tras confirmar el pago.</p>
+                  </div>
+                </div>
+                <div className="benefit-card">
+                  <div className="benefit-icon">
+                    <LockKeyhole size={20} />
+                  </div>
+                  <div>
+                    <strong>100% seguro</strong>
+                    <p>Nunca pedimos tu contraseña. Solo tu ID o usuario.</p>
+                  </div>
+                </div>
+                <div className="benefit-card">
+                  <div className="benefit-icon">
+                    <MessageCircle size={20} />
+                  </div>
+                  <div>
+                    <strong>Soporte humano</strong>
+                    <p>Te acompañamos por WhatsApp en todo el proceso.</p>
+                  </div>
+                </div>
+                <div className="benefit-card">
+                  <div className="benefit-icon">
+                    <ShieldCheck size={20} />
+                  </div>
+                  <div>
+                    <strong>Pago flexible</strong>
+                    <p>Nequi, Bancolombia o PayPal. Tú eliges.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="cta-banner max-w-6xl mx-auto px-4 sm:px-6">
+              <div className="cta-banner-inner">
+                <div>
+                  <h2>¿Listo para recargar?</h2>
+                  <p>Elige tu paquete arriba o escríbenos si tienes dudas.</p>
+                </div>
+                <div className="cta-banner-actions">
+                  <a href="#recargas" className="btn-continue">
+                    Ver paquetes
+                    <ArrowRight size={16} />
+                  </a>
+                  <a href={getGeneralWhatsAppLink()} target="_blank" rel="noreferrer" className="btn-ghost-wa">
+                    <MessageCircle size={16} />
+                    WhatsApp
+                  </a>
+                </div>
+              </div>
+            </section>
+          </>
         )}
 
         {isCheckoutVisible && (
