@@ -126,6 +126,11 @@ export default function App() {
 
   return (
     <div className="app-shell min-h-screen flex flex-col">
+      <div className="bg-orbs" aria-hidden="true">
+        <div className="float-orb o1" />
+        <div className="float-orb o2" />
+        <div className="float-orb o3" />
+      </div>
       <Header game={game} onSelectGame={handleSelectGame} />
       <LiveFeed />
 

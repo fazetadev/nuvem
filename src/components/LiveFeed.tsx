@@ -1,6 +1,5 @@
 import React from 'react';
 
-/** Mensajes mixtos: actividad de la tienda, no solo "X recargó" falso */
 const ITEMS = [
   { kind: 'ff', text: 'Paquete 1.166 diamantes · listo para entrega' },
   { kind: 'rb', text: 'Robux 400 · pedido confirmado' },
@@ -14,27 +13,36 @@ const ITEMS = [
   { kind: 'ff', text: '6.160 diamantes · bono incluido' },
   { kind: 'rb', text: 'Robux 100 · recarga rápida' },
   { kind: 'ok', text: 'Sin contraseñas · solo ID o usuario' },
+  { kind: 'ff', text: '341 diamantes · bono activo' },
+  { kind: 'rb', text: 'Robux 4.500 · entrega prioritaria' },
 ];
 
-export const LiveFeed: React.FC = () => {
-  const doubled = [...ITEMS, ...ITEMS];
-
+function Row() {
   return (
-    <div className="live-feed" aria-label="Actividad de la tienda">
-      <div className="live-feed-badge">
-        <span className="live-dot" />
-        EN VIVO
-      </div>
+    <>
+      {ITEMS.map((item, i) => (
+        <div className={`live-feed-item kind-${item.kind}`} key={`${item.kind}-${i}`}>
+          {item.kind === 'ff' && <span className="live-chip ff">◆ FF</span>}
+          {item.kind === 'rb' && <span className="live-chip rb">R$</span>}
+          {item.kind === 'ok' && <span className="live-chip ok">✓</span>}
+          <span className="live-text">{item.text}</span>
+        </div>
+      ))}
+    </>
+  );
+}
+
+export const LiveFeed: React.FC = () => (
+  <div className="live-feed" aria-label="Actividad de la tienda">
+    <div className="live-feed-badge">
+      <span className="live-dot" />
+      EN VIVO
+    </div>
+    <div className="live-feed-mask">
       <div className="live-feed-track">
-        {doubled.map((item, i) => (
-          <div className={`live-feed-item kind-${item.kind}`} key={`${item.kind}-${i}`}>
-            {item.kind === 'ff' && <span className="live-chip ff">◆ FF</span>}
-            {item.kind === 'rb' && <span className="live-chip rb">R$</span>}
-            {item.kind === 'ok' && <span className="live-chip ok">✓</span>}
-            <span className="live-text">{item.text}</span>
-          </div>
-        ))}
+        <Row />
+        <Row />
       </div>
     </div>
-  );
-};
+  </div>
+);
