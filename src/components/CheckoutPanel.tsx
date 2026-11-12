@@ -1,115 +1,63 @@
 import React from 'react';
-import { X, Send } from 'lucide-react';
+import { X, Send, ShieldCheck, CircleCheck, LockKeyhole } from 'lucide-react';
 import type { DiamondPackage, GameId, PaymentMethod } from '../types/store.ts';
 import { GAME_INFO, PAYMENT_METHODS, formatCOP, formatNumber } from '../utils/rechargeLogic.ts';
 
 interface CheckoutPanelProps {
-  game: GameId;
-  playerId: string;
-  onPlayerIdChange: (id: string) => void;
-  selectedPackage: DiamondPackage | null;
-  selectedPayment: PaymentMethod | null;
-  onSelectPayment: (m: PaymentMethod) => void;
-  onProceed: () => void;
-  error: string | null;
+  game: GameId; playerId: string; onPlayerIdChange: (id: string) => void;
+  selectedPackage: DiamondPackage | null; selectedPayment: PaymentMethod | null;
+  onSelectPayment: (m: PaymentMethod) => void; onProceed: () => void; error: string | null;
 }
 
 export const CheckoutPanel: React.FC<CheckoutPanelProps> = ({
-  game,
-  playerId,
-  onPlayerIdChange,
-  selectedPackage,
-  selectedPayment,
-  onSelectPayment,
-  onProceed,
-  error,
+  game, playerId, onPlayerIdChange, selectedPackage, selectedPayment, onSelectPayment, onProceed, error,
 }) => {
   const info = GAME_INFO[game];
   const isRoblox = game === 'roblox';
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const v = e.target.value;
     onPlayerIdChange(isRoblox ? v.replace(/[^a-zA-Z0-9_]/g, '').slice(0, 20) : v.replace(/\D/g, '').slice(0, 12));
   };
 
   return (
-    <div className="lg:sticky lg:top-20 rounded-3xl bg-[#100609] border border-red-950/80 shadow-lg shadow-black/40 p-5 sm:p-6 space-y-5">
-      <div className="space-y-2">
-        <label htmlFor="player-id" className="text-xs font-bold uppercase tracking-wider text-slate-300">
-          {info.accountLabel}
-        </label>
-        <div className="relative">
-          <input
-            id="player-id"
-            type="text"
-            inputMode={isRoblox ? 'text' : 'numeric'}
-            autoCapitalize="none"
-            autoCorrect="off"
-            placeholder={info.placeholder}
-            value={playerId}
-            onChange={handleChange}
-            className="w-full h-12 pl-4 pr-10 rounded-xl bg-[#080305] border border-red-950/80 focus:border-red-500 text-white placeholder-slate-500 font-mono tracking-wider outline-none"
-          />
-          {playerId && (
-            <button
-              type="button"
-              onClick={() => onPlayerIdChange('')}
-              aria-label="Borrar"
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-slate-400 hover:text-white cursor-pointer"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          )}
+    <div className="checkout-card">
+      <div className="checkout-card-top"><span><LockKeyhole size={14} /> CHECKOUT SEGURO</span><span className="checkout-encrypted">● PROTEGIDO</span></div>
+      <div className="checkout-field">
+        <label htmlFor="player-id"><span className="field-step">1</span>{info.accountLabel}</label>
+        <div className="input-wrap">
+          <input id="player-id" type="text" inputMode={isRoblox ? 'text' : 'numeric'} autoCapitalize="none" autoCorrect="off"
+            placeholder={info.placeholder} value={playerId} onChange={handleChange} />
+          {playerId && <button type="button" onClick={() => onPlayerIdChange('')} aria-label="Borrar"><X size={16} /></button>}
         </div>
-        {error && <p className="text-xs font-semibold text-red-400">{error}</p>}
+        <p className="field-helper"><ShieldCheck size={13} /> {isRoblox ? 'No necesitamos tu contraseña, solo tu usuario.' : 'Copia tu UID directamente desde tu perfil.'}</p>
+        {error && <p className="checkout-error">{error}</p>}
       </div>
 
-      <div className="space-y-2">
-        <span className="text-xs font-bold uppercase tracking-wider text-slate-300">Pago</span>
-        <div className="grid grid-cols-3 gap-2">
+      <div className="checkout-field">
+        <label><span className="field-step">2</span>Elige tu método de pago</label>
+        <div className="payment-grid">
           {PAYMENT_METHODS.map((m) => {
             const on = selectedPayment?.id === m.id;
-            return (
-              <button
-                key={m.id}
-                type="button"
-                onClick={() => onSelectPayment(m)}
-                aria-pressed={on}
-                className={`h-11 rounded-xl text-sm font-bold cursor-pointer transition-colors ${
-                  on
-                    ? 'bg-red-600/25 border-2 border-red-500 text-white'
-                    : 'bg-[#080305] border border-red-950 text-slate-300 hover:border-red-700'
-                }`}
-              >
-                {m.name}
-              </button>
-            );
+            return <button key={m.id} type="button" onClick={() => onSelectPayment(m)} aria-pressed={on}
+              className={`payment-option ${on ? 'payment-option-active' : ''}`}>
+              <span className="payment-radio">{on && <span />}</span><b>{m.name}</b>
+            </button>;
           })}
         </div>
+        <p className="field-helper"><CircleCheck size={13} /> Selecciona el medio que te resulte más cómodo.</p>
       </div>
 
-      <div className="pt-4 border-t border-red-950/60 space-y-4">
-        <div className="flex items-end justify-between">
-          <div>
-            <p className="text-xs text-slate-400">
-              {selectedPackage ? `${formatNumber(selectedPackage.diamonds)} ${info.unit}` : 'Elige un paquete'}
-            </p>
-            <p className="text-[11px] text-slate-500">Total</p>
-          </div>
-          <p className="font-display text-3xl font-black text-white">
-            {selectedPackage ? formatCOP(selectedPackage.priceCOP) : '$ 0 COP'}
-          </p>
+      <div className="checkout-total">
+        <div className="total-caption"><span>RESUMEN DE TU COMPRA</span><span className="total-live"><i /> ACTUALIZADO</span></div>
+        <div className="total-product">
+          <div className="total-product-icon">✦</div>
+          <div><b>{selectedPackage ? formatNumber(selectedPackage.diamonds) : '—'} {info.unit}</b><small>{selectedPackage ? 'Paquete seleccionado' : 'Elige un paquete para continuar'}</small></div>
         </div>
-
-        <button
-          type="button"
-          onClick={onProceed}
-          className="w-full py-3.5 rounded-xl font-extrabold text-white btn-blood cursor-pointer flex items-center justify-center gap-2"
-        >
-          <Send className="w-4 h-4 -rotate-12" />
-          Comprar por WhatsApp
-        </button>
+        <div className="total-price-row"><span>Total a pagar</span><strong>{selectedPackage ? formatCOP(selectedPackage.priceCOP) : '$ 0 COP'}</strong></div>
       </div>
+
+      <button type="button" onClick={onProceed} className="checkout-submit"><Send size={17} /> CONTINUAR CON MI COMPRA <span>→</span></button>
+      <div className="checkout-reassurance"><ShieldCheck size={14} /> Tus datos se usan únicamente para gestionar tu recarga.</div>
     </div>
   );
 };

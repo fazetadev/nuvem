@@ -3,57 +3,34 @@ import { DiamondIcon } from './DiamondIcon';
 import { IMAGES } from '../config/images';
 import type { DiamondPackage, GameId } from '../types/store.ts';
 import { DIAMOND_PACKAGES, ROBLOX_PACKAGES, GAME_INFO, formatNumber, formatCOP } from '../utils/rechargeLogic.ts';
+import { Check, Gift, Sparkles } from 'lucide-react';
 
-interface PackagesGridProps {
-  game: GameId;
-  selectedPackage: DiamondPackage | null;
-  onSelectPackage: (pkg: DiamondPackage) => void;
-}
+interface PackagesGridProps { game: GameId; selectedPackage: DiamondPackage | null; onSelectPackage: (pkg: DiamondPackage) => void; }
 
 export const PackagesGrid: React.FC<PackagesGridProps> = ({ game, selectedPackage, onSelectPackage }) => {
   const info = GAME_INFO[game];
   const list = game === 'roblox' ? ROBLOX_PACKAGES : DIAMOND_PACKAGES;
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-      {list.map((pkg) => {
+    <div className="packages-grid">
+      {list.map((pkg, index) => {
         const selected = selectedPackage?.id === pkg.id;
         const base = pkg.bonusDiamonds ? pkg.diamonds - pkg.bonusDiamonds : null;
-
+        const bonus = pkg.bonusDiamonds || 0;
         return (
-          <button
-            key={pkg.id}
-            type="button"
-            onClick={() => onSelectPackage(pkg)}
-            aria-pressed={selected}
-            className={`relative rounded-2xl px-3 pt-5 pb-4 flex flex-col items-center text-center cursor-pointer select-none transition-all duration-150 ${
-              selected
-                ? 'bg-gradient-to-b from-red-950/80 to-[#120306] border-2 border-red-500 shadow-xl shadow-red-950/70'
-                : 'bg-[#0b0407] border border-red-950 hover:border-red-600/60'
-            }`}
-          >
-            {pkg.tag && (
-              <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-red-600 text-white text-[10px] font-black uppercase tracking-wider">
-                {pkg.tag}
-              </span>
-            )}
-
-            {game === 'roblox' ? (
-              <img src={IMAGES.robux} alt="Robux" className="w-12 h-12 object-contain" loading="lazy" decoding="async" />
-            ) : (
-              <DiamondIcon className="w-12 h-12" />
-            )}
-
-            <span className="mt-2 font-display text-2xl font-black text-white leading-none">
-              {formatNumber(pkg.diamonds)}
+          <button key={pkg.id} type="button" onClick={() => onSelectPackage(pkg)} aria-pressed={selected}
+            className={`package-card ${selected ? 'package-card-selected' : ''} ${pkg.highlight ? 'package-card-highlight' : ''}`}>
+            {pkg.tag && <span className="package-tag"><Sparkles size={10} /> {pkg.tag}</span>}
+            {selected && <span className="package-check"><Check size={13} /></span>}
+            <span className="package-art">
+              {game === 'roblox' ? <img src={IMAGES.robux} alt="Robux" loading="lazy" /> : <DiamondIcon className="w-14 h-14" />}
             </span>
-            <span className="mt-1 text-[11px] text-slate-400 min-h-[16px]">
-              {base ? `${formatNumber(base)} + ${formatNumber(pkg.bonusDiamonds!)} bono` : info.unit}
-            </span>
-            <span className={`mt-2 font-display text-lg font-black ${selected ? 'text-red-400' : 'text-white'}`}>
-              {formatCOP(pkg.priceCOP).replace(' COP', '')}
-              <span className="ml-1 text-[10px] font-bold text-slate-500">COP</span>
-            </span>
+            <span className="package-amount">{formatNumber(pkg.diamonds)}</span>
+            <span className="package-unit">{info.unit}</span>
+            {base && <span className="package-bonus"><Gift size={11} /> {formatNumber(base)} + {formatNumber(bonus)} BONO</span>}
+            {!base && <span className="package-bonus package-bonus-empty">Recarga digital</span>}
+            <span className="package-price">{formatCOP(pkg.priceCOP).replace(' COP', '')}<small> COP</small></span>
+            <span className={`package-select-label ${selected ? 'is-selected' : ''}`}>{selected ? 'SELECCIONADO' : 'ELEGIR PAQUETE'}</span>
           </button>
         );
       })}
