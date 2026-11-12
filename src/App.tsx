@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { ShieldCheck, Zap, LockKeyhole, ArrowRight } from 'lucide-react';
+import { ShieldCheck, Zap, LockKeyhole, ArrowRight, ArrowLeft } from 'lucide-react';
 import { Header } from './components/Header.tsx';
 import { PackagesGrid } from './components/PackagesGrid.tsx';
 import { CheckoutPanel } from './components/CheckoutPanel.tsx';
@@ -192,7 +192,8 @@ export default function App() {
         {isCheckoutVisible && (
           <section className="checkout-section max-w-4xl mx-auto px-4 sm:px-6" id="checkout">
             <button type="button" className="checkout-back" onClick={handleBackToPackages}>
-              ← VOLVER A PAQUETES
+              <ArrowLeft size={16} />
+              <span>Volver a paquetes</span>
             </button>
             <div className="checkout-progress">
               <span className="done">
