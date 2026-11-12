@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { ShieldCheck, Zap, Headphones, LockKeyhole, CreditCard, Sparkles, ChevronRight, Gem } from 'lucide-react';
+import { ShieldCheck, Zap, Sparkles, ChevronRight, Gem, Gift, ArrowRight } from 'lucide-react';
 import { Header } from './components/Header.tsx';
 import { PackagesGrid } from './components/PackagesGrid.tsx';
 import { CheckoutPanel } from './components/CheckoutPanel.tsx';
@@ -8,7 +8,7 @@ import { CheckoutSummaryModal } from './components/CheckoutSummaryModal.tsx';
 import { OrderSuccessModal } from './components/OrderSuccessModal.tsx';
 import { Footer } from './components/Footer.tsx';
 import type { DiamondPackage, PaymentMethod, OrderRecord, GameId } from './types/store.ts';
-import { DIAMOND_PACKAGES, ROBLOX_PACKAGES, GAME_INFO, PAYMENT_METHODS, validateAccount, generateOrderId, saveOrder, formatNumber } from './utils/rechargeLogic.ts';
+import { DIAMOND_PACKAGES, ROBLOX_PACKAGES, GAME_INFO, PAYMENT_METHODS, validateAccount, generateOrderId, saveOrder, formatNumber, formatCOP } from './utils/rechargeLogic.ts';
 import { IMAGES } from './config/images.ts';
 
 const DEFAULT_FF = DIAMOND_PACKAGES[3];
@@ -99,34 +99,32 @@ export default function App() {
 
           <div className="catalog-layout">
             <div className="catalog-main">
-              <div className="catalog-toolbar"><div className="catalog-tabs"><span className="catalog-tab-active">{game === 'roblox' ? 'ROBLOX' : 'FREE FIRE'}</span><span>{game === 'roblox' ? 'ROBux' : 'DIAMANTES'}</span></div><span className="toolbar-note">Toca un paquete para seleccionarlo</span></div>
               <PackagesGrid game={game} selectedPackage={selectedPackage} onSelectPackage={(pkg) => { setSelectedPackage(pkg); setError(null); }} />
-              <div className="catalog-footnote"><Sparkles size={14} /><span>Los paquetes destacados incluyen bono cuando se indica en su tarjeta.</span></div>
+              <div className="catalog-footnote"><Sparkles size={14} /><span>Elige un paquete para ver aquí el total de tu recarga.</span></div>
             </div>
 
-            <aside className="side-rail">
-              <div className="rail-card rail-featured">
-                <div className="rail-card-title"><span className="rail-icon"><ShieldCheck /></span><div><b>COMPRA CON CONFIANZA</b><small>Tu seguridad es prioridad</small></div></div>
-                <ul><li><i /> No solicitamos contraseñas</li><li><i /> Revisas tu pedido antes de confirmar</li><li><i /> Atención directa por WhatsApp</li></ul>
+            <aside className="order-rail">
+              <div className="order-rail-top"><span className="order-rail-icon"><Gem /></span><div><b>TU PEDIDO</b><small>Resumen en tiempo real</small></div><span className="order-rail-live"><i /> LISTO</span></div>
+              <div className="order-rail-game">{game === 'roblox' ? 'ROBLOX' : 'FREE FIRE'}</div>
+              <div className="order-rail-product">
+                <img src={game === 'roblox' ? IMAGES.robux : IMAGES.diamond} alt="" />
+                <div><b>{selectedPackage ? formatNumber(selectedPackage.diamonds) : '—'} {info.unit}</b><small>{selectedPackage ? 'Paquete seleccionado' : 'Selecciona un paquete'}</small></div>
               </div>
-              <div className="rail-card">
-                <div className="rail-small-title"><CreditCard size={15} /> MÉTODOS DE PAGO</div>
-                <div className="payment-chips">{PAYMENT_METHODS.map((method) => <span key={method.id}>{method.name}</span>)}</div>
-                <p>Elige tu medio de pago al completar los datos de tu recarga.</p>
-              </div>
-              <div className="rail-help"><div className="help-orb"><Headphones /></div><div><b>¿Tienes dudas?</b><span>Te ayudamos con tu pedido.</span></div><a href="https://wa.me/573016886549?text=Hola%20NuvemGG%2C%20tengo%20una%20consulta" target="_blank" rel="noreferrer">HABLAR CON SOPORTE ↗</a></div>
+              {selectedPackage?.bonusDiamonds ? <div className="order-rail-bonus"><Gift size={13} /> Incluye {formatNumber(selectedPackage.bonusDiamonds)} de bono</div> : <div className="order-rail-bonus muted"><ShieldCheck size={13} /> Recarga digital</div>}
+              <div className="order-rail-total"><span>Total</span><strong>{selectedPackage ? formatCOP(selectedPackage.priceCOP) : '—'}</strong></div>
+              <a href="#checkout" className="order-rail-cta">CONTINUAR <ArrowRight size={15} /></a>
+              <p className="order-rail-note"><ShieldCheck size={12} /> Sin contraseña · Confirmas antes de pagar</p>
             </aside>
           </div>
         </section>
 
-        <section className="checkout-section max-w-6xl mx-auto px-4 sm:px-6">
+        <section id="checkout" className="checkout-section max-w-6xl mx-auto px-4 sm:px-6">
           <div className="checkout-section-heading"><div className="step-bubble">02</div><div><div className="eyebrow"><span className="eyebrow-line" /> CASI LISTO</div><h2>COMPLETA TU <em>RECARGA</em></h2><p>Ingresa el dato de tu cuenta y selecciona cómo quieres pagar.</p></div></div>
-          <div className="checkout-layout"><div className="checkout-art"><img src={game === 'roblox' ? IMAGES.robux : IMAGES.diamond} alt="" /><div><b>{game === 'roblox' ? 'ROBLOX' : 'FREE FIRE'}</b><span>{selectedPackage ? `${formatNumber(selectedPackage.diamonds)} ${info.unit}` : 'Selecciona un paquete'}</span></div><div className="checkout-art-glow" /></div>
+          <div className="checkout-layout checkout-layout-clean">
             <div className="checkout-form-wrap"><CheckoutPanel game={game} playerId={playerId} onPlayerIdChange={(id) => { setPlayerId(id); if (error) setError(null); }} selectedPackage={selectedPackage} selectedPayment={selectedPayment} onSelectPayment={setSelectedPayment} onProceed={handleProceed} error={error} /></div>
           </div>
         </section>
 
-        <section className="trust-bottom max-w-6xl mx-auto px-4 sm:px-6"><div><ShieldCheck /><b>Compra protegida</b><span>Revisa tu pedido antes de confirmar.</span></div><div><LockKeyhole /><b>Privacidad</b><span>No compartas tu contraseña con nadie.</span></div><div><Headphones /><b>Soporte cercano</b><span>Estamos disponibles para orientarte.</span></div></section>
       </main>
       <Footer />
       {selectedPackage && selectedPayment && <CheckoutSummaryModal isOpen={isSummaryOpen} onClose={() => setIsSummaryOpen(false)} playerId={playerId} selectedPackage={selectedPackage} selectedPayment={selectedPayment} phone="" email="" onConfirmOrder={handleConfirmOrder} isSubmitting={isSubmitting} game={game} />}
