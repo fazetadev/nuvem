@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { ShieldCheck, Zap, Sparkles, ChevronRight, Gem, Gift, ArrowRight } from 'lucide-react';
+import { ShieldCheck, Zap, Sparkles, ChevronRight, Gem, Gift, ArrowRight, LockKeyhole } from 'lucide-react';
 import { Header } from './components/Header.tsx';
 import { PackagesGrid } from './components/PackagesGrid.tsx';
 import { CheckoutPanel } from './components/CheckoutPanel.tsx';
