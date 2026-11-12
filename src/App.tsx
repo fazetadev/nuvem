@@ -8,8 +8,6 @@ import { CheckoutSummaryModal } from './components/CheckoutSummaryModal.tsx';
 import { OrderSuccessModal } from './components/OrderSuccessModal.tsx';
 import { Footer } from './components/Footer.tsx';
 import { LiveFeed } from './components/LiveFeed.tsx';
-import { TopBuyers } from './components/TopBuyers.tsx';
-import { HallOfFame } from './components/HallOfFame.tsx';
 import type { DiamondPackage, PaymentMethod, OrderRecord, GameId } from './types/store.ts';
 import {
   DIAMOND_PACKAGES,
@@ -119,43 +117,35 @@ export default function App() {
 
       <main className="flex-1">
         {!isCheckoutVisible && (
-          <section className="hero-section max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="hero-left">
+          <section className="hero-section max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="hero-intro">
               <h1 className="hero-title">
                 {game === 'roblox' ? (
                   <>
-                    ROBLOX
-                    <br />
-                    <em>RECHARGE</em>
+                    ROBLOX <em>RECHARGE</em>
                   </>
                 ) : (
                   <>
-                    FREE
-                    <br />
-                    FIRE
-                    <br />
-                    <em>RECHARGE</em>
+                    FREE FIRE <em>RECHARGE</em>
                   </>
                 )}
               </h1>
-
               <ol className="hero-steps">
                 <li>
                   <span className="step-num">1</span>
-                  Choose your package
+                  Elige tu paquete
                 </li>
                 <li>
                   <span className="step-num">2</span>
-                  Pay with 3+ payment options
+                  Paga con Nequi, Bancolombia o PayPal
                 </li>
                 <li>
                   <span className="step-num">3</span>
-                  Receive your {game === 'roblox' ? 'Robux' : 'diamonds'} in minutes
+                  Recibe tus {game === 'roblox' ? 'Robux' : 'diamantes'} en minutos
                 </li>
               </ol>
-
               <div className="payment-badges">
-                <span className="pay-label">PAYMENT METHODS</span>
+                <span className="pay-label">MÉTODOS DE PAGO</span>
                 <div className="pay-chips">
                   <span>Nequi</span>
                   <span>Bancolombia</span>
@@ -164,10 +154,10 @@ export default function App() {
               </div>
             </div>
 
-            <div className="hero-center" id="recargas">
+            <div className="hero-catalog" id="recargas">
               <div className="choose-label">
-                <span>CHOOSE YOUR RECHARGE</span>
-                <small>PLAYER ID → PAYMENT → DELIVERY</small>
+                <span>ELIGE TU RECARGA</span>
+                <small>ID → PAGO → ENTREGA</small>
               </div>
               <PackagesGrid
                 game={game}
@@ -195,10 +185,6 @@ export default function App() {
                   <ArrowRight size={16} />
                 </button>
               </div>
-            </div>
-
-            <div className="hero-right">
-              <TopBuyers />
             </div>
           </section>
         )}
@@ -247,8 +233,6 @@ export default function App() {
             </div>
           </section>
         )}
-
-        {!isCheckoutVisible && <HallOfFame />}
       </main>
 
       <Footer />

@@ -16,7 +16,7 @@ const GAMES: { id: GameId; label: string }[] = [
 
 export const Header: React.FC<HeaderProps> = ({ game, onSelectGame }) => (
   <header className="site-header sticky top-0 z-50 w-full">
-    <div className="header-bar max-w-7xl mx-auto px-4 sm:px-6">
+    <div className="header-bar max-w-6xl mx-auto px-4 sm:px-6">
       <a href="/" className="brand-lockup" aria-label="NuvemGG inicio">
         <span className="brand-logo">
           <img src={IMAGES.logo} alt="" />
@@ -25,27 +25,6 @@ export const Header: React.FC<HeaderProps> = ({ game, onSelectGame }) => (
           nuvem<span>GG</span>
         </span>
       </a>
-
-      <nav className="main-nav" aria-label="Navegación">
-        <a href="#recargas" className="nav-link active">HOME</a>
-        <button
-          type="button"
-          className={`nav-link ${game === 'freefire' ? 'active' : ''}`}
-          onClick={() => onSelectGame('freefire')}
-        >
-          DIAMONDS
-        </button>
-        <button
-          type="button"
-          className={`nav-link ${game === 'roblox' ? 'active' : ''}`}
-          onClick={() => onSelectGame('roblox')}
-        >
-          ROBUX
-        </button>
-        <a href={getGeneralWhatsAppLink()} target="_blank" rel="noreferrer" className="nav-link">
-          SUPPORT
-        </a>
-      </nav>
 
       <div className="header-right">
         <div className="game-pills">
