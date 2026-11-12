@@ -56,8 +56,8 @@ export const CheckoutPanel: React.FC<CheckoutPanelProps> = ({
         <div className="total-price-row"><span>Total a pagar</span><strong>{selectedPackage ? formatCOP(selectedPackage.priceCOP) : '$ 0 COP'}</strong></div>
       </div>
 
-      <button type="button" onClick={onProceed} className="checkout-submit"><Send size={17} /> CONTINUAR CON MI COMPRA <span>→</span></button>
-      <div className="checkout-reassurance"><ShieldCheck size={14} /> Tus datos se usan únicamente para gestionar tu recarga.</div>
+      <button type="button" onClick={onProceed} className="checkout-submit"><Send size={17} /> REVISAR Y CONTINUAR <span>→</span></button>
+      <div className="checkout-reassurance"><ShieldCheck size={14} /> Primero revisarás tu pedido. El mensaje de WhatsApp se abrirá al generar la orden.</div>
     </div>
   );
 };

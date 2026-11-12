@@ -19,6 +19,7 @@ export default function App() {
   const [playerId, setPlayerId] = useState('');
   const [selectedPackage, setSelectedPackage] = useState<DiamondPackage | null>(DEFAULT_FF);
   const [selectedPayment, setSelectedPayment] = useState<PaymentMethod | null>(PAYMENT_METHODS[0]);
+  const [isCheckoutVisible, setIsCheckoutVisible] = useState(false);
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [currentOrder, setCurrentOrder] = useState<OrderRecord | null>(null);
@@ -33,6 +34,16 @@ export default function App() {
     setPlayerId('');
     setError(null);
     setSelectedPackage(next === 'roblox' ? DEFAULT_ROBLOX : DEFAULT_FF);
+    setIsCheckoutVisible(false);
+  };
+
+  const handleStartCheckout = () => {
+    if (!selectedPackage) return;
+    setIsCheckoutVisible(true);
+    window.setTimeout(() => {
+      document.getElementById('checkout')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('player-id')?.focus({ preventScroll: true });
+    }, 90);
   };
 
   const handleProceed = () => {
@@ -112,18 +123,21 @@ export default function App() {
               </div>
               {selectedPackage?.bonusDiamonds ? <div className="order-rail-bonus"><Gift size={13} /> Incluye {formatNumber(selectedPackage.bonusDiamonds)} de bono</div> : <div className="order-rail-bonus muted"><ShieldCheck size={13} /> Recarga digital</div>}
               <div className="order-rail-total"><span>Total</span><strong>{selectedPackage ? formatCOP(selectedPackage.priceCOP) : '—'}</strong></div>
-              <a href="#checkout" className="order-rail-cta">CONTINUAR <ArrowRight size={15} /></a>
+              <button type="button" onClick={handleStartCheckout} className="order-rail-cta">CONTINUAR <ArrowRight size={15} /></button>
               <p className="order-rail-note"><ShieldCheck size={12} /> Sin contraseña · Confirmas antes de pagar</p>
             </aside>
           </div>
         </section>
 
-        <section id="checkout" className="checkout-section max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="checkout-section-heading"><div className="step-bubble">02</div><div><div className="eyebrow"><span className="eyebrow-line" /> CASI LISTO</div><h2>COMPLETA TU <em>RECARGA</em></h2><p>Ingresa el dato de tu cuenta y selecciona cómo quieres pagar.</p></div></div>
-          <div className="checkout-layout checkout-layout-clean">
-            <div className="checkout-form-wrap"><CheckoutPanel game={game} playerId={playerId} onPlayerIdChange={(id) => { setPlayerId(id); if (error) setError(null); }} selectedPackage={selectedPackage} selectedPayment={selectedPayment} onSelectPayment={setSelectedPayment} onProceed={handleProceed} error={error} /></div>
-          </div>
-        </section>
+        {isCheckoutVisible && (
+          <section id="checkout" className="checkout-section checkout-enter max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="checkout-section-heading"><div className="step-bubble">02</div><div><div className="eyebrow"><span className="eyebrow-line" /> SIGUIENTE PASO</div><h2>COMPLETA TU <em>RECARGA</em></h2><p>Ingresa tu ID, elige el medio de pago y revisa el resumen antes de generar el pedido.</p></div></div>
+            <div className="checkout-progress"><span className="checkout-progress-done"><i>✓</i> Paquete elegido</span><b></b><span className="checkout-progress-current"><i>2</i> Datos y pago</span><b></b><span><i>3</i> Confirmación</span></div>
+            <div className="checkout-layout checkout-layout-clean">
+              <div className="checkout-form-wrap"><CheckoutPanel game={game} playerId={playerId} onPlayerIdChange={(id) => { setPlayerId(id); if (error) setError(null); }} selectedPackage={selectedPackage} selectedPayment={selectedPayment} onSelectPayment={setSelectedPayment} onProceed={handleProceed} error={error} /></div>
+            </div>
+          </section>
+        )}
 
       </main>
       <Footer />
