@@ -1,15 +1,27 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { ShieldCheck, Zap, Sparkles, ChevronRight, Gem, Gift, ArrowRight, LockKeyhole } from 'lucide-react';
+import { ShieldCheck, Zap, LockKeyhole, ArrowRight } from 'lucide-react';
 import { Header } from './components/Header.tsx';
 import { PackagesGrid } from './components/PackagesGrid.tsx';
 import { CheckoutPanel } from './components/CheckoutPanel.tsx';
 import { CheckoutSummaryModal } from './components/CheckoutSummaryModal.tsx';
 import { OrderSuccessModal } from './components/OrderSuccessModal.tsx';
 import { Footer } from './components/Footer.tsx';
+import { LiveFeed } from './components/LiveFeed.tsx';
+import { TopBuyers } from './components/TopBuyers.tsx';
+import { HallOfFame } from './components/HallOfFame.tsx';
 import type { DiamondPackage, PaymentMethod, OrderRecord, GameId } from './types/store.ts';
-import { DIAMOND_PACKAGES, ROBLOX_PACKAGES, GAME_INFO, PAYMENT_METHODS, validateAccount, generateOrderId, saveOrder, formatNumber, formatCOP } from './utils/rechargeLogic.ts';
-import { IMAGES } from './config/images.ts';
+import {
+  DIAMOND_PACKAGES,
+  ROBLOX_PACKAGES,
+  GAME_INFO,
+  PAYMENT_METHODS,
+  validateAccount,
+  generateOrderId,
+  saveOrder,
+  formatNumber,
+  formatCOP,
+} from './utils/rechargeLogic.ts';
 
 const DEFAULT_FF = DIAMOND_PACKAGES[3];
 const DEFAULT_ROBLOX = ROBLOX_PACKAGES[1];
@@ -25,8 +37,8 @@ export default function App() {
   const [currentOrder, setCurrentOrder] = useState<OrderRecord | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
   const info = GAME_INFO[game];
-  const packages = game === 'roblox' ? ROBLOX_PACKAGES : DIAMOND_PACKAGES;
 
   const handleSelectGame = (next: GameId) => {
     if (next === game) return;
@@ -54,7 +66,10 @@ export default function App() {
 
   const handleProceed = () => {
     const result = validateAccount(game, playerId);
-    if (!result.isValid) { setError(result.error || 'Revisa los datos de tu cuenta'); return; }
+    if (!result.isValid) {
+      setError(result.error || 'Revisa los datos de tu cuenta');
+      return;
+    }
     if (!selectedPackage || !selectedPayment) return;
     setError(null);
     setIsSummaryOpen(true);
@@ -65,90 +80,195 @@ export default function App() {
     setIsSubmitting(true);
     window.setTimeout(() => {
       const order: OrderRecord = {
-        orderId: generateOrderId(), playerId: playerId.trim(), packageId: selectedPackage.id,
-        packageName: `${selectedPackage.diamonds} ${info.unit}`, game, diamonds: selectedPackage.diamonds,
-        totalCOP: selectedPackage.priceCOP, totalUSD: selectedPackage.priceUSD,
-        paymentMethodId: selectedPayment.id, paymentMethodName: selectedPayment.name,
-        customerPhone: 'WhatsApp', status: 'PENDIENTE', createdAt: new Date().toISOString(),
+        orderId: generateOrderId(),
+        playerId: playerId.trim(),
+        packageId: selectedPackage.id,
+        packageName: `${selectedPackage.diamonds} ${info.unit}`,
+        game,
+        diamonds: selectedPackage.diamonds,
+        totalCOP: selectedPackage.priceCOP,
+        totalUSD: selectedPackage.priceUSD,
+        paymentMethodId: selectedPayment.id,
+        paymentMethodName: selectedPayment.name,
+        customerPhone: 'WhatsApp',
+        status: 'PENDIENTE',
+        createdAt: new Date().toISOString(),
       };
       saveOrder(order);
       setCurrentOrder(order);
       setIsSubmitting(false);
       setIsSummaryOpen(false);
       setIsSuccessOpen(true);
-      try { confetti({ particleCount: 75, spread: 68, origin: { y: 0.65 }, colors: ['#ef3039', '#b90f20', '#f7c56b', '#ffffff'] }); } catch { /* opcional */ }
+      try {
+        confetti({
+          particleCount: 90,
+          spread: 72,
+          origin: { y: 0.62 },
+          colors: ['#ef3039', '#b90f20', '#f7c56b', '#ffffff'],
+        });
+      } catch {
+        /* optional */
+      }
     }, 350);
   };
 
   return (
     <div className="app-shell min-h-screen flex flex-col">
       <Header game={game} onSelectGame={handleSelectGame} />
+      <LiveFeed />
+
       <main className="flex-1">
-        <div className="activity-ribbon" aria-label="Beneficios de Nuvem">
-          <div className="activity-track">
-            {Array.from({ length: 2 }).map((_, i) => <div className="activity-set" key={i}>
-              <span><i /> RECARGAS DIGITALES</span><b>✦</b><span><ShieldCheck /> COMPRA ACOMPAÑADA</span><b>✦</b><span><Zap /> PROCESO SENCILLO</span><b>✦</b><span><LockKeyhole /> NUNCA PEDIMOS TU CONTRASEÑA</span><b>✦</b><span>NUVEMGG STORE</span><b>✦</b>
-            </div>)}
-          </div>
-        </div>
+        {!isCheckoutVisible && (
+          <section className="hero-section max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="hero-left">
+              <h1 className="hero-title">
+                {game === 'roblox' ? (
+                  <>
+                    ROBLOX
+                    <br />
+                    <em>RECHARGE</em>
+                  </>
+                ) : (
+                  <>
+                    FREE
+                    <br />
+                    FIRE
+                    <br />
+                    <em>RECHARGE</em>
+                  </>
+                )}
+              </h1>
 
-        {!isCheckoutVisible && <section className="shop-hero max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="hero-copy-block">
-            <div className="eyebrow"><span className="live-dot" /> TU RECARGA, A TU MANERA</div>
-            <h1>RECARGA Y<br /><em>VUELVE AL JUEGO.</em></h1>
-            <p>Diamantes y Robux sin vueltas. Escoge tu paquete, ingresa tus datos y solicita tu recarga en unos pocos pasos.</p>
-            <div className="hero-mini-benefits"><span><ShieldCheck /> Compra segura</span><span><Zap /> Atención rápida</span></div>
-            <a href="#recargas" className="hero-jump">VER PAQUETES <ChevronRight size={16} /></a>
-          </div>
-          <div className="hero-art-panel">
-            <div className="hero-art-glow" />
-            <div className="hero-art-label"><span>{game === 'roblox' ? 'ROBLOX' : 'FREE FIRE'}</span><b>NUVEM SELECT</b></div>
-            <img key={game} src={game === 'roblox' ? IMAGES.robux : IMAGES.diamond} alt={game === 'roblox' ? 'Robux' : 'Diamantes Free Fire'} />
-            <div className="hero-art-bottom"><strong>{game === 'roblox' ? 'ROBux' : 'DIAMANTES'}</strong><span>ELIGE · RECARGA · DISFRUTA</span></div>
-          </div>
-        </section>}
+              <ol className="hero-steps">
+                <li>
+                  <span className="step-num">1</span>
+                  Choose your package
+                </li>
+                <li>
+                  <span className="step-num">2</span>
+                  Pay with 3+ payment options
+                </li>
+                <li>
+                  <span className="step-num">3</span>
+                  Receive your {game === 'roblox' ? 'Robux' : 'diamonds'} in minutes
+                </li>
+              </ol>
 
-        <section id="recargas" className={`catalog-section purchase-stage max-w-6xl mx-auto px-4 sm:px-6 ${isCheckoutVisible ? "purchase-stage-checkout" : ""}`}>
-          {!isCheckoutVisible ? (
-            <div className="stage-swap stage-catalog" key="catalog">
-              <div className="catalog-heading">
-                <div><div className="eyebrow"><span className="eyebrow-line" /> CATÁLOGO NUVEM</div><h2>ELIGE TU <em>PAQUETE</em></h2><p>Precios claros. Selecciona una opción para ver el resumen de tu pedido.</p></div>
-                <div className="catalog-count"><Gem size={16} /><span>{packages.length} PAQUETES DISPONIBLES</span></div>
-              </div>
-              <div className="catalog-layout">
-                <div className="catalog-main">
-                  <PackagesGrid game={game} selectedPackage={selectedPackage} onSelectPackage={(pkg) => { setSelectedPackage(pkg); setError(null); }} />
-                  <div className="catalog-footnote"><Sparkles size={14} /><span>Selecciona tu paquete y continúa para elegir cómo pagar.</span></div>
+              <div className="payment-badges">
+                <span className="pay-label">PAYMENT METHODS</span>
+                <div className="pay-chips">
+                  <span>Nequi</span>
+                  <span>Bancolombia</span>
+                  <span>PayPal</span>
                 </div>
-                <aside className="order-rail">
-                  <div className="order-rail-top"><span className="order-rail-icon"><Gem /></span><div><b>TU PEDIDO</b><small>Resumen en tiempo real</small></div><span className="order-rail-live"><i /> LISTO</span></div>
-                  <div className="order-rail-game">{game === 'roblox' ? 'ROBLOX' : 'FREE FIRE'}</div>
-                  <div className="order-rail-product"><img src={game === 'roblox' ? IMAGES.robux : IMAGES.diamond} alt="" /><div><b>{selectedPackage ? formatNumber(selectedPackage.diamonds) : '—'} {info.unit}</b><small>{selectedPackage ? 'Paquete seleccionado' : 'Selecciona un paquete'}</small></div></div>
-                  {selectedPackage?.bonusDiamonds ? <div className="order-rail-bonus"><Gift size={13} /> Incluye {formatNumber(selectedPackage.bonusDiamonds)} de bono</div> : <div className="order-rail-bonus muted"><ShieldCheck size={13} /> Recarga digital</div>}
-                  <div className="order-rail-total"><span>Total</span><strong>{selectedPackage ? formatCOP(selectedPackage.priceCOP) : '—'}</strong></div>
-                  <button type="button" onClick={handleStartCheckout} className="order-rail-cta">CONTINUAR <ArrowRight size={15} /></button>
-                  <p className="order-rail-note"><ShieldCheck size={12} /> Sin contraseña · Confirmas antes de pagar</p>
-                </aside>
               </div>
             </div>
-          ) : (
-            <div className="stage-swap stage-checkout checkout-enter" id="checkout" key="checkout">
-              <div className="checkout-section-heading">
-                <button type="button" className="checkout-back" onClick={handleBackToPackages}>← VOLVER A PAQUETES</button>
-                <div className="eyebrow"><span className="eyebrow-line" /> SIGUIENTE PASO</div>
-                <h2>COMPLETA TU <em>RECARGA</em></h2>
-                <p>Un último paso: ingresa tu ID y selecciona tu forma de pago.</p>
+
+            <div className="hero-center" id="recargas">
+              <div className="choose-label">
+                <span>CHOOSE YOUR RECHARGE</span>
+                <small>PLAYER ID → PAYMENT → DELIVERY</small>
               </div>
-              <div className="checkout-progress"><span className="checkout-progress-done"><i>✓</i> Paquete elegido</span><b></b><span className="checkout-progress-current"><i>2</i> Datos y pago</span><b></b><span><i>3</i> Confirmación</span></div>
-              <div className="checkout-layout checkout-layout-clean"><div className="checkout-form-wrap"><CheckoutPanel game={game} playerId={playerId} onPlayerIdChange={(id) => { setPlayerId(id); if (error) setError(null); }} selectedPackage={selectedPackage} selectedPayment={selectedPayment} onSelectPayment={setSelectedPayment} onProceed={handleProceed} error={error} /></div></div>
-              <div className="checkout-bottom-trust"><span><ShieldCheck /> Compra protegida</span><span><LockKeyhole /> No pedimos contraseñas</span><span><Zap /> Atención por WhatsApp</span></div>
+              <PackagesGrid
+                game={game}
+                selectedPackage={selectedPackage}
+                onSelectPackage={(pkg) => {
+                  setSelectedPackage(pkg);
+                  setError(null);
+                }}
+              />
+              <div className="hero-cta-row">
+                <div className="selected-summary">
+                  {selectedPackage ? (
+                    <>
+                      <span className="sel-amount">
+                        {formatNumber(selectedPackage.diamonds)} {info.unit}
+                      </span>
+                      <span className="sel-price">{formatCOP(selectedPackage.priceCOP)}</span>
+                    </>
+                  ) : (
+                    <span className="sel-empty">Selecciona un paquete</span>
+                  )}
+                </div>
+                <button type="button" className="btn-continue" onClick={handleStartCheckout} disabled={!selectedPackage}>
+                  CONTINUAR
+                  <ArrowRight size={16} />
+                </button>
+              </div>
             </div>
-          )}
-        </section>
+
+            <div className="hero-right">
+              <TopBuyers />
+            </div>
+          </section>
+        )}
+
+        {isCheckoutVisible && (
+          <section className="checkout-section max-w-4xl mx-auto px-4 sm:px-6" id="checkout">
+            <button type="button" className="checkout-back" onClick={handleBackToPackages}>
+              ← VOLVER A PAQUETES
+            </button>
+            <div className="checkout-progress">
+              <span className="done">
+                <i>✓</i> Paquete
+              </span>
+              <b />
+              <span className="current">
+                <i>2</i> Datos y pago
+              </span>
+              <b />
+              <span>
+                <i>3</i> Confirmación
+              </span>
+            </div>
+            <CheckoutPanel
+              game={game}
+              playerId={playerId}
+              onPlayerIdChange={(id) => {
+                setPlayerId(id);
+                if (error) setError(null);
+              }}
+              selectedPackage={selectedPackage}
+              selectedPayment={selectedPayment}
+              onSelectPayment={setSelectedPayment}
+              onProceed={handleProceed}
+              error={error}
+            />
+            <div className="checkout-trust">
+              <span>
+                <ShieldCheck size={14} /> Compra protegida
+              </span>
+              <span>
+                <LockKeyhole size={14} /> No pedimos contraseñas
+              </span>
+              <span>
+                <Zap size={14} /> Atención por WhatsApp
+              </span>
+            </div>
+          </section>
+        )}
+
+        {!isCheckoutVisible && <HallOfFame />}
       </main>
+
       <Footer />
-      {selectedPackage && selectedPayment && <CheckoutSummaryModal isOpen={isSummaryOpen} onClose={() => setIsSummaryOpen(false)} playerId={playerId} selectedPackage={selectedPackage} selectedPayment={selectedPayment} phone="" email="" onConfirmOrder={handleConfirmOrder} isSubmitting={isSubmitting} game={game} />}
-      {currentOrder && <OrderSuccessModal isOpen={isSuccessOpen} onClose={() => setIsSuccessOpen(false)} order={currentOrder} />}
+
+      {isSummaryOpen && selectedPackage && selectedPayment && (
+        <CheckoutSummaryModal
+          isOpen={isSummaryOpen}
+          onClose={() => setIsSummaryOpen(false)}
+          onConfirmOrder={handleConfirmOrder}
+          isSubmitting={isSubmitting}
+          game={game}
+          playerId={playerId}
+          selectedPackage={selectedPackage}
+          selectedPayment={selectedPayment}
+          phone=""
+        />
+      )}
+      {isSuccessOpen && currentOrder && (
+        <OrderSuccessModal isOpen={isSuccessOpen} onClose={() => setIsSuccessOpen(false)} order={currentOrder} />
+      )}
     </div>
   );
 }

@@ -1,18 +1,71 @@
 import React from 'react';
 import { IMAGES } from '../config/images';
 import { getGeneralWhatsAppLink } from '../utils/rechargeLogic.ts';
-import { MessageCircle, ShoppingBag } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import type { GameId } from '../types/store.ts';
 
-interface HeaderProps { game: GameId; onSelectGame: (g: GameId) => void; }
-const GAMES: { id: GameId; label: string }[] = [{ id: 'freefire', label: 'FREE FIRE' }, { id: 'roblox', label: 'ROBLOX' }];
+interface HeaderProps {
+  game: GameId;
+  onSelectGame: (g: GameId) => void;
+}
+
+const GAMES: { id: GameId; label: string }[] = [
+  { id: 'freefire', label: 'DIAMONDS' },
+  { id: 'roblox', label: 'ROBUX' },
+];
 
 export const Header: React.FC<HeaderProps> = ({ game, onSelectGame }) => (
-  <header className="site-header sticky top-0 z-40 w-full">
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 header-inner">
-      <a href="/" className="brand-lockup" aria-label="NuvemGG inicio"><span className="brand-logo"><img src={IMAGES.logo} alt="" /></span><span className="brand-name">nuvem<span>GG</span><small>STORE</small></span></a>
-      <nav className="game-switch" aria-label="Seleccionar juego">{GAMES.map((g) => <button key={g.id} type="button" onClick={() => onSelectGame(g.id)} aria-pressed={game === g.id} className={game === g.id ? 'game-switch-active' : ''}>{g.label}</button>)}</nav>
-      <div className="header-actions"><a href="#recargas" className="header-shop"><ShoppingBag size={15} /><span>RECARGAR</span></a><a href={getGeneralWhatsAppLink()} target="_blank" rel="noreferrer" className="header-support"><MessageCircle size={16} /><span>SOPORTE</span></a></div>
+  <header className="site-header sticky top-0 z-50 w-full">
+    <div className="header-bar max-w-7xl mx-auto px-4 sm:px-6">
+      <a href="/" className="brand-lockup" aria-label="NuvemGG inicio">
+        <span className="brand-logo">
+          <img src={IMAGES.logo} alt="" />
+        </span>
+        <span className="brand-name">
+          nuvem<span>GG</span>
+        </span>
+      </a>
+
+      <nav className="main-nav" aria-label="Navegación">
+        <a href="#recargas" className="nav-link active">HOME</a>
+        <button
+          type="button"
+          className={`nav-link ${game === 'freefire' ? 'active' : ''}`}
+          onClick={() => onSelectGame('freefire')}
+        >
+          DIAMONDS
+        </button>
+        <button
+          type="button"
+          className={`nav-link ${game === 'roblox' ? 'active' : ''}`}
+          onClick={() => onSelectGame('roblox')}
+        >
+          ROBUX
+        </button>
+        <a href={getGeneralWhatsAppLink()} target="_blank" rel="noreferrer" className="nav-link">
+          SUPPORT
+        </a>
+      </nav>
+
+      <div className="header-right">
+        <div className="game-pills">
+          {GAMES.map((g) => (
+            <button
+              key={g.id}
+              type="button"
+              onClick={() => onSelectGame(g.id)}
+              className={game === g.id ? 'pill-active' : ''}
+              aria-pressed={game === g.id}
+            >
+              {g.label}
+            </button>
+          ))}
+        </div>
+        <a href={getGeneralWhatsAppLink()} target="_blank" rel="noreferrer" className="btn-support">
+          <MessageCircle size={15} />
+          <span>SOPORTE</span>
+        </a>
+      </div>
     </div>
   </header>
 );
