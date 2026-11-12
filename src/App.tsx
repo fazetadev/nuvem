@@ -43,7 +43,13 @@ export default function App() {
     window.setTimeout(() => {
       document.getElementById('checkout')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       document.getElementById('player-id')?.focus({ preventScroll: true });
-    }, 90);
+    }, 180);
+  };
+
+  const handleBackToPackages = () => {
+    setIsCheckoutVisible(false);
+    setError(null);
+    window.setTimeout(() => document.getElementById('recargas')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
   };
 
   const handleProceed = () => {
@@ -86,7 +92,7 @@ export default function App() {
           </div>
         </div>
 
-        <section className="shop-hero max-w-6xl mx-auto px-4 sm:px-6">
+        {!isCheckoutVisible && <section className="shop-hero max-w-6xl mx-auto px-4 sm:px-6">
           <div className="hero-copy-block">
             <div className="eyebrow"><span className="live-dot" /> TU RECARGA, A TU MANERA</div>
             <h1>RECARGA Y<br /><em>VUELVE AL JUEGO.</em></h1>
@@ -100,45 +106,45 @@ export default function App() {
             <img key={game} src={game === 'roblox' ? IMAGES.robux : IMAGES.diamond} alt={game === 'roblox' ? 'Robux' : 'Diamantes Free Fire'} />
             <div className="hero-art-bottom"><strong>{game === 'roblox' ? 'ROBux' : 'DIAMANTES'}</strong><span>ELIGE · RECARGA · DISFRUTA</span></div>
           </div>
-        </section>
+        </section>}
 
-        <section id="recargas" className="catalog-section max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="catalog-heading">
-            <div><div className="eyebrow"><span className="eyebrow-line" /> CATÁLOGO NUVEM</div><h2>ELIGE TU <em>PAQUETE</em></h2><p>Precios claros. Selecciona una opción para ver el resumen de tu pedido.</p></div>
-            <div className="catalog-count"><Gem size={16} /><span>{packages.length} PAQUETES DISPONIBLES</span></div>
-          </div>
-
-          <div className="catalog-layout">
-            <div className="catalog-main">
-              <PackagesGrid game={game} selectedPackage={selectedPackage} onSelectPackage={(pkg) => { setSelectedPackage(pkg); setError(null); }} />
-              <div className="catalog-footnote"><Sparkles size={14} /><span>Elige un paquete para ver aquí el total de tu recarga.</span></div>
-            </div>
-
-            <aside className="order-rail">
-              <div className="order-rail-top"><span className="order-rail-icon"><Gem /></span><div><b>TU PEDIDO</b><small>Resumen en tiempo real</small></div><span className="order-rail-live"><i /> LISTO</span></div>
-              <div className="order-rail-game">{game === 'roblox' ? 'ROBLOX' : 'FREE FIRE'}</div>
-              <div className="order-rail-product">
-                <img src={game === 'roblox' ? IMAGES.robux : IMAGES.diamond} alt="" />
-                <div><b>{selectedPackage ? formatNumber(selectedPackage.diamonds) : '—'} {info.unit}</b><small>{selectedPackage ? 'Paquete seleccionado' : 'Selecciona un paquete'}</small></div>
+        <section id="recargas" className={`catalog-section purchase-stage max-w-6xl mx-auto px-4 sm:px-6 ${isCheckoutVisible ? "purchase-stage-checkout" : ""}`}>
+          {!isCheckoutVisible ? (
+            <div className="stage-swap stage-catalog" key="catalog">
+              <div className="catalog-heading">
+                <div><div className="eyebrow"><span className="eyebrow-line" /> CATÁLOGO NUVEM</div><h2>ELIGE TU <em>PAQUETE</em></h2><p>Precios claros. Selecciona una opción para ver el resumen de tu pedido.</p></div>
+                <div className="catalog-count"><Gem size={16} /><span>{packages.length} PAQUETES DISPONIBLES</span></div>
               </div>
-              {selectedPackage?.bonusDiamonds ? <div className="order-rail-bonus"><Gift size={13} /> Incluye {formatNumber(selectedPackage.bonusDiamonds)} de bono</div> : <div className="order-rail-bonus muted"><ShieldCheck size={13} /> Recarga digital</div>}
-              <div className="order-rail-total"><span>Total</span><strong>{selectedPackage ? formatCOP(selectedPackage.priceCOP) : '—'}</strong></div>
-              <button type="button" onClick={handleStartCheckout} className="order-rail-cta">CONTINUAR <ArrowRight size={15} /></button>
-              <p className="order-rail-note"><ShieldCheck size={12} /> Sin contraseña · Confirmas antes de pagar</p>
-            </aside>
-          </div>
-        </section>
-
-        {isCheckoutVisible && (
-          <section id="checkout" className="checkout-section checkout-enter max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="checkout-section-heading"><div className="step-bubble">02</div><div><div className="eyebrow"><span className="eyebrow-line" /> SIGUIENTE PASO</div><h2>COMPLETA TU <em>RECARGA</em></h2><p>Ingresa tu ID, elige el medio de pago y revisa el resumen antes de generar el pedido.</p></div></div>
-            <div className="checkout-progress"><span className="checkout-progress-done"><i>✓</i> Paquete elegido</span><b></b><span className="checkout-progress-current"><i>2</i> Datos y pago</span><b></b><span><i>3</i> Confirmación</span></div>
-            <div className="checkout-layout checkout-layout-clean">
-              <div className="checkout-form-wrap"><CheckoutPanel game={game} playerId={playerId} onPlayerIdChange={(id) => { setPlayerId(id); if (error) setError(null); }} selectedPackage={selectedPackage} selectedPayment={selectedPayment} onSelectPayment={setSelectedPayment} onProceed={handleProceed} error={error} /></div>
+              <div className="catalog-layout">
+                <div className="catalog-main">
+                  <PackagesGrid game={game} selectedPackage={selectedPackage} onSelectPackage={(pkg) => { setSelectedPackage(pkg); setError(null); }} />
+                  <div className="catalog-footnote"><Sparkles size={14} /><span>Selecciona tu paquete y continúa para elegir cómo pagar.</span></div>
+                </div>
+                <aside className="order-rail">
+                  <div className="order-rail-top"><span className="order-rail-icon"><Gem /></span><div><b>TU PEDIDO</b><small>Resumen en tiempo real</small></div><span className="order-rail-live"><i /> LISTO</span></div>
+                  <div className="order-rail-game">{game === 'roblox' ? 'ROBLOX' : 'FREE FIRE'}</div>
+                  <div className="order-rail-product"><img src={game === 'roblox' ? IMAGES.robux : IMAGES.diamond} alt="" /><div><b>{selectedPackage ? formatNumber(selectedPackage.diamonds) : '—'} {info.unit}</b><small>{selectedPackage ? 'Paquete seleccionado' : 'Selecciona un paquete'}</small></div></div>
+                  {selectedPackage?.bonusDiamonds ? <div className="order-rail-bonus"><Gift size={13} /> Incluye {formatNumber(selectedPackage.bonusDiamonds)} de bono</div> : <div className="order-rail-bonus muted"><ShieldCheck size={13} /> Recarga digital</div>}
+                  <div className="order-rail-total"><span>Total</span><strong>{selectedPackage ? formatCOP(selectedPackage.priceCOP) : '—'}</strong></div>
+                  <button type="button" onClick={handleStartCheckout} className="order-rail-cta">CONTINUAR <ArrowRight size={15} /></button>
+                  <p className="order-rail-note"><ShieldCheck size={12} /> Sin contraseña · Confirmas antes de pagar</p>
+                </aside>
+              </div>
             </div>
-          </section>
-        )}
-
+          ) : (
+            <div className="stage-swap stage-checkout checkout-enter" id="checkout" key="checkout">
+              <div className="checkout-section-heading">
+                <button type="button" className="checkout-back" onClick={handleBackToPackages}>← VOLVER A PAQUETES</button>
+                <div className="eyebrow"><span className="eyebrow-line" /> SIGUIENTE PASO</div>
+                <h2>COMPLETA TU <em>RECARGA</em></h2>
+                <p>Un último paso: ingresa tu ID y selecciona tu forma de pago.</p>
+              </div>
+              <div className="checkout-progress"><span className="checkout-progress-done"><i>✓</i> Paquete elegido</span><b></b><span className="checkout-progress-current"><i>2</i> Datos y pago</span><b></b><span><i>3</i> Confirmación</span></div>
+              <div className="checkout-layout checkout-layout-clean"><div className="checkout-form-wrap"><CheckoutPanel game={game} playerId={playerId} onPlayerIdChange={(id) => { setPlayerId(id); if (error) setError(null); }} selectedPackage={selectedPackage} selectedPayment={selectedPayment} onSelectPayment={setSelectedPayment} onProceed={handleProceed} error={error} /></div></div>
+              <div className="checkout-bottom-trust"><span><ShieldCheck /> Compra protegida</span><span><LockKeyhole /> No pedimos contraseñas</span><span><Zap /> Atención por WhatsApp</span></div>
+            </div>
+          )}
+        </section>
       </main>
       <Footer />
       {selectedPackage && selectedPayment && <CheckoutSummaryModal isOpen={isSummaryOpen} onClose={() => setIsSummaryOpen(false)} playerId={playerId} selectedPackage={selectedPackage} selectedPayment={selectedPayment} phone="" email="" onConfirmOrder={handleConfirmOrder} isSubmitting={isSubmitting} game={game} />}
