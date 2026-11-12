@@ -116,10 +116,12 @@ export const CheckoutSummaryModal: React.FC<CheckoutSummaryModalProps> = ({
               <span className="font-semibold text-red-200">{selectedPayment.name}</span>
             </div>
 
-            <div className="flex items-center justify-between text-xs text-slate-400">
-              <span>{t("Tu WhatsApp:")}</span>
-              <span className="font-mono text-slate-200">{phone}</span>
-            </div>
+            {phone && (
+              <div className="flex items-center justify-between text-xs text-slate-400">
+                <span>{t("Tu WhatsApp:")}</span>
+                <span className="font-mono text-slate-200">{phone}</span>
+              </div>
+            )}
 
             {email && (
               <div className="flex items-center justify-between text-xs text-slate-400">

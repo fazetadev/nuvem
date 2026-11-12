@@ -2,15 +2,13 @@ export type GameId = 'freefire' | 'roblox';
 
 export interface DiamondPackage {
   id: string;
+  /** Total que recibe el cliente (incluye bono si lo hay) */
   diamonds: number;
   bonusDiamonds?: number;
   priceCOP: number;
   priceUSD?: number; // precio fijo en USD (si no existe se calcula con la tasa)
   tag?: string;
   highlight?: boolean;
-  category: 'diamonds' | 'membership';
-  description: string;
-  iconType: 'single' | 'handful' | 'chest' | 'vault' | 'booyah' | 'card_week' | 'card_month';
 }
 
 export interface PaymentMethod {

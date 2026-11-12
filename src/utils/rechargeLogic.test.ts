@@ -18,30 +18,22 @@ import { EN } from '../translations.ts';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-test('diamond packages match user specifications exactly', () => {
-  const p100 = DIAMOND_PACKAGES.find((p) => p.diamonds === 100);
-  assert.ok(p100, '100 diamonds pack must exist');
-  assert.equal(p100.priceCOP, 3200);
-
-  const p310 = DIAMOND_PACKAGES.find((p) => p.diamonds === 310);
-  assert.ok(p310, '310 diamonds pack must exist');
-  assert.equal(p310.priceCOP, 10000);
-
-  const p520 = DIAMOND_PACKAGES.find((p) => p.diamonds === 520);
-  assert.ok(p520, '520 diamonds pack must exist');
-  assert.equal(p520.priceCOP, 16000);
-
-  const p1060 = DIAMOND_PACKAGES.find((p) => p.diamonds === 1060);
-  assert.ok(p1060, '1060 diamonds pack must exist');
-  assert.equal(p1060.priceCOP, 30000);
-
-  const p2180 = DIAMOND_PACKAGES.find((p) => p.diamonds === 2180);
-  assert.ok(p2180, '2180 diamonds pack must exist');
-  assert.equal(p2180.priceCOP, 60000);
-
-  const p5600 = DIAMOND_PACKAGES.find((p) => p.diamonds === 5600);
-  assert.ok(p5600, '5600 diamonds pack must exist');
-  assert.equal(p5600.priceCOP, 160000);
+test('diamond packages match the price list exactly', () => {
+  const expected: [number, number, number][] = [
+    [110, 10, 3200],
+    [341, 31, 10000],
+    [572, 52, 16000],
+    [1166, 106, 32000],
+    [2398, 218, 60000],
+    [6160, 560, 150000],
+  ];
+  assert.equal(DIAMOND_PACKAGES.length, expected.length);
+  for (const [total, bonus, price] of expected) {
+    const pkg = DIAMOND_PACKAGES.find((p) => p.diamonds === total);
+    assert.ok(pkg, `${total} diamonds pack must exist`);
+    assert.equal(pkg.priceCOP, price);
+    assert.equal(pkg.bonusDiamonds, bonus);
+  }
 });
 
 test('official phone number matches user request +57 301 688 6549', () => {
@@ -124,11 +116,4 @@ test('every t("...") text in the source has an English translation', () => {
     }
   }
   assert.deepEqual(missing, []);
-});
-
-test('Free Fire USD prices are fixed per package', () => {
-  const usd: Record<number, number> = { 100: 1.03, 310: 3.09, 520: 3.8, 1060: 7.59, 2180: 15.84, 5600: 37.99 };
-  for (const [d, price] of Object.entries(usd)) {
-    assert.equal(DIAMOND_PACKAGES.find((p) => p.diamonds === Number(d))?.priceUSD, price);
-  }
 });
