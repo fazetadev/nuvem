@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import confetti from 'canvas-confetti';
 import {
   ShieldCheck,
   Zap,
@@ -111,38 +110,11 @@ export default function App() {
       setIsSubmitting(false);
       setIsSummaryOpen(false);
       setIsSuccessOpen(true);
-      try {
-        confetti({
-          particleCount: 90,
-          spread: 72,
-          origin: { y: 0.62 },
-          colors: game === 'roblox' ? ['#e8b84a', '#f0c14b', '#ffffff', '#c9922a'] : ['#38bdf8', '#075985', '#f5d58a', '#ffffff'],
-        });
-      } catch {
-        /* optional */
-      }
     }, 350);
   };
 
   return (
     <div className="app-shell min-h-screen flex flex-col">
-      <div className="bg-orbs" aria-hidden="true">
-        <div className="float-orb o1" />
-        <div className="float-orb o2" />
-        <div className="float-orb o3" />
-      </div>
-      <div className="holiday-season" role="region" aria-label="Temporada navideña Nuvem">
-        <div className="holiday-lights" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /><i /><i /></div>
-        <div className="holiday-season-inner">
-          <span className="holiday-kicker">✦ NAVIDAD POLAR · TEMPORADA 2026 ✦</span>
-          <strong>Una Navidad brillante, en azul hielo</strong>
-          <span className="holiday-copy">De los faroles colombianos a la nieve de Europa · celebra en todo el mundo</span>
-          <span className="holiday-emojis" aria-hidden="true">🕯️ 🏮 ❄️ 🎄 🎁</span>
-        </div>
-      </div>
-      <div className="holiday-atmosphere" aria-hidden="true">
-        <span>✦</span><span>❄</span><span>✧</span><span>❄</span><span>✦</span><span>❄</span>
-      </div>
       <Header game={game} onSelectGame={handleSelectGame} />
       <LiveFeed />
 
