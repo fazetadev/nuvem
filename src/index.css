@@ -1730,3 +1730,41 @@ img[alt*="Diamante"],img[alt*="diamante"] { filter:none!important; }
 /* Marca y artes oficiales actualizados */
 .brand-logo img { width: 100%; height: 100%; object-fit: contain; }
 .package-art .pkg-diamond { width: 100%; height: 100%; max-width: 112px; max-height: 88px; object-fit: contain; }
+
+
+/* NAVIDAD PREMIUM — marca limpia y selección manual */
+.brand-logo {
+  width:42px!important;height:42px!important;
+  border:0!important;border-radius:0!important;
+  background:transparent!important;box-shadow:none!important;
+  overflow:visible!important;
+}
+.brand-logo img {width:100%!important;height:100%!important;object-fit:contain!important}
+.christmas-banner {
+  position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:clamp(16px,5vw,64px);
+  min-height:126px;padding:20px 16px;text-align:center;overflow:hidden;
+  color:#fff8e9;border-bottom:1px solid rgba(244,198,106,.45);
+  background:radial-gradient(ellipse at 50% -90%,rgba(255,231,174,.28),transparent 75%),
+    linear-gradient(110deg,#092b20 0%,#125638 38%,#8c1d2c 100%);
+  box-shadow:0 12px 36px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.08);
+}
+.christmas-banner::before {content:"";position:absolute;inset:0;pointer-events:none;opacity:.28;
+  background-image:radial-gradient(#fff4d6 1px,transparent 1px);background-size:34px 34px;
+  mask-image:linear-gradient(90deg,black,transparent 38%,transparent 62%,black)}
+.christmas-banner div {position:relative;z-index:1}
+.christmas-banner small {display:block;color:#f4d58e;font-size:9px;font-weight:900;letter-spacing:.24em;margin-bottom:5px}
+.christmas-banner strong {display:block;font:900 clamp(22px,3.3vw,34px)/1.12 Outfit,sans-serif;letter-spacing:-.04em;text-shadow:0 3px 22px rgba(0,0,0,.25)}
+.christmas-banner p {margin:7px 0 0;color:rgba(255,248,233,.82);font-size:12px;font-weight:600}
+.christmas-side {position:relative;z-index:1;color:#f3d28a;font-size:clamp(18px,2.5vw,28px);letter-spacing:.12em;text-shadow:0 0 18px rgba(255,226,159,.38)}
+.site-header {background:rgba(4,19,14,.94)!important;border-bottom-color:rgba(226,184,99,.28)!important}
+.brand-name > span {color:#e9c477!important}
+.game-pills button.pill-active {background:linear-gradient(120deg,#176b48,#a52a3a)!important;box-shadow:0 5px 18px rgba(11,87,55,.3)!important}
+.package-card {border-color:rgba(222,190,125,.2)!important;background:radial-gradient(ellipse 85% 55% at 50% 0%,rgba(30,111,72,.17),transparent 65%),linear-gradient(155deg,#12291f,#091710)!important}
+.package-card:hover {border-color:#d9b96e!important;box-shadow:0 12px 30px rgba(0,0,0,.28),0 0 0 1px rgba(217,185,110,.16)!important}
+.package-card.is-selected {border-color:#e5c477!important;background:radial-gradient(ellipse at 50% 0%,rgba(31,130,79,.28),transparent 70%),linear-gradient(155deg,#183b2a,#0b1c14)!important;box-shadow:0 0 0 1px rgba(229,196,119,.55),0 12px 32px rgba(0,0,0,.35)!important}
+.package-card.is-popular {border-color:rgba(217,185,110,.45)!important}
+.hero-title em,.title-grad-red,.hero-title .accent {background:linear-gradient(100deg,#f5dfaa 0%,#d9b45e 45%,#f8e7bd 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important}
+.btn-continue,.btn-primary,.checkout-submit {background:linear-gradient(110deg,#1b8053,#a72c3d)!important;color:#fff!important;border:1px solid rgba(240,211,148,.4)!important;box-shadow:0 8px 24px rgba(10,85,52,.25)!important}
+.btn-continue:hover,.btn-primary:hover,.checkout-submit:hover {filter:brightness(1.12)}
+.benefits-strip::before {color:#e4c477!important}
+@media(max-width:600px){.christmas-banner{min-height:112px;gap:9px;padding:17px 9px}.christmas-side{font-size:15px}.christmas-banner p{font-size:10px}.christmas-banner small{font-size:8px;letter-spacing:.15em}}
