@@ -1,5 +1,5 @@
 export const IMAGES = {
-  logo: 'https://i.ibb.co/h1tFqgVM/logo-marca.png',
+  logo: '/images/logo.png',
   diamond: '/images/diamantes.png',
   robux: '/images/robux.png',
   slide1: '/banners/slide1.jpg',

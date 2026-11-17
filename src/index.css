@@ -442,23 +442,18 @@ button:focus-visible, a:focus-visible, input:focus-visible {
     radial-gradient(ellipse 90% 70% at 50% 15%, rgba(56, 189, 248, 0.18), transparent 55%),
     linear-gradient(165deg, #0b2238 0%, #071525 100%);
 }
+/* Popular is a label only; selection styling is reserved for the chosen package. */
 .package-card.is-popular {
-  border-color: #075985;
+  border-color: #17324b;
 }
 .package-card.is-popular::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(ellipse at 50% 0%, rgba(56, 189, 248, 0.12), transparent 60%);
-  pointer-events: none;
+  content: none;
 }
-/* Robux uses the same blue selection language as diamonds */
 .theme-robux .package-card.is-popular {
-  border-color: #075985;
+  border-color: #17324b;
 }
 .theme-robux .package-card.is-popular::before {
-  background: radial-gradient(ellipse at 50% 0%, rgba(56, 189, 248, 0.1), transparent 60%);
+  content: none;
 }
 
 .package-tag {
