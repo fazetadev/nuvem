@@ -20,6 +20,7 @@ import { LiveFeed } from './components/LiveFeed.tsx';
 import type { DiamondPackage, PaymentMethod, OrderRecord, GameId } from './types/store.ts';
 import {
   GAME_INFO,
+  PAYMENT_METHODS,
   validateAccount,
   generateOrderId,
   saveOrder,
@@ -32,7 +33,7 @@ export default function App() {
   const [game, setGame] = useState<GameId>('freefire');
   const [playerId, setPlayerId] = useState('');
   const [selectedPackage, setSelectedPackage] = useState<DiamondPackage | null>(null);
-  const [selectedPayment, setSelectedPayment] = useState<PaymentMethod | null>(null);
+  const [selectedPayment, setSelectedPayment] = useState<PaymentMethod | null>(PAYMENT_METHODS[0]);
   const [isCheckoutVisible, setIsCheckoutVisible] = useState(false);
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
@@ -110,11 +111,6 @@ export default function App() {
   return (
     <div className="app-shell min-h-screen flex flex-col">
       <Header game={game} onSelectGame={handleSelectGame} />
-      <section className="christmas-banner" aria-label="Temporada navideña">
-        <span className="christmas-side" aria-hidden="true">✦ ❄ ✦</span>
-        <div><small>NUVEM STORE · EDICIÓN ESPECIAL</small><strong>¡La magia de la Navidad llegó!</strong><p>Recarga tus juegos y celebra con beneficios especiales</p></div>
-        <span className="christmas-side" aria-hidden="true">✦ 🎁 ✦</span>
-      </section>
       <LiveFeed />
 
       <main className="flex-1">
