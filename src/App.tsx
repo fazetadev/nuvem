@@ -131,6 +131,18 @@ export default function App() {
         <div className="float-orb o2" />
         <div className="float-orb o3" />
       </div>
+      <div className="holiday-season" role="region" aria-label="Temporada navideña Nuvem">
+        <div className="holiday-lights" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /><i /><i /></div>
+        <div className="holiday-season-inner">
+          <span className="holiday-kicker">✦ TEMPORADA MÁGICA 2026 ✦</span>
+          <strong>¡La Navidad se juega en Nuvem!</strong>
+          <span className="holiday-copy">Faroles, novenas y mucha alegría colombiana · Christmas vibes from around the world</span>
+          <span className="holiday-emojis" aria-hidden="true">🕯️ 🎄 ✨ 🎁</span>
+        </div>
+      </div>
+      <div className="holiday-atmosphere" aria-hidden="true">
+        <span>✦</span><span>❄</span><span>✧</span><span>❄</span><span>✦</span><span>❄</span>
+      </div>
       <Header game={game} onSelectGame={handleSelectGame} />
       <LiveFeed />
 
