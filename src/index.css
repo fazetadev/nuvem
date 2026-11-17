@@ -1719,3 +1719,72 @@ img[alt*="Diamante"],img[alt*="diamante"] { filter:none!important; }
 /* Marca y artes oficiales actualizados */
 .brand-logo img { width: 100%; height: 100%; object-fit: contain; }
 .package-art .pkg-diamond { width: 100%; height: 100%; max-width: 112px; max-height: 88px; object-fit: contain; }
+
+/* Popularidad no debe parecer una selección inicial: solo is-selected marca la elección del cliente. */
+.package-card.is-popular {
+  border-color: rgba(125,211,252,.15) !important;
+}
+.package-card.is-popular::before {
+  content: none !important;
+  background: none !important;
+}
+
+/* Brillo sutil para las artes de diamantes y Robux, sin alterar las tarjetas. */
+.package-art {
+  isolation: isolate;
+}
+.package-art::before {
+  content: "";
+  position: absolute;
+  inset: 5px 8px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: .62;
+  background:
+    radial-gradient(circle at 24% 28%, rgba(255,255,255,.95) 0 1px, transparent 2px),
+    radial-gradient(circle at 78% 22%, rgba(186,230,253,.9) 0 1px, transparent 2px),
+    radial-gradient(circle at 72% 78%, rgba(255,255,255,.82) 0 1px, transparent 2px);
+  filter: drop-shadow(0 0 3px rgba(125,211,252,.85));
+  animation: package-art-twinkle 3.6s ease-in-out infinite !important;
+}
+.package-art::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  top: -18%;
+  bottom: -18%;
+  left: -48%;
+  width: 34%;
+  opacity: 0;
+  transform: skewX(-22deg);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.48), rgba(186,230,253,.22), transparent);
+  filter: blur(1px);
+  animation: package-art-shine 5.2s ease-in-out infinite !important;
+}
+.theme-diamonds .package-art img {
+  filter: drop-shadow(0 0 5px rgba(56,189,248,.34)) brightness(1.07) !important;
+}
+.theme-robux .package-art img {
+  filter: drop-shadow(0 0 5px rgba(250,204,21,.28)) brightness(1.06) !important;
+}
+.theme-robux .package-art::before {
+  filter: drop-shadow(0 0 3px rgba(253,224,71,.72));
+  background:
+    radial-gradient(circle at 24% 28%, rgba(255,255,255,.95) 0 1px, transparent 2px),
+    radial-gradient(circle at 78% 22%, rgba(253,224,71,.9) 0 1px, transparent 2px),
+    radial-gradient(circle at 72% 78%, rgba(255,255,255,.82) 0 1px, transparent 2px);
+}
+@keyframes package-art-shine {
+  0%, 18% { left: -48%; opacity: 0; }
+  25% { opacity: .72; }
+  48% { left: 118%; opacity: .42; }
+  49%, 100% { left: 118%; opacity: 0; }
+}
+@keyframes package-art-twinkle {
+  0%, 100% { opacity: .34; }
+  48% { opacity: .82; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .package-art::before, .package-art::after { animation: none !important; }
+}
