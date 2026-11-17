@@ -1,5 +1,4 @@
 import React from 'react';
-import { DiamondIcon } from './DiamondIcon';
 import { IMAGES } from '../config/images';
 import type { DiamondPackage, GameId } from '../types/store.ts';
 import { GAME_INFO, formatNumber, formatCOP, DIAMOND_PACKAGES as FREEFIRE, ROBLOX_PACKAGES as ROBLOX } from '../utils/rechargeLogic.ts';
@@ -15,6 +14,14 @@ export const PackagesGrid: React.FC<PackagesGridProps> = ({ game, selectedPackag
   const info = GAME_INFO[game];
   const packages = game === 'roblox' ? ROBLOX : FREEFIRE;
   const isRoblox = game === 'roblox';
+  const diamondArtByPackage: Record<string, string> = {
+    'ff-110': 'https://i.ibb.co/4ySTpkN/10.png',
+    'ff-341': 'https://i.ibb.co/B5ynkq2k/300.png',
+    'ff-572': 'https://i.ibb.co/WWFMXBts/500.png',
+    'ff-1166': 'https://i.ibb.co/gM4ssZCx/1000.png',
+    'ff-2398': 'https://i.ibb.co/GvFCrV2t/2000.png',
+    'ff-6160': 'https://i.ibb.co/G3T1TXFQ/5000.png',
+  };
 
   return (
     <div className={`packages-grid ${isRoblox ? 'theme-robux' : 'theme-diamonds'}`}>
@@ -47,7 +54,12 @@ export const PackagesGrid: React.FC<PackagesGridProps> = ({ game, selectedPackag
               {isRoblox ? (
                 <img src={IMAGES.robux} alt="Robux" className="pkg-robux" loading="lazy" />
               ) : (
-                <DiamondIcon className="pkg-diamond" />
+                <img
+                  src={diamondArtByPackage[pkg.id] || IMAGES.diamond}
+                  alt={`${formatNumber(pkg.diamonds)} diamantes`}
+                  className="pkg-diamond"
+                  loading="lazy"
+                />
               )}
               <div className="art-glow" />
             </div>

@@ -42,7 +42,7 @@ export const OrderSuccessModal: React.FC<OrderSuccessModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto">
       <div className="relative w-full max-w-lg my-8 rounded-3xl bg-[#120609] border border-blue-800/80 shadow-2xl shadow-blue-950/90 overflow-hidden text-slate-100">
         
-        {/* Top Glow bar in Blood Red */}
+        {/* Top Glow bar in Blue */}
         <div className="h-2 w-full bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500" />
 
         {/* Header */}

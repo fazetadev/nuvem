@@ -40,8 +40,8 @@ export const Bat: React.FC<P> = ({ className, style }) => (
       d="M50 16 L45 6 L48 18 C 38 10, 20 8, 2 22 C 14 20, 20 26, 26 38 C 32 30, 40 30, 46 40 L50 32 L54 40 C 60 30, 68 30, 74 38 C 80 26, 86 20, 98 22 C 80 8, 62 10, 52 18 L55 6 Z"
       fill="currentColor"
     />
-    <circle cx="47" cy="22" r="1.3" fill="#ef4444" />
-    <circle cx="53" cy="22" r="1.3" fill="#ef4444" />
+    <circle cx="47" cy="22" r="1.3" fill="#38bdf8" />
+    <circle cx="53" cy="22" r="1.3" fill="#38bdf8" />
   </svg>
 );
 
@@ -82,7 +82,7 @@ export const BloodMoon: React.FC<P> = ({ className, style }) => (
       <radialGradient id="moon-blood" cx="42%" cy="40%" r="68%">
         <stop offset="0%" stopColor="#fff1f2" />
         <stop offset="35%" stopColor="#fca5a5" />
-        <stop offset="70%" stopColor="#ef4444" />
+        <stop offset="70%" stopColor="#38bdf8" />
         <stop offset="100%" stopColor="#991b1b" />
       </radialGradient>
     </defs>
