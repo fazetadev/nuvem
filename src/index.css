@@ -214,17 +214,6 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   padding: 0 18px;
   border-right: 1px solid #142c45;
 }
-.live-chip {
-  font-size: 9px;
-  font-weight: 900;
-  letter-spacing: 0.04em;
-  padding: 3px 7px;
-  border-radius: 5px;
-  flex-shrink: 0;
-}
-.live-chip.ff { background: rgba(56,189,248,.15); color: #7dd3fc; }
-.live-chip.rb { background: rgba(200,160,60,.12); color: #d4b45a; }
-.live-chip.ok { background: rgba(87,212,155,.12); color: #57d49b; }
 .live-text { font-weight: 600; }
 
 .live-dot {
@@ -1654,7 +1643,7 @@ body { background:radial-gradient(ellipse at 50% -18%,rgba(14,116,190,.19),trans
 .site-header {background:rgba(3,10,22,.86);border-bottom:1px solid rgba(56,189,248,.2);box-shadow:0 8px 28px rgba(0,0,0,.22)}
 .brand-logo {border:1px solid rgba(125,211,252,.55);background:linear-gradient(145deg,#123b61,#071525);box-shadow:0 0 25px rgba(56,189,248,.2),inset 0 1px rgba(255,255,255,.12)}.brand-name > span {color:#7dd3fc}.nav-link.active {background:rgba(56,189,248,.15)}
 .game-pills {border-color:rgba(125,211,252,.2);background:#071525}.game-pills button.pill-active {background:linear-gradient(115deg,#38bdf8,#0369a1);box-shadow:0 5px 18px rgba(14,165,233,.3)}
-.live-feed {background:rgba(3,12,26,.92);border-bottom-color:rgba(56,189,248,.18)}.live-chip.ff {background:rgba(56,189,248,.15);color:#7dd3fc}.live-dot {background:#38bdf8;box-shadow:0 0 12px #38bdf8}
+.live-feed {background:rgba(3,12,26,.92);border-bottom-color:rgba(56,189,248,.18)}.live-dot {background:#38bdf8;box-shadow:0 0 12px #38bdf8}
 .hero-section {position:relative}.hero-title em,.title-grad-red,.hero-title .accent {color:#7dd3fc;background:linear-gradient(100deg,#e0f7ff 0%,#7dd3fc 38%,#38bdf8 72%,#dbeafe 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 7px 24px rgba(56,189,248,.18))}
 .hero-badge {border-color:rgba(125,211,252,.28);background:rgba(8,47,73,.45)}
 .package-card,.checkout-panel,.benefit-card,.faq-item,.cta-banner-inner {border-color:rgba(125,211,252,.15);background-image:linear-gradient(145deg,rgba(12,35,61,.72),rgba(5,15,29,.94))}
