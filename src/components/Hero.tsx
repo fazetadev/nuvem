@@ -80,7 +80,7 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToRecharge, onSelectGame }) 
   };
 
   return (
-    <section className="relative overflow-hidden pt-4 pb-10 sm:pt-6 sm:pb-14 border-b border-red-950/40">
+    <section className="relative overflow-hidden pt-4 pb-10 sm:pt-6 sm:pb-14 border-b border-blue-950/40">
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 relative z-10">
         
         {/* COVERFLOW CAROUSEL (Matching image_492b0cd2.png exactly: 3 slides visible) */}
@@ -91,7 +91,7 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToRecharge, onSelectGame }) 
             <div
               onClick={handlePrev}
               title={prevSlide.title}
-              className="absolute left-1/2 -translate-x-[150%] w-[72%] sm:w-[58%] h-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl opacity-30 brightness-[0.3] hover:opacity-50 hover:brightness-50 transition-all duration-500 ease-out cursor-pointer z-10 border border-red-950/40 bg-black"
+              className="absolute left-1/2 -translate-x-[150%] w-[72%] sm:w-[58%] h-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl opacity-30 brightness-[0.3] hover:opacity-50 hover:brightness-50 transition-all duration-500 ease-out cursor-pointer z-10 border border-blue-950/40 bg-black"
             >
               <img
                 src={prevSlide.img}
@@ -104,7 +104,7 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToRecharge, onSelectGame }) 
             {/* Center Slide (Active - Pure Clean Banner Graphic) */}
             <div
               onClick={() => handleSlideClick(currSlide)}
-              className="relative w-[72%] sm:w-[58%] h-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.95)] z-20 border border-red-600/30 hover:border-red-500/60 transition-all duration-500 ease-out cursor-pointer group bg-black"
+              className="relative w-[72%] sm:w-[58%] h-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.95)] z-20 border border-blue-600/30 hover:border-blue-500/60 transition-all duration-500 ease-out cursor-pointer group bg-black"
             >
               <img
                 key={currSlide.id}
@@ -119,7 +119,7 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToRecharge, onSelectGame }) 
             <div
               onClick={handleNext}
               title={nextSlide.title}
-              className="absolute left-1/2 translate-x-[50%] w-[72%] sm:w-[58%] h-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl opacity-30 brightness-[0.3] hover:opacity-50 hover:brightness-50 transition-all duration-500 ease-out cursor-pointer z-10 border border-red-950/40 bg-black"
+              className="absolute left-1/2 translate-x-[50%] w-[72%] sm:w-[58%] h-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl opacity-30 brightness-[0.3] hover:opacity-50 hover:brightness-50 transition-all duration-500 ease-out cursor-pointer z-10 border border-blue-950/40 bg-black"
             >
               <img
                 src={nextSlide.img}
@@ -161,7 +161,7 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToRecharge, onSelectGame }) 
                 aria-label={`Slide ${idx + 1}`}
                 className={`transition-all duration-300 rounded-full cursor-pointer ${
                   activeSlide === idx
-                    ? 'w-7 sm:w-8 h-2 bg-gradient-to-r from-red-600 to-rose-600 shadow-[0_0_12px_rgba(239,68,68,0.8)]'
+                    ? 'w-7 sm:w-8 h-2 bg-gradient-to-r from-blue-600 to-sky-600 shadow-[0_0_12px_rgba(239,68,68,0.8)]'
                     : 'w-2 h-2 bg-slate-600/80 hover:bg-slate-400'
                 }`}
               />
@@ -179,7 +179,7 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToRecharge, onSelectGame }) 
             </span>
           </h1>
 
-          <div className="w-16 h-1 bg-gradient-to-r from-red-600 to-rose-500 rounded-full mx-auto" />
+          <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-sky-500 rounded-full mx-auto" />
 
           <p className="text-sm sm:text-base text-slate-300 font-normal leading-relaxed pt-1">
             {t("Tu plataforma gamer favorita en Colombia. Recargas oficiales con acreditación inmediata por UID en Free Fire y usuario en Roblox. Sin contraseñas ni intermediarios.")}
@@ -187,16 +187,16 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToRecharge, onSelectGame }) 
 
           {/* Quick Value Props Strip */}
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 pt-2 text-xs text-slate-300">
-            <span className="flex items-center gap-1.5 text-red-300 font-semibold">
-              <Flame className="w-3.5 h-3.5 text-red-500" />
+            <span className="flex items-center gap-1.5 text-blue-300 font-semibold">
+              <Flame className="w-3.5 h-3.5 text-blue-500" />
               {t("Entrega Inmediata 24/7")}
             </span>
-            <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-red-800/80" />
+            <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-blue-800/80" />
             <span className="flex items-center gap-1.5 font-medium">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
               {t("100% Seguro y Anti-Ban")}
             </span>
-            <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-red-800/80" />
+            <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-blue-800/80" />
             <span className="flex items-center gap-1.5 font-medium">
               <Clock className="w-3.5 h-3.5 text-amber-400" />
               {t("Pagas por Nequi, Bancolombia o PayPal")}

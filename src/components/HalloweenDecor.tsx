@@ -122,7 +122,7 @@ export const HalloweenBackdrop: React.FC = () => (
     <div className="absolute -top-10 -right-10 sm:top-4 sm:right-6 w-36 sm:w-52 opacity-40 blur-[0.5px] hw-moon">
       <BloodMoon className="w-full h-full" />
     </div>
-    <div className="absolute inset-x-0 bottom-0 h-80 bg-gradient-to-t from-red-950/25 via-orange-950/15 to-transparent" />
+    <div className="absolute inset-x-0 bottom-0 h-80 bg-gradient-to-t from-blue-950/25 via-orange-950/15 to-transparent" />
     <div className="hidden md:block absolute inset-x-0 bottom-0 h-44 hw-fog" />
 
     {[

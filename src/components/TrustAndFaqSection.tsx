@@ -38,14 +38,14 @@ export const TrustAndFaqSection: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-12 sm:py-16 border-b border-red-950/60">
+    <section id="faq" className="py-12 sm:py-16 border-b border-blue-950/60">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* FAQ Section */}
         <div className="space-y-6">
           <div className="space-y-2 text-center">
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold text-red-400 uppercase tracking-wider">
-              <HelpCircle className="w-4 h-4 text-red-400" />
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-400 uppercase tracking-wider">
+              <HelpCircle className="w-4 h-4 text-blue-400" />
               <span>{t("Resuelve tus Dudas")}</span>
             </div>
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-black title-grad-red tracking-tight">
@@ -65,8 +65,8 @@ export const TrustAndFaqSection: React.FC = () => {
                   key={idx}
                   className={`rounded-2xl transition-all border ${
                     isOpen
-                      ? 'bg-[#15070a] border-red-700/60 shadow-lg shadow-red-950/40'
-                      : 'bg-[#0d0406] border-red-950/60 hover:border-red-800/60'
+                      ? 'bg-[#15070a] border-blue-700/60 shadow-lg shadow-blue-950/40'
+                      : 'bg-[#0d0406] border-blue-950/60 hover:border-blue-800/60'
                   }`}
                 >
                   <button
@@ -79,14 +79,14 @@ export const TrustAndFaqSection: React.FC = () => {
                       {faq.q}
                     </span>
                     <ChevronDown
-                      className={`w-5 h-5 text-red-400 transition-transform duration-200 shrink-0 ${
-                        isOpen ? 'rotate-180 text-red-300' : ''
+                      className={`w-5 h-5 text-blue-400 transition-transform duration-200 shrink-0 ${
+                        isOpen ? 'rotate-180 text-blue-300' : ''
                       }`}
                     />
                   </button>
 
                   {isOpen && (
-                    <div className="px-4 pb-5 sm:px-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-red-950/60 pt-3">
+                    <div className="px-4 pb-5 sm:px-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-blue-950/60 pt-3">
                       {faq.a}
                     </div>
                   )}

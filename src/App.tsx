@@ -116,7 +116,7 @@ export default function App() {
           particleCount: 90,
           spread: 72,
           origin: { y: 0.62 },
-          colors: game === 'roblox' ? ['#e8b84a', '#f0c14b', '#ffffff', '#c9922a'] : ['#ef3039', '#b90f20', '#f7c56b', '#ffffff'],
+          colors: game === 'roblox' ? ['#e8b84a', '#f0c14b', '#ffffff', '#c9922a'] : ['#38bdf8', '#075985', '#f5d58a', '#ffffff'],
         });
       } catch {
         /* optional */
@@ -134,10 +134,10 @@ export default function App() {
       <div className="holiday-season" role="region" aria-label="Temporada navideña Nuvem">
         <div className="holiday-lights" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /><i /><i /></div>
         <div className="holiday-season-inner">
-          <span className="holiday-kicker">✦ TEMPORADA MÁGICA 2026 ✦</span>
-          <strong>¡La Navidad se juega en Nuvem!</strong>
-          <span className="holiday-copy">Faroles, novenas y mucha alegría colombiana · Christmas vibes from around the world</span>
-          <span className="holiday-emojis" aria-hidden="true">🕯️ 🎄 ✨ 🎁</span>
+          <span className="holiday-kicker">✦ NAVIDAD POLAR · TEMPORADA 2026 ✦</span>
+          <strong>Una Navidad brillante, en azul hielo</strong>
+          <span className="holiday-copy">De los faroles colombianos a la nieve de Europa · celebra en todo el mundo</span>
+          <span className="holiday-emojis" aria-hidden="true">🕯️ 🏮 ❄️ 🎄 🎁</span>
         </div>
       </div>
       <div className="holiday-atmosphere" aria-hidden="true">

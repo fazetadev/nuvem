@@ -36,19 +36,19 @@ export const CheckoutSummaryModal: React.FC<CheckoutSummaryModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-lg rounded-3xl bg-[#120609] border border-red-800/60 shadow-2xl shadow-red-950/90 overflow-hidden">
+      <div className="relative w-full max-w-lg rounded-3xl bg-[#120609] border border-blue-800/60 shadow-2xl shadow-blue-950/90 overflow-hidden">
         
         {/* Header */}
-        <div className="p-6 pb-4 border-b border-red-950/60 flex items-center justify-between">
+        <div className="p-6 pb-4 border-b border-blue-950/60 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-red-600/30 border border-red-500/40 flex items-center justify-center text-red-400">
+            <div className="w-9 h-9 rounded-xl bg-blue-600/30 border border-blue-500/40 flex items-center justify-center text-blue-400">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
               <h3 className="font-display text-lg font-bold text-white tracking-tight">
                 {t("Resumen de tu Recarga")}
               </h3>
-              <p className="text-xs text-red-300/80">
+              <p className="text-xs text-blue-300/80">
                 {t("Verifica los datos antes de proceder al pago")}
               </p>
             </div>
@@ -56,7 +56,7 @@ export const CheckoutSummaryModal: React.FC<CheckoutSummaryModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-red-950/50 transition-colors cursor-pointer"
+            className="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-blue-950/50 transition-colors cursor-pointer"
             aria-label={t("Cerrar resumen")}
           >
             <X className="w-5 h-5" />
@@ -67,8 +67,8 @@ export const CheckoutSummaryModal: React.FC<CheckoutSummaryModalProps> = ({
         <div className="p-6 space-y-4 text-sm">
           
           {/* Game Account Summary Box */}
-          <div className="p-4 rounded-2xl bg-[#090305] border border-red-950/70 space-y-2.5">
-            <div className="flex items-center justify-between text-xs text-red-300/80 font-semibold uppercase tracking-wider">
+          <div className="p-4 rounded-2xl bg-[#090305] border border-blue-950/70 space-y-2.5">
+            <div className="flex items-center justify-between text-xs text-blue-300/80 font-semibold uppercase tracking-wider">
               <span>{t('Cuenta {game}', { game: info.name })}</span>
               <span className="text-emerald-400 font-bold normal-case flex items-center gap-1">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
@@ -83,17 +83,17 @@ export const CheckoutSummaryModal: React.FC<CheckoutSummaryModalProps> = ({
                   {playerId}
                 </span>
               </div>
-              <span className="text-xs text-red-300 font-medium bg-red-950/80 px-2.5 py-1 rounded-lg border border-red-800/40">
+              <span className="text-xs text-blue-300 font-medium bg-blue-950/80 px-2.5 py-1 rounded-lg border border-blue-800/40">
                 {t("Recarga Directa")}
               </span>
             </div>
           </div>
 
           {/* Package and Amount Details */}
-          <div className="p-4 rounded-2xl bg-red-950/30 border border-red-800/40 space-y-3">
+          <div className="p-4 rounded-2xl bg-blue-950/30 border border-blue-800/40 space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Gem className="w-4 h-4 text-red-400" />
+                <Gem className="w-4 h-4 text-blue-400" />
                 <span className="font-bold text-white">
                   {formatNumber(selectedPackage.diamonds)} {t(info.unit)} {info.name}
                 </span>
@@ -111,9 +111,9 @@ export const CheckoutSummaryModal: React.FC<CheckoutSummaryModalProps> = ({
               </p>
             )}
 
-            <div className="flex items-center justify-between text-xs text-slate-400 pt-2 border-t border-red-950/60">
+            <div className="flex items-center justify-between text-xs text-slate-400 pt-2 border-t border-blue-950/60">
               <span>{t("Método de Pago:")}</span>
-              <span className="font-semibold text-red-200">{selectedPayment.name}</span>
+              <span className="font-semibold text-blue-200">{selectedPayment.name}</span>
             </div>
 
             {phone && (
@@ -130,19 +130,19 @@ export const CheckoutSummaryModal: React.FC<CheckoutSummaryModalProps> = ({
               </div>
             )}
 
-            <div className="pt-3 border-t border-red-950/70 flex items-baseline justify-between">
+            <div className="pt-3 border-t border-blue-950/70 flex items-baseline justify-between">
               <span className="text-xs font-bold uppercase tracking-wider text-slate-300">
                 {lang === 'en' ? t('Total a Pagar (USD)') : t('Total a Pagar (COP)')}
               </span>
-              <span className="font-mono text-2xl font-black text-red-400 tabular-nums">
+              <span className="font-mono text-2xl font-black text-blue-400 tabular-nums">
                 {formatPrice(selectedPackage.priceCOP, selectedPackage.priceUSD)}
               </span>
             </div>
           </div>
 
           {/* Guarantee notice */}
-          <div className="flex items-start gap-2.5 p-3 rounded-xl bg-red-950/20 border border-red-900/30 text-xs text-red-300/90">
-            <ShieldCheck className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+          <div className="flex items-start gap-2.5 p-3 rounded-xl bg-blue-950/20 border border-blue-900/30 text-xs text-blue-300/90">
+            <ShieldCheck className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
             <p>
               {t(info.deliveredIn)}
             </p>
@@ -151,7 +151,7 @@ export const CheckoutSummaryModal: React.FC<CheckoutSummaryModalProps> = ({
         </div>
 
         {/* Footer Actions */}
-        <div className="p-6 pt-2 border-t border-red-950/60 flex items-center gap-3">
+        <div className="p-6 pt-2 border-t border-blue-950/60 flex items-center gap-3">
           <button
             type="button"
             onClick={onClose}

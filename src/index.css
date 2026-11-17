@@ -2,10 +2,10 @@
 
 :root {
   color-scheme: dark;
-  --red: #ef3039;
-  --red-bright: #ff4757;
-  --red-dark: #a91525;
-  --red-glow: rgba(239, 48, 57, 0.35);
+  --red: #38bdf8;
+  --red-bright: #7dd3fc;
+  --red-dark: #075985;
+  --red-glow: rgba(56, 189, 248, 0.34);
   --bg: #050507;
   --bg-elevated: #0c0c10;
   --panel: #121218;
@@ -40,14 +40,14 @@ h1, h2, h3, .font-display {
 
 button, a { -webkit-tap-highlight-color: transparent; }
 button:focus-visible, a:focus-visible, input:focus-visible {
-  outline: 2px solid #ff6971;
+  outline: 2px solid #7dd3fc;
   outline-offset: 3px;
 }
-::selection { background: #e8323e; color: #fff; }
+::selection { background: #0284c7; color: #fff; }
 
 ::-webkit-scrollbar { width: 7px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: #64212a; border-radius: 9px; }
+::-webkit-scrollbar-thumb { background: #075985; border-radius: 9px; }
 
 .max-w-7xl { max-width: 1280px; }
 .max-w-4xl { max-width: 860px; }
@@ -148,7 +148,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 }
 .game-pills button:hover { color: #fff; }
 .game-pills button.pill-active {
-  background: linear-gradient(110deg, #ef3943, #b9182a);
+  background: linear-gradient(110deg, #38bdf8, #075985);
   color: white;
   box-shadow: 0 4px 15px #d5223540;
 }
@@ -222,7 +222,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   border-radius: 5px;
   flex-shrink: 0;
 }
-.live-chip.ff { background: rgba(239,48,57,.15); color: #ff6b75; }
+.live-chip.ff { background: rgba(56,189,248,.15); color: #7dd3fc; }
 .live-chip.rb { background: rgba(200,160,60,.12); color: #d4b45a; }
 .live-chip.ok { background: rgba(87,212,155,.12); color: #57d49b; }
 .live-text { font-weight: 600; }
@@ -231,8 +231,8 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #ef3943;
-  box-shadow: 0 0 10px #ef3943;
+  background: #38bdf8;
+  box-shadow: 0 0 10px #38bdf8;
   animation: pulse-dot 1.4s ease-in-out infinite;
   flex-shrink: 0;
 }
@@ -282,7 +282,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 }
 .hero-title em {
   font-style: normal;
-  color: #ef3943;
+  color: #38bdf8;
   text-shadow: 0 0 48px rgba(239, 48, 57, 0.5);
 }
 .hero-sub {
@@ -323,7 +323,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   width: 28px;
   height: 28px;
   border-radius: 9px;
-  background: linear-gradient(135deg, #ef3943, #b9182a);
+  background: linear-gradient(135deg, #38bdf8, #075985);
   color: #fff;
   font-size: 12px;
   font-weight: 900;
@@ -357,7 +357,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   background: #121218;
   border: 1px solid #25252e;
 }
-.hero-trust-row svg { color: #ef6b73; }
+.hero-trust-row svg { color: #7dd3fc; }
 
 /* ─── PACKAGES ─── */
 .hero-catalog { animation: fade-up 0.7s ease both 0.08s; }
@@ -433,10 +433,10 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(239, 48, 57, 0.15);
 }
 .package-card.is-selected {
-  border-color: #ef3943;
+  border-color: #38bdf8;
   box-shadow:
-    0 0 0 1px #ef3943,
-    0 0 28px rgba(239, 48, 57, 0.35),
+    0 0 0 1px #38bdf8,
+    0 0 28px rgba(56, 189, 248, 0.34),
     0 12px 36px rgba(0, 0, 0, 0.5);
   background:
     radial-gradient(ellipse 90% 70% at 50% 15%, rgba(239, 48, 57, 0.18), transparent 55%),
@@ -470,7 +470,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   letter-spacing: 0.1em;
   padding: 4px 8px;
   border-radius: 5px;
-  background: linear-gradient(110deg, #ef3943, #c41e2e);
+  background: linear-gradient(110deg, #38bdf8, #0369a1);
   color: #fff;
   box-shadow: 0 4px 12px var(--red-glow);
   z-index: 2;
@@ -482,7 +482,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: #ef3943;
+  background: #38bdf8;
   color: #fff;
   display: grid;
   place-items: center;
@@ -579,7 +579,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
     filter:
       drop-shadow(0 0 6px rgba(255, 120, 130, 0.85))
       drop-shadow(0 0 16px rgba(239, 48, 57, 0.65))
-      drop-shadow(0 0 32px rgba(239, 48, 57, 0.35))
+      drop-shadow(0 0 32px rgba(56, 189, 248, 0.34))
       brightness(1.1)
       contrast(1.05);
   }
@@ -628,7 +628,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   margin-top: 6px;
   font-size: 10px;
   font-weight: 600;
-  color: #ef6b73;
+  color: #7dd3fc;
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -673,7 +673,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 .sel-price {
   font-size: 13px;
   font-weight: 700;
-  color: #ef3943;
+  color: #38bdf8;
 }
 .sel-empty { color: #6e6e78; font-size: 13px; }
 .btn-continue {
@@ -689,7 +689,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   font-weight: 900;
   letter-spacing: 0.1em;
   color: #fff;
-  background: linear-gradient(110deg, #ef3943, #b9182a);
+  background: linear-gradient(110deg, #38bdf8, #075985);
   box-shadow: 0 6px 20px var(--red-glow);
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
@@ -758,7 +758,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 }
 .top-buyers-tabs button:hover { color: #fff; }
 .top-buyers-tabs button.active {
-  background: #ef3943;
+  background: #38bdf8;
   color: #fff;
 }
 
@@ -797,7 +797,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   place-items: center;
   font-size: 9px;
   font-weight: 800;
-  color: #ef6b73;
+  color: #7dd3fc;
   flex-shrink: 0;
 }
 .rank-name {
@@ -812,7 +812,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 .rank-amount {
   font-size: 12px;
   font-weight: 800;
-  color: #ef3943;
+  color: #38bdf8;
   white-space: nowrap;
 }
 .top-buyers-more {
@@ -829,7 +829,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   transition: color 0.2s, background 0.2s;
 }
 .top-buyers-more:hover {
-  color: #ef3943;
+  color: #38bdf8;
   background: rgba(239, 48, 57, 0.06);
 }
 
@@ -902,7 +902,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 .podium-amount {
   font-size: 14px;
   font-weight: 800;
-  color: #ef3943;
+  color: #38bdf8;
 }
 
 /* ─── CHECKOUT ─── */
@@ -928,7 +928,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 }
 .checkout-back:hover {
   color: #fff;
-  border-color: #ef3943;
+  border-color: #38bdf8;
   background: rgba(239, 48, 57, 0.1);
   box-shadow: 0 4px 16px rgba(239, 48, 57, 0.2);
   transform: translateX(-2px);
@@ -963,7 +963,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 .checkout-progress .done { color: #57d49b; }
 .checkout-progress .done i { background: #153d2e; color: #57d49b; }
 .checkout-progress .current { color: #fff; }
-.checkout-progress .current i { background: #ef3943; color: #fff; }
+.checkout-progress .current i { background: #38bdf8; color: #fff; }
 .checkout-progress b {
   flex: 1;
   height: 1px;
@@ -986,7 +986,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   color: #6e6e78;
   font-weight: 600;
 }
-.checkout-trust svg { color: #ef6b73; }
+.checkout-trust svg { color: #7dd3fc; }
 
 /* Checkout panel styles (kept compatible) */
 .checkout-card {
@@ -1020,7 +1020,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   width: 22px;
   height: 22px;
   border-radius: 6px;
-  background: #ef3943;
+  background: #38bdf8;
   color: #fff;
   font-size: 11px;
   font-weight: 900;
@@ -1044,7 +1044,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   outline: none;
   transition: border-color 0.2s;
 }
-.input-wrap input:focus { border-color: #ef3943; }
+.input-wrap input:focus { border-color: #38bdf8; }
 .input-wrap button {
   position: absolute;
   right: 10px;
@@ -1066,7 +1066,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 .checkout-error {
   margin: 8px 0 0;
   font-size: 12px;
-  color: #ef3943;
+  color: #38bdf8;
   font-weight: 600;
 }
 .payment-grid {
@@ -1096,7 +1096,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   background: #121218;
 }
 .payment-option-active {
-  border-color: #ef3943;
+  border-color: #38bdf8;
   background: rgba(239, 48, 57, 0.1);
   color: #fff;
   box-shadow: 0 0 0 1px rgba(239, 48, 57, 0.25), 0 4px 16px rgba(239, 48, 57, 0.15);
@@ -1115,12 +1115,12 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 }
 .payment-option-active .payment-icon {
   background: rgba(239, 48, 57, 0.2);
-  border-color: #ef3943;
-  color: #ff6b75;
+  border-color: #38bdf8;
+  color: #7dd3fc;
 }
 .total-product-icon.icon-diamond {
   background: linear-gradient(135deg, #3a1a22, #1a1216);
-  color: #ef3943;
+  color: #38bdf8;
 }
 .total-product-icon.icon-robux {
   background: linear-gradient(135deg, #3a3018, #1a160c);
@@ -1165,7 +1165,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   background: linear-gradient(135deg, #3a1a22, #1a1216);
   display: grid;
   place-items: center;
-  color: #ef3943;
+  color: #38bdf8;
   font-size: 16px;
 }
 .total-product b { display: block; font-size: 14px; color: #fff; }
@@ -1182,7 +1182,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 .total-price-row strong {
   font-size: 18px;
   font-weight: 900;
-  color: #ef3943;
+  color: #38bdf8;
   font-family: Outfit, sans-serif;
 }
 .checkout-submit {
@@ -1198,7 +1198,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   font-weight: 900;
   letter-spacing: 0.08em;
   color: #fff;
-  background: linear-gradient(110deg, #ef3943, #b9182a);
+  background: linear-gradient(110deg, #38bdf8, #075985);
   box-shadow: 0 8px 24px var(--red-glow);
   cursor: pointer;
   transition: transform 0.2s, filter 0.2s;
@@ -1263,7 +1263,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   gap: 6px;
   transition: color 0.2s;
 }
-.footer-column a:hover { color: #ef3943; }
+.footer-column a:hover { color: #38bdf8; }
 .footer-contact b {
   display: block;
   font-size: 10px;
@@ -1302,7 +1302,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   flex-wrap: wrap;
   gap: 8px;
 }
-.footer-bottom b { color: #ef3943; }
+.footer-bottom b { color: #38bdf8; }
 
 /* ─── BENEFITS + CTA ─── */
 .benefits-strip {
@@ -1344,7 +1344,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   border: 1px solid rgba(239, 48, 57, 0.3);
   display: grid;
   place-items: center;
-  color: #ff6b75;
+  color: #7dd3fc;
   flex-shrink: 0;
 }
 .benefit-card strong {
@@ -1482,8 +1482,8 @@ a.btn-continue {
 }
 
 .btn-blood {
-  background: linear-gradient(110deg, #ef3943, #b9182a);
-  box-shadow: 0 6px 20px rgba(239, 48, 57, 0.35);
+  background: linear-gradient(110deg, #38bdf8, #075985);
+  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.34);
 }
 .btn-blood:hover:not(:disabled) {
   filter: brightness(1.08);
@@ -1533,20 +1533,20 @@ a.btn-continue {
 }
 .float-orb.o1 {
   width: 280px; height: 280px;
-  background: #ef3039;
+  background: #38bdf8;
   top: 12%; left: -60px;
   animation-duration: 14s;
 }
 .float-orb.o2 {
   width: 220px; height: 220px;
-  background: #7a1a28;
+  background: #123d66;
   top: 55%; right: -40px;
   animation-duration: 18s;
   animation-delay: -4s;
 }
 .float-orb.o3 {
   width: 180px; height: 180px;
-  background: #b9182a;
+  background: #075985;
   bottom: 10%; left: 30%;
   opacity: 0.2;
   animation-duration: 16s;
@@ -1569,13 +1569,13 @@ a.btn-continue {
 :root {
   --holiday-evergreen: #126044;
   --holiday-gold: #e7bd68;
-  --holiday-cranberry: #a91f35;
+  --holiday-ice: #38bdf8;
 }
 .app-shell {
   isolation: isolate;
   background:
     radial-gradient(ellipse at 8% 8%, rgba(20, 104, 70, .12), transparent 34%),
-    radial-gradient(ellipse at 92% 22%, rgba(169, 31, 53, .12), transparent 32%),
+    radial-gradient(ellipse at 92% 22%, rgba(14, 116, 190, .16), transparent 32%),
     var(--bg);
 }
 .holiday-season {
@@ -1590,7 +1590,7 @@ a.btn-continue {
   color: #fff8e8;
   background:
     radial-gradient(ellipse at 50% -100%, rgba(244, 207, 129, .23), transparent 70%),
-    linear-gradient(105deg, #092d23 0%, #124b35 38%, #6e1726 100%);
+    linear-gradient(105deg, #061b35 0%, #0b3a68 42%, #087eaa 100%);
   border-bottom: 1px solid rgba(231, 189, 104, .45);
   box-shadow: 0 8px 32px rgba(0,0,0,.24);
 }
@@ -1613,12 +1613,12 @@ a.btn-continue {
 .holiday-emojis { font-size:15px; letter-spacing:3px; }
 .holiday-lights { position:absolute; inset:0 0 auto; height:8px; display:flex; justify-content:space-around; pointer-events:none; }
 .holiday-lights i { width:7px; height:7px; border-radius:50%; background:#f5d77e; box-shadow:0 0 10px 3px rgba(245,215,126,.65); animation: holiday-twinkle 2.2s ease-in-out infinite alternate; }
-.holiday-lights i:nth-child(3n) { background:#ff6474; box-shadow:0 0 10px 3px rgba(255,100,116,.6); animation-delay:.5s; }
-.holiday-lights i:nth-child(3n + 1) { background:#72d5a0; box-shadow:0 0 10px 3px rgba(114,213,160,.55); animation-delay:1s; }
+.holiday-lights i:nth-child(3n) { background:#7dd3fc; box-shadow:0 0 10px 3px rgba(125,211,252,.7); animation-delay:.5s; }
+.holiday-lights i:nth-child(3n + 1) { background:#dbeafe; box-shadow:0 0 10px 3px rgba(219,234,254,.65); animation-delay:1s; }
 .holiday-atmosphere { position:absolute; inset:90px 0 0; z-index:0; overflow:hidden; pointer-events:none; }
 .holiday-atmosphere span { position:absolute; top:-25px; left:8%; color:rgba(255,255,255,.35); font-size:15px; animation: holiday-fall 13s linear infinite; }
 .holiday-atmosphere span:nth-child(2) { left:24%; animation-delay:-5s; font-size:11px; }
-.holiday-atmosphere span:nth-child(3) { left:48%; animation-delay:-9s; color:rgba(231,189,104,.5); }
+.holiday-atmosphere span:nth-child(3) { left:48%; animation-delay:-9s; color:rgba(125,211,252,.7); }
 .holiday-atmosphere span:nth-child(4) { left:68%; animation-delay:-3s; font-size:12px; }
 .holiday-atmosphere span:nth-child(5) { left:84%; animation-delay:-7s; }
 .holiday-atmosphere span:nth-child(6) { left:94%; animation-delay:-11s; font-size:10px; }
@@ -1640,3 +1640,59 @@ a.btn-continue {
   .holiday-atmosphere, .holiday-lights { display:none; }
   .holiday-lights i, .holiday-atmosphere span { animation:none !important; }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   NUVEM · NAVIDAD AZUL POLAR — visual refresh
+   ═══════════════════════════════════════════════════════════════ */
+:root { --red:#38bdf8; --red-bright:#7dd3fc; --red-dark:#075985; --red-glow:rgba(56,189,248,.34); --ice:#7dd3fc; --ice-deep:#075985; --ice-soft:#dff6ff; --holiday-gold:#f5d58a; }
+html { background:#030914; }
+body { background:radial-gradient(ellipse at 50% -18%,rgba(14,116,190,.19),transparent 52%),#030914; }
+.app-shell { background:radial-gradient(ellipse at 8% 10%,rgba(14,165,233,.13),transparent 34%),radial-gradient(ellipse at 92% 26%,rgba(30,64,175,.13),transparent 34%),linear-gradient(180deg,#040d1c 0%,#050b17 48%,#030914 100%); }
+.app-shell::before { content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.16;background-image:radial-gradient(#b9eaff .7px,transparent .7px);background-size:34px 34px;mask-image:linear-gradient(to bottom,black,transparent 78%); }
+.app-shell::after { content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(115deg,transparent 0 47%,rgba(56,189,248,.025) 48%,transparent 50% 100%);background-size:120px 120px; }
+.float-orb.o1 {background:#0284c7;opacity:.25}.float-orb.o2 {background:#1d4ed8;opacity:.25}.float-orb.o3 {background:#67e8f9;opacity:.12}
+.holiday-season {min-height:118px;padding:24px 16px 20px;background:radial-gradient(ellipse at 50% -100%,rgba(186,230,253,.25),transparent 70%),linear-gradient(110deg,#04172e 0%,#075985 45%,#082f63 100%);border-bottom:1px solid rgba(125,211,252,.48);box-shadow:0 12px 45px rgba(2,132,199,.16),inset 0 -1px rgba(255,255,255,.08)}
+.holiday-season::before,.holiday-season::after {border-color:rgba(186,230,253,.2);box-shadow:0 0 0 16px rgba(125,211,252,.035),0 0 0 34px rgba(125,211,252,.025)}
+.holiday-kicker {color:#bae6fd}.holiday-season-inner strong {color:#fff;text-shadow:0 2px 25px rgba(125,211,252,.45);font-size:clamp(20px,3vw,29px)}.holiday-copy {color:#dbeafe}.holiday-emojis {filter:drop-shadow(0 3px 8px rgba(125,211,252,.3))}
+.holiday-lights {height:10px}.holiday-lights i {width:8px;height:8px;background:#e0f2fe;box-shadow:0 0 13px 4px rgba(186,230,253,.8)}.holiday-lights i:nth-child(3n) {background:#38bdf8;box-shadow:0 0 13px 4px rgba(56,189,248,.8)}.holiday-lights i:nth-child(3n + 1) {background:#f5d58a;box-shadow:0 0 13px 4px rgba(245,213,138,.7)}
+.site-header {background:rgba(3,10,22,.86);border-bottom:1px solid rgba(56,189,248,.2);box-shadow:0 8px 28px rgba(0,0,0,.22)}
+.brand-logo {border:1px solid rgba(125,211,252,.55);background:linear-gradient(145deg,#123b61,#071525);box-shadow:0 0 25px rgba(56,189,248,.2),inset 0 1px rgba(255,255,255,.12)}.brand-name > span {color:#7dd3fc}.nav-link.active {background:rgba(56,189,248,.15)}
+.game-pills {border-color:rgba(125,211,252,.2);background:#071525}.game-pills button.pill-active {background:linear-gradient(115deg,#38bdf8,#0369a1);box-shadow:0 5px 18px rgba(14,165,233,.3)}
+.live-feed {background:rgba(3,12,26,.92);border-bottom-color:rgba(56,189,248,.18)}.live-chip.ff {background:rgba(56,189,248,.15);color:#7dd3fc}.live-dot {background:#38bdf8;box-shadow:0 0 12px #38bdf8}
+.hero-section {position:relative}.hero-title em,.title-grad-red,.hero-title .accent {color:#7dd3fc;background:linear-gradient(100deg,#e0f7ff 0%,#7dd3fc 38%,#38bdf8 72%,#dbeafe 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 7px 24px rgba(56,189,248,.18))}
+.hero-badge {border-color:rgba(125,211,252,.28);background:rgba(8,47,73,.45)}
+.package-card,.checkout-panel,.benefit-card,.faq-item,.cta-banner-inner {border-color:rgba(125,211,252,.15);background-image:linear-gradient(145deg,rgba(12,35,61,.72),rgba(5,15,29,.94))}
+.package-card:hover,.package-card.selected {border-color:rgba(56,189,248,.78);box-shadow:0 14px 36px rgba(2,132,199,.16),0 0 0 1px rgba(56,189,248,.15)}
+.package-card.selected::after {background:linear-gradient(90deg,#38bdf8,#dbeafe)}
+.btn-primary,.btn-continue,.checkout-submit {background:linear-gradient(110deg,#38bdf8,#0369a1);color:#03111f;border:1px solid rgba(186,230,253,.35);box-shadow:0 9px 28px rgba(2,132,199,.24)}
+.btn-primary:hover,.btn-continue:hover,.checkout-submit:hover {background:linear-gradient(110deg,#7dd3fc,#0ea5e9);transform:translateY(-2px)}
+input:focus,select:focus {border-color:#38bdf8!important;box-shadow:0 0 0 3px rgba(56,189,248,.13)!important}.footer-column a:hover,.footer-bottom b {color:#7dd3fc}
+.btn-support {background:#082f49;border-color:#0e7490}.btn-support svg {color:#7dd3fc}
+img[alt*="Diamante"],img[alt*="diamante"],.diamond-icon {filter:hue-rotate(145deg) saturate(1.45) drop-shadow(0 0 9px rgba(56,189,248,.62))}.package-card img {filter:hue-rotate(145deg) saturate(1.35) drop-shadow(0 0 9px rgba(56,189,248,.58))}.art-glow {background:radial-gradient(circle,rgba(56,189,248,.24),transparent 68%)}
+.hero-catalog,.hero-intro {position:relative;z-index:1}.holiday-atmosphere {z-index:0;inset:100px 0 0}.holiday-atmosphere span {color:rgba(219,242,255,.66);text-shadow:0 0 12px rgba(125,211,252,.55);animation-duration:17s}.holiday-atmosphere span:nth-child(3n) {color:rgba(245,213,138,.75)}.benefits-strip::before {color:rgba(186,230,253,.8)}
+@keyframes snow-drift {0%{transform:translate3d(0,-8vh,0) rotate(0);opacity:0}12%{opacity:.8}88%{opacity:.7}100%{transform:translate3d(34px,105vh,0) rotate(260deg);opacity:0}}
+.holiday-atmosphere span:nth-child(odd) {animation-name:snow-drift}
+@media(max-width:768px){.holiday-season{min-height:112px}.hero-section{padding-top:24px}.holiday-atmosphere span:nth-child(n+5){display:none}}
+@media(prefers-reduced-motion:reduce){.holiday-atmosphere span,.holiday-lights i{animation:none!important}}
+/* Final polish for the real component class names */
+.package-card.is-selected {
+  border-color:#7dd3fc!important;
+  background:radial-gradient(ellipse 90% 70% at 50% 15%,rgba(56,189,248,.2),transparent 58%),linear-gradient(165deg,#102c49 0%,#071525 100%)!important;
+  box-shadow:0 0 0 1px rgba(125,211,252,.75),0 0 34px rgba(56,189,248,.22),0 14px 38px rgba(0,0,0,.42)!important;
+}
+.package-card.is-popular {border-color:rgba(125,211,252,.45)}
+.package-card.is-popular::before {background:radial-gradient(ellipse at 50% 0%,rgba(56,189,248,.16),transparent 62%)}
+.package-card {background:radial-gradient(ellipse 80% 60% at 50% 15%,rgba(56,189,248,.1),transparent 58%),linear-gradient(165deg,#101f34 0%,#07111f 100%)}
+.package-card:hover {border-color:#38bdf8;box-shadow:0 14px 35px rgba(2,132,199,.2)}
+.btn-continue {background:linear-gradient(110deg,#7dd3fc,#0284c7)!important;color:#03111f!important;border:1px solid rgba(186,230,253,.55)!important;box-shadow:0 8px 25px rgba(14,165,233,.25)!important}
+.btn-continue:hover {filter:brightness(1.12);transform:translateY(-2px)}
+.hero-trust-row span {background:rgba(8,30,52,.78);border-color:rgba(125,211,252,.17)}
+.step-num {background:linear-gradient(135deg,#7dd3fc,#0369a1);color:#041321}
+.hero-title em {text-shadow:0 0 42px rgba(56,189,248,.4)}
+.holiday-season {overflow:hidden}
+.holiday-season-inner::before {content:"✧";position:absolute;left:-72px;top:-35px;font-size:84px;color:rgba(219,242,255,.14);font-weight:200;pointer-events:none}
+.holiday-season-inner::after {content:"❄";position:absolute;right:-78px;bottom:-50px;font-size:104px;color:rgba(219,242,255,.12);pointer-events:none}
+.holiday-atmosphere span:nth-child(2n) {font-size:19px;filter:drop-shadow(0 0 9px rgba(186,230,253,.45))}
+::selection {background:#0ea5e9;color:#fff}
+::-webkit-scrollbar-thumb {background:linear-gradient(#38bdf8,#075985)}

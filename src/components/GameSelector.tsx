@@ -16,8 +16,8 @@ export const GameSelector: React.FC<Props> = ({ selected = 'freefire', onSelect 
   return (
     <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-1">
       {/* Title with sparkles */}
-      <div className="flex items-center gap-2 text-xs font-bold text-red-400 uppercase tracking-widest">
-        <Sparkles className="w-4 h-4 text-red-400" />
+      <div className="flex items-center gap-2 text-xs font-bold text-blue-400 uppercase tracking-widest">
+        <Sparkles className="w-4 h-4 text-blue-400" />
         <span>{t("Selección de Juego")}</span>
       </div>
 
@@ -30,8 +30,8 @@ export const GameSelector: React.FC<Props> = ({ selected = 'freefire', onSelect 
           aria-pressed={selected === 'freefire'}
           className={`relative px-3 sm:px-4 py-2.5 rounded-2xl cursor-pointer flex items-center justify-between gap-2.5 transition-all outline-none select-none ${
             selected === 'freefire'
-              ? 'bg-gradient-to-r from-red-950/90 via-[#20080f] to-[#140407] border-2 border-red-500 shadow-xl shadow-red-950/70 ring-1 ring-red-500/40'
-              : 'bg-[#0b0407]/80 hover:bg-[#15060b] border border-red-950 hover:border-red-800/60 opacity-80 hover:opacity-100'
+              ? 'bg-gradient-to-r from-blue-950/90 via-[#20080f] to-[#140407] border-2 border-blue-500 shadow-xl shadow-blue-950/70 ring-1 ring-blue-500/40'
+              : 'bg-[#0b0407]/80 hover:bg-[#15060b] border border-blue-950 hover:border-blue-800/60 opacity-80 hover:opacity-100'
           }`}
         >
           {/* Text on left side */}
@@ -41,18 +41,18 @@ export const GameSelector: React.FC<Props> = ({ selected = 'freefire', onSelect 
                 Free Fire
               </span>
               {selected === 'freefire' && (
-                <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-red-600 text-white flex items-center justify-center shadow-sm shrink-0">
+                <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-sm shrink-0">
                   <Check className="w-2 sm:w-2.5 h-2 sm:h-2.5 stroke-[3]" />
                 </div>
               )}
             </div>
-            <span className="text-[10px] sm:text-[11px] text-red-300/80 font-medium block">
+            <span className="text-[10px] sm:text-[11px] text-blue-300/80 font-medium block">
               {t("Diamantes por UID")}
             </span>
           </div>
 
           {/* Small Free Fire Logo positioned to the right */}
-          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl overflow-hidden p-0.5 bg-gradient-to-tr from-red-600 via-rose-500 to-amber-500 shadow-sm shrink-0">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl overflow-hidden p-0.5 bg-gradient-to-tr from-blue-600 via-sky-500 to-amber-500 shadow-sm shrink-0">
             <img
               decoding="async"
               loading="lazy"
@@ -71,8 +71,8 @@ export const GameSelector: React.FC<Props> = ({ selected = 'freefire', onSelect 
           aria-pressed={selected === 'roblox'}
           className={`relative px-3 sm:px-4 py-2.5 rounded-2xl cursor-pointer flex items-center justify-between gap-2.5 transition-all outline-none select-none ${
             selected === 'roblox'
-              ? 'bg-gradient-to-r from-red-950/90 via-[#20080f] to-[#140407] border-2 border-red-500 shadow-xl shadow-red-950/70 ring-1 ring-red-500/40'
-              : 'bg-[#0b0407]/80 hover:bg-[#15060b] border border-red-950 hover:border-red-800/60 opacity-80 hover:opacity-100'
+              ? 'bg-gradient-to-r from-blue-950/90 via-[#20080f] to-[#140407] border-2 border-blue-500 shadow-xl shadow-blue-950/70 ring-1 ring-blue-500/40'
+              : 'bg-[#0b0407]/80 hover:bg-[#15060b] border border-blue-950 hover:border-blue-800/60 opacity-80 hover:opacity-100'
           }`}
         >
           {/* Text on left side */}
@@ -82,12 +82,12 @@ export const GameSelector: React.FC<Props> = ({ selected = 'freefire', onSelect 
                 Roblox
               </span>
               {selected === 'roblox' && (
-                <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-red-600 text-white flex items-center justify-center shadow-sm shrink-0">
+                <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-sm shrink-0">
                   <Check className="w-2 sm:w-2.5 h-2 sm:h-2.5 stroke-[3]" />
                 </div>
               )}
             </div>
-            <span className="text-[10px] sm:text-[11px] text-red-300/80 font-medium block">
+            <span className="text-[10px] sm:text-[11px] text-blue-300/80 font-medium block">
               {t("Robux por Usuario")}
             </span>
           </div>

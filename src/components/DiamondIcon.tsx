@@ -75,6 +75,6 @@ export const DiamondIcon: React.FC<{ className?: string; src?: string; alt?: str
     }
     return () => { alive = false; };
   }, [source]);
-  const glow = 'sm:drop-shadow-[0_0_8px_rgba(239,68,68,0.75)]';
+  const glow = 'sm:drop-shadow-[0_0_8px_rgba(56,189,248,0.82)]';
   return <img src={src} alt={alt} loading="lazy" decoding="async" className={`${className} object-contain ${glow}`} />;
 };
