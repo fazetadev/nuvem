@@ -198,7 +198,7 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToRecharge, onSelectGame }) 
             </span>
             <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-blue-800/80" />
             <span className="flex items-center gap-1.5 font-medium">
-              <Clock className="w-3.5 h-3.5 text-amber-400" />
+              <Clock className="w-3.5 h-3.5 text-sky-400" />
               {t("Pagas por Nequi, Bancolombia o PayPal")}
             </span>
           </div>

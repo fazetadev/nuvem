@@ -40,10 +40,10 @@ export const OrderSuccessModal: React.FC<OrderSuccessModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto">
-      <div className="relative w-full max-w-lg my-8 rounded-3xl bg-[#120609] border border-blue-800/80 shadow-2xl shadow-blue-950/90 overflow-hidden text-slate-100">
+      <div className="relative w-full max-w-lg my-8 rounded-3xl bg-[#071525] border border-blue-800/80 shadow-2xl shadow-blue-950/90 overflow-hidden text-slate-100">
         
         {/* Top Glow bar in Blue */}
-        <div className="h-2 w-full bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500" />
+        <div className="h-2 w-full bg-gradient-to-r from-blue-600 via-sky-500 to-cyan-400" />
 
         {/* Header */}
         <div className="p-6 pb-4 border-b border-blue-950/60 flex items-start justify-between">
@@ -74,7 +74,7 @@ export const OrderSuccessModal: React.FC<OrderSuccessModalProps> = ({
         <div className="p-6 space-y-4 text-sm">
           
           {/* Instructions banner */}
-          <div className="p-4 rounded-2xl bg-gradient-to-br from-blue-950/50 via-[#18070b] to-[#0e0305] border border-blue-700/50 space-y-2.5">
+          <div className="p-4 rounded-2xl bg-gradient-to-br from-blue-950/50 via-[#0b2238] to-[#071525] border border-blue-700/50 space-y-2.5">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-blue-300 uppercase tracking-wider">
                 {t("Paso Final para tu Entrega")}
@@ -88,7 +88,7 @@ export const OrderSuccessModal: React.FC<OrderSuccessModalProps> = ({
               {t("Realiza el pago desde")} <strong className="text-white font-semibold">{order.paymentMethodName}</strong> {t("con los datos que te enviamos por WhatsApp y envía la captura para acreditación inmediata:")}
             </p>
 
-            <div className="p-3 rounded-xl bg-[#080204] border border-blue-950/70 text-xs text-slate-300">
+            <div className="p-3 rounded-xl bg-[#050d18] border border-blue-950/70 text-xs text-slate-300">
               {t('Toca el botón de WhatsApp: te enviamos los datos de {method} para que hagas el pago.', { method: order.paymentMethodName })}
             </div>
           </div>
@@ -106,7 +106,7 @@ export const OrderSuccessModal: React.FC<OrderSuccessModalProps> = ({
           </a>
 
           {/* Order Summary Details */}
-          <div className="p-4 rounded-2xl bg-[#090305] border border-blue-950/60 space-y-2 text-xs">
+          <div className="p-4 rounded-2xl bg-[#050d18] border border-blue-950/60 space-y-2 text-xs">
             {order.playerId && (
               <div className="flex items-center justify-between py-1 border-b border-blue-950">
                 <span className="text-slate-400">{t(info.accountLabel)}:</span>
@@ -143,7 +143,7 @@ export const OrderSuccessModal: React.FC<OrderSuccessModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="p-4 bg-[#080204] border-t border-blue-950/60 text-center">
+        <div className="p-4 bg-[#050d18] border-t border-blue-950/60 text-center">
           <button
             type="button"
             onClick={onClose}

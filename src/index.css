@@ -6,12 +6,12 @@
   --blue-bright: #7dd3fc;
   --blue-dark: #075985;
   --blue-glow: rgba(56, 189, 248, 0.34);
-  --bg: #050507;
-  --bg-elevated: #0c0c10;
-  --panel: #121218;
-  --panel-2: #18181f;
-  --line: #2a2a33;
-  --line-soft: #1e1e26;
+  --bg: #050d18;
+  --bg-elevated: #0b1b2d;
+  --panel: #0d2034;
+  --panel-2: #10263c;
+  --line: #1b3853;
+  --line-soft: #142c45;
   --muted: #8b8b96;
   --text: #f4f4f6;
 }
@@ -414,10 +414,10 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   text-align: center;
   padding: 20px 12px 18px;
   border-radius: 16px;
-  border: 1px solid #2a2430;
+  border: 1px solid #17324b;
   background:
     radial-gradient(ellipse 80% 60% at 50% 20%, rgba(56, 189, 248, 0.08), transparent 55%),
-    linear-gradient(165deg, #16141c 0%, #0c0c12 100%);
+    linear-gradient(165deg, #10263c 0%, #071525 100%);
   cursor: pointer;
   transition: transform 0.25s ease, border-color 0.25s, box-shadow 0.25s;
   animation: card-in 0.45s ease both;
@@ -453,12 +453,12 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   background: radial-gradient(ellipse at 50% 0%, rgba(56, 189, 248, 0.12), transparent 60%);
   pointer-events: none;
 }
-/* Robux popular: same subtle intensity as diamonds, but gold */
+/* Robux uses the same blue selection language as diamonds */
 .theme-robux .package-card.is-popular {
-  border-color: #4a4028;
+  border-color: #075985;
 }
 .theme-robux .package-card.is-popular::before {
-  background: radial-gradient(ellipse at 50% 0%, rgba(200, 160, 60, 0.1), transparent 60%);
+  background: radial-gradient(ellipse at 50% 0%, rgba(56, 189, 248, 0.1), transparent 60%);
 }
 
 .package-tag {
@@ -521,7 +521,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 .theme-diamonds .package-card:hover .pkg-diamond {
   transform: scale(1.1) translateY(-2px);
   filter:
-    drop-shadow(0 0 12px rgba(255, 100, 110, 0.75))
+    drop-shadow(0 0 12px rgba(56, 189, 248, 0.75))
     drop-shadow(0 0 28px rgba(56, 189, 248, 0.45))
     brightness(1.15);
 }
@@ -530,42 +530,42 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   opacity: 0.75;
 }
 
-/* Robux — soft gold (not neon) */
+/* Robux — cool blue glow */
 .theme-robux .pkg-robux {
   filter:
-    drop-shadow(0 0 8px rgba(200, 160, 60, 0.45))
-    drop-shadow(0 0 18px rgba(180, 140, 50, 0.25))
+    drop-shadow(0 0 8px rgba(56, 189, 248, 0.45))
+    drop-shadow(0 0 18px rgba(7, 89, 133, 0.35))
     brightness(1.05);
 }
 .theme-robux .package-card:hover .pkg-robux {
   transform: scale(1.08) translateY(-2px);
   filter:
-    drop-shadow(0 0 12px rgba(200, 160, 60, 0.6))
-    drop-shadow(0 0 24px rgba(180, 140, 50, 0.35))
+    drop-shadow(0 0 12px rgba(56, 189, 248, 0.6))
+    drop-shadow(0 0 24px rgba(7, 89, 133, 0.45))
     brightness(1.1);
 }
 .theme-robux .art-glow {
-  background: radial-gradient(circle, rgba(200, 160, 60, 0.22), transparent 70%);
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.22), transparent 70%);
   opacity: 0.7;
 }
-.theme-robux .package-bonus { color: #c9a84a; }
+.theme-robux .package-bonus { color: #7dd3fc; }
 .theme-robux .package-card.is-selected {
-  border-color: #b89840;
+  border-color: #38bdf8;
   box-shadow:
-    0 0 0 1px rgba(184, 152, 64, 0.5),
+    0 0 0 1px rgba(56, 189, 248, 0.5),
     0 8px 24px rgba(0, 0, 0, 0.45);
   background:
-    radial-gradient(ellipse 90% 70% at 50% 15%, rgba(184, 152, 64, 0.08), transparent 55%),
+    radial-gradient(ellipse 90% 70% at 50% 15%, rgba(56, 189, 248, 0.08), transparent 55%),
     linear-gradient(165deg, #0b2238 0%, #071525 100%);
 }
 .theme-robux .package-tag {
-  background: linear-gradient(110deg, #c9a84a, #9a7a30);
-  color: #071525;
-  box-shadow: 0 2px 8px rgba(184, 152, 64, 0.25);
+  background: linear-gradient(110deg, #38bdf8, #0369a1);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(56, 189, 248, 0.25);
 }
 .theme-robux .package-check {
-  background: #c9a84a;
-  color: #071525;
+  background: #38bdf8;
+  color: #ffffff;
 }
 
 .art-glow {
@@ -784,7 +784,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   color: #6e6e78;
   text-align: center;
 }
-.rank-1 .rank-num { color: #f7c56b; }
+.rank-1 .rank-num { color: #7dd3fc; }
 .rank-2 .rank-num { color: #c0c0c8; }
 .rank-3 .rank-num { color: #cd7f32; }
 .rank-avatar {
@@ -844,7 +844,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   gap: 14px;
   margin-bottom: 18px;
 }
-.hall-head span { color: #f7c56b; font-size: 14px; }
+.hall-head span { color: #7dd3fc; font-size: 14px; }
 .hall-head h3 {
   margin: 0;
   font-size: 12px;
@@ -889,9 +889,9 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   font-weight: 900;
   color: #8b8b96;
 }
-.place-1 .podium-rank { background: linear-gradient(135deg, #f7c56b, #c9a227); color: #071525; }
+.place-1 .podium-rank { background: linear-gradient(135deg, #7dd3fc, #0284c7); color: #ffffff; }
 .place-2 .podium-rank { background: linear-gradient(135deg, #c0c0c8, #888); color: #1a1a1e; }
-.place-3 .podium-rank { background: linear-gradient(135deg, #cd7f32, #8b5a1a); color: #071525; }
+.place-3 .podium-rank { background: linear-gradient(135deg, #cd7f32, #8b5a1a); color: #ffffff; }
 .podium-badge { font-size: 22px; }
 .podium-name {
   flex: 1;
@@ -1645,7 +1645,7 @@ a.btn-continue {
 /* ═══════════════════════════════════════════════════════════════
    NUVEM · NAVIDAD AZUL POLAR — visual refresh
    ═══════════════════════════════════════════════════════════════ */
-:root { --blue:#38bdf8; --blue-bright:#7dd3fc; --blue-dark:#075985; --blue-glow:rgba(56,189,248,.34); --ice:#7dd3fc; --ice-deep:#075985; --ice-soft:#dff6ff; --holiday-gold:#f5d58a; }
+:root { --blue:#38bdf8; --blue-bright:#7dd3fc; --blue-dark:#075985; --blue-glow:rgba(56,189,248,.34); --ice:#7dd3fc; --ice-deep:#075985; --ice-soft:#dff6ff; --holiday-gold:#7dd3fc; }
 html { background:#030914; }
 body { background:radial-gradient(ellipse at 50% -18%,rgba(14,116,190,.19),transparent 52%),#030914; }
 .app-shell { background:radial-gradient(ellipse at 8% 10%,rgba(14,165,233,.13),transparent 34%),radial-gradient(ellipse at 92% 26%,rgba(30,64,175,.13),transparent 34%),linear-gradient(180deg,#040d1c 0%,#050b17 48%,#030914 100%); }
@@ -1655,7 +1655,7 @@ body { background:radial-gradient(ellipse at 50% -18%,rgba(14,116,190,.19),trans
 .holiday-season {min-height:118px;padding:24px 16px 20px;background:radial-gradient(ellipse at 50% -100%,rgba(186,230,253,.25),transparent 70%),linear-gradient(110deg,#04172e 0%,#075985 45%,#082f63 100%);border-bottom:1px solid rgba(125,211,252,.48);box-shadow:0 12px 45px rgba(2,132,199,.16),inset 0 -1px rgba(255,255,255,.08)}
 .holiday-season::before,.holiday-season::after {border-color:rgba(186,230,253,.2);box-shadow:0 0 0 16px rgba(125,211,252,.035),0 0 0 34px rgba(125,211,252,.025)}
 .holiday-kicker {color:#bae6fd}.holiday-season-inner strong {color:#fff;text-shadow:0 2px 25px rgba(125,211,252,.45);font-size:clamp(20px,3vw,29px)}.holiday-copy {color:#dbeafe}.holiday-emojis {filter:drop-shadow(0 3px 8px rgba(125,211,252,.3))}
-.holiday-lights {height:10px}.holiday-lights i {width:8px;height:8px;background:#e0f2fe;box-shadow:0 0 13px 4px rgba(186,230,253,.8)}.holiday-lights i:nth-child(3n) {background:#38bdf8;box-shadow:0 0 13px 4px rgba(56,189,248,.8)}.holiday-lights i:nth-child(3n + 1) {background:#f5d58a;box-shadow:0 0 13px 4px rgba(245,213,138,.7)}
+.holiday-lights {height:10px}.holiday-lights i {width:8px;height:8px;background:#e0f2fe;box-shadow:0 0 13px 4px rgba(186,230,253,.8)}.holiday-lights i:nth-child(3n) {background:#38bdf8;box-shadow:0 0 13px 4px rgba(56,189,248,.8)}.holiday-lights i:nth-child(3n + 1) {background:#7dd3fc;box-shadow:0 0 13px 4px rgba(125,211,252,.7)}
 .site-header {background:rgba(3,10,22,.86);border-bottom:1px solid rgba(56,189,248,.2);box-shadow:0 8px 28px rgba(0,0,0,.22)}
 .brand-logo {border:1px solid rgba(125,211,252,.55);background:linear-gradient(145deg,#123b61,#071525);box-shadow:0 0 25px rgba(56,189,248,.2),inset 0 1px rgba(255,255,255,.12)}.brand-name > span {color:#7dd3fc}.nav-link.active {background:rgba(56,189,248,.15)}
 .game-pills {border-color:rgba(125,211,252,.2);background:#071525}.game-pills button.pill-active {background:linear-gradient(115deg,#38bdf8,#0369a1);box-shadow:0 5px 18px rgba(14,165,233,.3)}

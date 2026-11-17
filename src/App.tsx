@@ -19,8 +19,6 @@ import { Footer } from './components/Footer.tsx';
 import { LiveFeed } from './components/LiveFeed.tsx';
 import type { DiamondPackage, PaymentMethod, OrderRecord, GameId } from './types/store.ts';
 import {
-  DIAMOND_PACKAGES,
-  ROBLOX_PACKAGES,
   GAME_INFO,
   PAYMENT_METHODS,
   validateAccount,
@@ -31,13 +29,10 @@ import {
   getGeneralWhatsAppLink,
 } from './utils/rechargeLogic.ts';
 
-const DEFAULT_FF = DIAMOND_PACKAGES[3];
-const DEFAULT_ROBLOX = ROBLOX_PACKAGES[1];
-
 export default function App() {
   const [game, setGame] = useState<GameId>('freefire');
   const [playerId, setPlayerId] = useState('');
-  const [selectedPackage, setSelectedPackage] = useState<DiamondPackage | null>(DEFAULT_FF);
+  const [selectedPackage, setSelectedPackage] = useState<DiamondPackage | null>(null);
   const [selectedPayment, setSelectedPayment] = useState<PaymentMethod | null>(PAYMENT_METHODS[0]);
   const [isCheckoutVisible, setIsCheckoutVisible] = useState(false);
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
@@ -53,7 +48,7 @@ export default function App() {
     setGame(next);
     setPlayerId('');
     setError(null);
-    setSelectedPackage(next === 'roblox' ? DEFAULT_ROBLOX : DEFAULT_FF);
+    setSelectedPackage(null);
     setIsCheckoutVisible(false);
   };
 

@@ -36,7 +36,7 @@ export const CheckoutSummaryModal: React.FC<CheckoutSummaryModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-lg rounded-3xl bg-[#120609] border border-blue-800/60 shadow-2xl shadow-blue-950/90 overflow-hidden">
+      <div className="relative w-full max-w-lg rounded-3xl bg-[#071525] border border-blue-800/60 shadow-2xl shadow-blue-950/90 overflow-hidden">
         
         {/* Header */}
         <div className="p-6 pb-4 border-b border-blue-950/60 flex items-center justify-between">
@@ -67,7 +67,7 @@ export const CheckoutSummaryModal: React.FC<CheckoutSummaryModalProps> = ({
         <div className="p-6 space-y-4 text-sm">
           
           {/* Game Account Summary Box */}
-          <div className="p-4 rounded-2xl bg-[#090305] border border-blue-950/70 space-y-2.5">
+          <div className="p-4 rounded-2xl bg-[#050d18] border border-blue-950/70 space-y-2.5">
             <div className="flex items-center justify-between text-xs text-blue-300/80 font-semibold uppercase tracking-wider">
               <span>{t('Cuenta {game}', { game: info.name })}</span>
               <span className="text-emerald-400 font-bold normal-case flex items-center gap-1">

@@ -17,12 +17,12 @@ const GAMES: { id: GameId; label: string }[] = [
 export const Header: React.FC<HeaderProps> = ({ game, onSelectGame }) => (
   <header className="site-header sticky top-0 z-50 w-full">
     <div className="header-bar max-w-6xl mx-auto px-4 sm:px-6">
-      <a href="/" className="brand-lockup" aria-label="NuvemGG inicio">
+      <a href="/" className="brand-lockup" aria-label="Nuvem Store inicio">
         <span className="brand-logo">
           <img src={IMAGES.logo} alt="" />
         </span>
         <span className="brand-name">
-          nuvem<span>GG</span>
+          Nuvem <span>Store</span>
         </span>
       </a>
 

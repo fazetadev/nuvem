@@ -32,7 +32,7 @@ export const PaymentStep: React.FC<PaymentStepProps> = ({
       case 'Smartphone':
         return <Smartphone className="w-4 h-4 text-sky-400" />;
       case 'Wallet':
-        return <Wallet className="w-4 h-4 text-amber-400" />;
+        return <Wallet className="w-4 h-4 text-sky-400" />;
       case 'Building2':
         return <Building2 className="w-4 h-4 text-blue-400" />;
       case 'CreditCard':

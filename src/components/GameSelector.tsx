@@ -30,8 +30,8 @@ export const GameSelector: React.FC<Props> = ({ selected = 'freefire', onSelect 
           aria-pressed={selected === 'freefire'}
           className={`relative px-3 sm:px-4 py-2.5 rounded-2xl cursor-pointer flex items-center justify-between gap-2.5 transition-all outline-none select-none ${
             selected === 'freefire'
-              ? 'bg-gradient-to-r from-blue-950/90 via-[#20080f] to-[#140407] border-2 border-blue-500 shadow-xl shadow-blue-950/70 ring-1 ring-blue-500/40'
-              : 'bg-[#0b0407]/80 hover:bg-[#15060b] border border-blue-950 hover:border-blue-800/60 opacity-80 hover:opacity-100'
+              ? 'bg-gradient-to-r from-blue-950/90 via-[#0b2944] to-[#071525] border-2 border-blue-500 shadow-xl shadow-blue-950/70 ring-1 ring-blue-500/40'
+              : 'bg-[#071525]/80 hover:bg-[#0b2238] border border-blue-950 hover:border-blue-800/60 opacity-80 hover:opacity-100'
           }`}
         >
           {/* Text on left side */}
@@ -52,7 +52,7 @@ export const GameSelector: React.FC<Props> = ({ selected = 'freefire', onSelect 
           </div>
 
           {/* Small Free Fire Logo positioned to the right */}
-          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl overflow-hidden p-0.5 bg-gradient-to-tr from-blue-600 via-sky-500 to-amber-500 shadow-sm shrink-0">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl overflow-hidden p-0.5 bg-gradient-to-tr from-blue-500 via-sky-400 to-cyan-500 shadow-sm shrink-0">
             <img
               decoding="async"
               loading="lazy"
@@ -71,8 +71,8 @@ export const GameSelector: React.FC<Props> = ({ selected = 'freefire', onSelect 
           aria-pressed={selected === 'roblox'}
           className={`relative px-3 sm:px-4 py-2.5 rounded-2xl cursor-pointer flex items-center justify-between gap-2.5 transition-all outline-none select-none ${
             selected === 'roblox'
-              ? 'bg-gradient-to-r from-blue-950/90 via-[#20080f] to-[#140407] border-2 border-blue-500 shadow-xl shadow-blue-950/70 ring-1 ring-blue-500/40'
-              : 'bg-[#0b0407]/80 hover:bg-[#15060b] border border-blue-950 hover:border-blue-800/60 opacity-80 hover:opacity-100'
+              ? 'bg-gradient-to-r from-blue-950/90 via-[#0b2944] to-[#071525] border-2 border-blue-500 shadow-xl shadow-blue-950/70 ring-1 ring-blue-500/40'
+              : 'bg-[#071525]/80 hover:bg-[#0b2238] border border-blue-950 hover:border-blue-800/60 opacity-80 hover:opacity-100'
           }`}
         >
           {/* Text on left side */}

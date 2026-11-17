@@ -113,7 +113,7 @@ export const PurchaseSummarySidebar: React.FC<PurchaseSummarySidebarProps> = ({
           </span>
           <span aria-hidden="true" className="text-blue-900">·</span>
           <span className="flex items-center gap-1">
-            <Zap className="w-3.5 h-3.5 text-amber-400" />
+            <Zap className="w-3.5 h-3.5 text-sky-400" />
             {t("Entrega < 2 Minutos")}
           </span>
         </div>
