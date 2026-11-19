@@ -9,10 +9,10 @@ export const Footer: React.FC = () => (
       <div className="footer-brand">
         <a href="/" className="brand-lockup">
           <span className="brand-logo">
-            <img src={IMAGES.logo} alt="NuvemGG" />
+            <img src={IMAGES.logo} alt="Nuvem Store" />
           </span>
           <span className="brand-name">
-            nuvem<span>GG</span>
+            Nuvem <span>Store</span>
           </span>
         </a>
         <p>Tu tienda gamer de confianza. Recargas digitales para que nunca pares de jugar.</p>
