@@ -17,6 +17,7 @@ import { CheckoutSummaryModal } from './components/CheckoutSummaryModal.tsx';
 import { OrderSuccessModal } from './components/OrderSuccessModal.tsx';
 import { Footer } from './components/Footer.tsx';
 import { LiveFeed } from './components/LiveFeed.tsx';
+import { ServiceCatalog } from './components/ServiceCatalog.tsx';
 import type { DiamondPackage, PaymentMethod, OrderRecord, GameId } from './types/store.ts';
 import {
   GAME_INFO,
@@ -223,6 +224,8 @@ export default function App() {
                 </div>
               </div>
             </section>
+
+            <ServiceCatalog />
 
             <section className="benefits-strip">
               <div className="max-w-6xl mx-auto px-4 sm:px-6 benefits-grid">

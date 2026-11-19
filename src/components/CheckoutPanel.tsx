@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { X, Send, ShieldCheck, CircleCheck, LockKeyhole, Smartphone, Building2, Wallet, Gem } from 'lucide-react';
 import type { DiamondPackage, GameId, PaymentMethod } from '../types/store.ts';
 import { GAME_INFO, PAYMENT_METHODS, formatCOP, formatNumber } from '../utils/rechargeLogic.ts';
@@ -30,6 +30,8 @@ export const CheckoutPanel: React.FC<CheckoutPanelProps> = ({
   onProceed,
   error,
 }) => {
+  const [coupon, setCoupon] = useState('');
+  const [couponMessage, setCouponMessage] = useState('');
   const info = GAME_INFO[game];
   const isRoblox = game === 'roblox';
 
@@ -105,6 +107,24 @@ export const CheckoutPanel: React.FC<CheckoutPanelProps> = ({
         <p className="field-helper">
           <CircleCheck size={13} /> Selecciona el medio que te resulte más cómodo.
         </p>
+      </div>
+
+      <div className="coupon-box">
+        <label htmlFor="coupon-code">¿Tienes un cupón de descuento?</label>
+        <div className="coupon-entry">
+          <input
+            id="coupon-code"
+            type="text"
+            value={coupon}
+            onChange={(e) => { setCoupon(e.target.value.toUpperCase().replace(/\\s/g, '').slice(0, 24)); setCouponMessage(''); }}
+            placeholder="ESCRIBE TU CÓDIGO"
+            autoCapitalize="characters"
+          />
+          <button type="button" onClick={() => setCouponMessage(coupon.trim() ? 'Compártelo con nuestro asesor al confirmar por WhatsApp.' : 'Escribe tu código primero.')}>
+            Usar código
+          </button>
+        </div>
+        <small>{couponMessage || 'Los cupones se verifican al confirmar tu compra por WhatsApp.'}</small>
       </div>
 
       <div className="checkout-total">

@@ -1788,3 +1788,58 @@ img[alt*="Diamante"],img[alt*="diamante"] { filter:none!important; }
 @media (prefers-reduced-motion: reduce) {
   .package-art::before, .package-art::after { animation: none !important; }
 }
+
+
+/* ─── NUVEM SHOP: SERVICIOS DIGITALES ─── */
+.service-section { padding-top: 24px; padding-bottom: 54px; }
+.service-heading { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:20px; }
+.service-eyebrow { display:inline-flex; align-items:center; gap:7px; color:#7dd3fc; font-size:10px; font-weight:900; letter-spacing:.14em; }
+.service-heading h2 { margin:9px 0 6px; color:#fff; font-size:clamp(26px,4vw,36px); font-weight:900; letter-spacing:-.045em; }
+.service-heading h2 span { color:#38bdf8; }
+.service-heading p { margin:0; color:#929eac; font-size:13px; line-height:1.6; }
+.service-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:13px; }
+.service-card { min-width:0; overflow:hidden; border:1px solid #1b3853; border-radius:16px; background:linear-gradient(160deg,#10263c,#081525); transition:transform .2s,border-color .2s,box-shadow .2s; }
+.service-card:hover { transform:translateY(-3px); border-color:#2875a5; box-shadow:0 12px 28px #0005; }
+.service-image { height:122px; padding:12px; display:grid; place-items:center; background:radial-gradient(ellipse at center,#1b3a54,#091725 72%); }
+.service-image img { width:100%; height:100%; object-fit:contain; border-radius:8px; }
+.service-info { padding:13px; }
+.service-info>span { color:#8fa2b4; font-size:9px; text-transform:uppercase; letter-spacing:.08em; font-weight:800; }
+.service-info h3 { color:#fff; font-size:13px; line-height:1.3; margin:5px 0 9px; font-weight:800; letter-spacing:-.02em; }
+.service-info>strong { color:#7dd3fc; font-size:18px; font-weight:900; letter-spacing:-.03em; white-space:nowrap; }
+.service-info>strong small { color:#8295a8; font-size:9px; letter-spacing:.05em; }
+.service-info a { display:flex; align-items:center; justify-content:space-between; gap:5px; margin-top:12px; padding-top:10px; border-top:1px solid #1b3853; color:#d9efff; font-size:10px; font-weight:800; text-decoration:none; }
+.service-info a:hover { color:#7dd3fc; }
+.coupon-box { padding:14px; border:1px solid #1b3853; border-radius:13px; background:#0a1928; margin-bottom:18px; }
+.coupon-box>label { display:block; color:#e5edf5; font-size:12px; font-weight:800; margin-bottom:9px; }
+.coupon-entry { display:flex; gap:8px; }
+.coupon-entry input { flex:1; min-width:0; height:42px; border:1px solid #23435f; border-radius:9px; background:#06111d; color:#fff; padding:0 12px; font-size:12px; outline:none; }
+.coupon-entry input:focus { border-color:#38bdf8; }
+.coupon-entry input::placeholder { color:#607487; font-size:10px; letter-spacing:.08em; }
+.coupon-entry button { border:1px solid #27628a; border-radius:9px; padding:0 13px; background:#123653; color:#dff4ff; font-size:11px; font-weight:800; white-space:nowrap; cursor:pointer; }
+.coupon-box>small { display:block; margin-top:7px; color:#8295a8; font-size:10px; line-height:1.5; }
+@media (max-width: 900px) { .service-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media (max-width: 600px) {
+  .service-section { padding-top:12px; padding-bottom:34px; }
+  .service-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+  .service-image { height:108px; padding:10px; }
+  .service-info { padding:11px; }
+  .service-info h3 { font-size:12px; min-height:31px; }
+  .service-info>strong { font-size:16px; }
+  .service-info a { font-size:9px; }
+  .hero-section { gap:25px; padding-top:24px; padding-bottom:32px; }
+  .hero-title { font-size:clamp(34px,11vw,48px); }
+  .packages-grid { gap:9px; }
+  .package-card { padding:17px 8px 14px; border-radius:13px; }
+  .hero-cta-row { gap:9px; }
+  .btn-continue { min-height:44px; }
+  .checkout-section { padding-top:18px; }
+  .checkout-progress { gap:6px; }
+  .checkout-progress span { font-size:9px; }
+  .coupon-entry button { padding:0 10px; }
+}
+@media (max-width: 360px) {
+  .service-grid { gap:8px; }
+  .service-info { padding:9px; }
+  .service-info>strong { font-size:14px; }
+  .game-pills button { padding:7px 8px; }
+}
