@@ -225,8 +225,6 @@ export default function App() {
               </div>
             </section>
 
-            <ServiceCatalog />
-
             <section className="benefits-strip">
               <div className="max-w-6xl mx-auto px-4 sm:px-6 benefits-grid">
                 <div className="benefit-card">
@@ -267,6 +265,8 @@ export default function App() {
                 </div>
               </div>
             </section>
+
+            <ServiceCatalog />
 
             <section className="cta-banner max-w-6xl mx-auto px-4 sm:px-6">
               <div className="cta-banner-inner">

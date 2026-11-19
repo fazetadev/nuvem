@@ -1843,3 +1843,50 @@ img[alt*="Diamante"],img[alt*="diamante"] { filter:none!important; }
   .service-info>strong { font-size:14px; }
   .game-pills button { padding:7px 8px; }
 }
+
+
+/* ─── CATÁLOGO ORDENADO: PASE FREE FIRE + SERVICIOS ─── */
+.pass-package-card {
+  color: inherit;
+  text-decoration: none;
+  min-height: 100%;
+}
+.pass-package-card .pass-art { width:100%; height:74px; margin:0 0 12px; }
+.pass-package-card .pass-art img { width:100%; height:100%; object-fit:contain; border-radius:8px; }
+.pass-package-card .pass-title { font-size:21px; }
+.pass-package-card .pass-tag { background:linear-gradient(110deg,#38bdf8,#075985); }
+.pass-buy-link { display:flex; align-items:center; justify-content:center; gap:5px; width:100%; margin-top:10px; padding-top:9px; border-top:1px solid #1b3853; color:#bdeaff; font-size:10px; font-weight:900; }
+.pass-package-card:hover .pass-buy-link { color:#fff; }
+
+.service-section { padding-top:34px; padding-bottom:48px; }
+.service-heading { margin-bottom:18px; }
+.service-heading h2 em { color:#7dd3fc; font-style:normal; }
+.service-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; max-width:850px; }
+.service-card { display:grid; grid-template-columns:minmax(115px, .8fr) minmax(0,1.2fr); align-items:stretch; min-height:154px; }
+.service-brand { padding:15px; display:flex; flex-direction:column; justify-content:center; gap:10px; background:linear-gradient(145deg,#10263c,#0a1928); border-right:1px solid #1b3853; }
+.service-image { height:72px; padding:5px; background:transparent; }
+.service-image img { max-width:100%; max-height:100%; object-fit:contain; }
+.service-brand-copy h3 { margin:0 0 3px; font-size:16px; color:#fff; font-weight:900; }
+.service-brand-copy span { color:#8fa2b4; font-size:10px; line-height:1.4; }
+.service-plans { display:flex; flex-direction:column; justify-content:center; padding:9px 13px; }
+.service-plan { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:11px 0; }
+.service-plan + .service-plan { border-top:1px solid #1b3853; }
+.service-plan>div { display:flex; flex-direction:column; gap:4px; }
+.service-plan>div>span { color:#a7b8c8; font-size:11px; font-weight:700; }
+.service-plan strong { color:#7dd3fc; font-size:16px; font-weight:900; white-space:nowrap; }
+.service-plan strong small { color:#8295a8; font-size:9px; }
+.service-plan a { width:30px; height:30px; flex:0 0 30px; display:grid; place-items:center; border:1px solid #275777; border-radius:9px; color:#bdeaff; background:#102e46; }
+.service-plan a:hover { color:white; background:#16466b; }
+@media (max-width:700px) {
+  .service-section { padding-top:24px; padding-bottom:34px; }
+  .service-grid { grid-template-columns:1fr; gap:11px; max-width:100%; }
+  .service-card { grid-template-columns:105px minmax(0,1fr); min-height:132px; }
+  .service-brand { padding:10px; gap:5px; }
+  .service-image { height:60px; }
+  .service-brand-copy h3 { font-size:14px; }
+  .service-brand-copy span { font-size:9px; }
+  .service-plans { padding:6px 12px; }
+  .service-plan { padding:9px 0; }
+  .service-plan strong { font-size:15px; }
+  .pass-package-card .pass-art { height:58px; }
+}

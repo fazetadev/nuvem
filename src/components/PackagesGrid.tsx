@@ -2,7 +2,8 @@ import React from 'react';
 import { IMAGES } from '../config/images';
 import type { DiamondPackage, GameId } from '../types/store.ts';
 import { GAME_INFO, formatNumber, formatCOP, DIAMOND_PACKAGES as FREEFIRE, ROBLOX_PACKAGES as ROBLOX } from '../utils/rechargeLogic.ts';
-import { Check, Sparkles, Gift } from 'lucide-react';
+import { Check, Sparkles, Gift, ArrowUpRight } from 'lucide-react';
+import { OFFICIAL_PHONE } from '../utils/rechargeLogic.ts';
 
 interface PackagesGridProps {
   game: GameId;
@@ -81,6 +82,23 @@ export const PackagesGrid: React.FC<PackagesGridProps> = ({ game, selectedPackag
           </button>
         );
       })}
+      {!isRoblox && (
+        <a
+          className="package-card pass-package-card"
+          href={`https://wa.me/${OFFICIAL_PHONE}?text=${encodeURIComponent('Hola Nuvem Shop, quiero comprar el Pase de Free Fire por $6.800 COP.')}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span className="package-tag pass-tag">PASE FREE FIRE</span>
+          <div className="package-art pass-art">
+            <img src="https://i.ibb.co/HJ8h56n/pase-card.jpg" alt="Pase de Free Fire" loading="lazy" />
+          </div>
+          <div className="package-amount pass-title">Pase</div>
+          <div className="package-bonus muted">Pase de temporada</div>
+          <div className="package-price">$ 6.800<small> COP</small></div>
+          <span className="pass-buy-link">Comprar pase <ArrowUpRight size={13} /></span>
+        </a>
+      )}
     </div>
   );
 };
