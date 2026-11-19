@@ -1,25 +1,85 @@
-import type { DiamondPackage, PaymentMethod, OrderRecord, GameId } from '../types/store.ts';
+import type { DiamondPackage, PaymentMethod, OrderRecord, CatalogTab } from '../types/store.ts';
 
 export const OFFICIAL_PHONE = '573016886549';
 export const OFFICIAL_PHONE_FORMATTED = '+57 301 688 6549';
+export const OFFICIAL_COMMUNITY_URL = 'https://whatsapp.com/channel/0029VbDccG0LNSa8QZ2BYe1o';
 
 // Diamantes: `diamonds` = total que recibe el cliente (base + bono).
 export const DIAMOND_PACKAGES: DiamondPackage[] = [
-  { id: 'ff-110',  diamonds: 110,  bonusDiamonds: 10,  priceCOP: 3200 },
-  { id: 'ff-341',  diamonds: 341,  bonusDiamonds: 31,  priceCOP: 10000 },
-  { id: 'ff-572',  diamonds: 572,  bonusDiamonds: 52,  priceCOP: 16000 },
-  { id: 'ff-1166', diamonds: 1166, bonusDiamonds: 106, priceCOP: 32000, tag: 'Popular', highlight: true },
-  { id: 'ff-2398', diamonds: 2398, bonusDiamonds: 218, priceCOP: 60000 },
-  { id: 'ff-6160', diamonds: 6160, bonusDiamonds: 560, priceCOP: 150000 },
+  { id: 'ff-110',  diamonds: 110,  bonusDiamonds: 10,  priceCOP: 3200,   tag: 'Para empezar', tagTone: 'popular', incentive: 'Entrega inmediata' },
+  { id: 'ff-341',  diamonds: 341,  bonusDiamonds: 31,  priceCOP: 10000,  tag: 'Favorito',     tagTone: 'fav',     incentive: 'Ideal para eventos' },
+  { id: 'ff-572',  diamonds: 572,  bonusDiamonds: 52,  priceCOP: 16000,  tag: 'Más comprado', tagTone: 'hot',     incentive: 'El más pedido hoy' },
+  { id: 'ff-1166', diamonds: 1166, bonusDiamonds: 106, priceCOP: 32000,  tag: 'Top ventas',   tagTone: 'popular', highlight: true, incentive: 'Favorito gamers' },
+  { id: 'ff-2398', diamonds: 2398, bonusDiamonds: 218, priceCOP: 60000,  tag: 'Ahorras más',  tagTone: 'value',   incentive: 'Ahorro extra COP' },
+  { id: 'ff-6160', diamonds: 6160, bonusDiamonds: 560, priceCOP: 150000, tag: 'Mejor valor',  tagTone: 'value',   incentive: 'Máximo ahorro - 16%' },
 ];
 
 export const ROBLOX_PACKAGES: DiamondPackage[] = [
   { id: 'robux-100',   diamonds: 100,   priceCOP: 4000,   priceUSD: 1 },
-  { id: 'robux-400',   diamonds: 400,   priceCOP: 16000,  priceUSD: 4,   tag: 'Popular', highlight: true },
-  { id: 'robux-800',   diamonds: 800,   priceCOP: 32000,  priceUSD: 8 },
+  { id: 'robux-400',   diamonds: 400,   priceCOP: 16000,  priceUSD: 4,   tag: 'Más comprado', tagTone: 'hot', highlight: true, incentive: 'El más pedido hoy' },
+  { id: 'robux-800',   diamonds: 800,   priceCOP: 32000,  priceUSD: 8,   tag: 'Favorito',     tagTone: 'fav', incentive: 'Para gamepasses' },
   { id: 'robux-1700',  diamonds: 1700,  priceCOP: 68000,  priceUSD: 17 },
   { id: 'robux-4500',  diamonds: 4500,  priceCOP: 180000, priceUSD: 45 },
-  { id: 'robux-10000', diamonds: 10000, priceCOP: 400000, priceUSD: 100 },
+  { id: 'robux-10000', diamonds: 10000, priceCOP: 400000, priceUSD: 100, tag: 'Mejor valor', tagTone: 'value' },
+];
+
+export const FREE_FIRE_PASS_PACKAGE: DiamondPackage = {
+  id: 'ff-pass',
+  diamonds: 0,
+  priceCOP: 6800,
+  tag: 'Pase Free Fire',
+  title: 'Pase',
+  subtitle: 'Pase de temporada',
+  incentive: 'Activación rápida',
+  displayName: 'Pase de Free Fire',
+  image: 'https://i.ibb.co/Z1hyMTxF/pase-card-removebg-preview.png',
+};
+
+export const SOCIAL_PACKAGES: DiamondPackage[] = [
+  {
+    id: 'netflix-estandar',
+    diamonds: 0,
+    priceCOP: 14000,
+    tag: 'Netflix',
+    title: 'Estándar',
+    subtitle: 'Planes de entretenimiento',
+    incentive: 'Entrega inmediata',
+    displayName: 'Netflix Estándar',
+    image: 'https://i.ibb.co/ksLWm7Cw/netflix.jpg',
+  },
+  {
+    id: 'netflix-premium',
+    diamonds: 0,
+    priceCOP: 28000,
+    tag: 'Netflix',
+    title: 'Premium',
+    subtitle: 'Planes de entretenimiento',
+    incentive: 'Más pedido - Ultra HD',
+    displayName: 'Netflix Premium',
+    image: 'https://i.ibb.co/ksLWm7Cw/netflix.jpg',
+  },
+  {
+    id: 'capcut-estandar',
+    diamonds: 0,
+    priceCOP: 20000,
+    tag: 'CapCut',
+    title: 'Estándar',
+    subtitle: 'Herramientas para crear contenido',
+    incentive: 'Activación rápida',
+    displayName: 'CapCut Estándar',
+    image: 'https://i.ibb.co/DXDPjfZ/capcut.jpg',
+  },
+  {
+    id: 'capcut-pro',
+    diamonds: 0,
+    priceCOP: 40000,
+    tag: 'CapCut',
+    title: 'Pro',
+    subtitle: 'Herramientas para crear contenido',
+    incentive: 'Favorito creadores',
+    displayName: 'CapCut Pro',
+    image: 'https://i.ibb.co/DXDPjfZ/capcut.jpg',
+  },
 ];
 
 export interface GameInfo {
@@ -38,7 +98,7 @@ export interface GameInfo {
   deliveredIn: string;
 }
 
-export const GAME_INFO: Record<GameId, GameInfo> = {
+export const GAME_INFO: Record<CatalogTab, GameInfo> = {
   freefire: {
     name: 'Free Fire',
     unit: 'Diamantes',
@@ -49,7 +109,7 @@ export const GAME_INFO: Record<GameId, GameInfo> = {
     placeholder: 'Ingresa tu ID de Free Fire',
     hint: 'Asegúrate de copiar tu UID exactamente como aparece en tu perfil',
     stepTitle: 'Ingresa tu ID de Jugador (UID)',
-    stepSub: 'Recarga directa y segura por ID · No requerimos contraseñas ni accesos a tu cuenta',
+    stepSub: 'Recarga directa y segura por ID - No requerimos contraseñas ni accesos a tu cuenta',
     packagesTitle: 'Selecciona tu Cantidad de Diamantes',
     packagesTab: 'Diamantes Free Fire',
     deliveredIn: 'Tus diamantes se acreditan automáticamente en Garena Free Fire una vez confirmado el comprobante con nuestro asesor.',
@@ -64,12 +124,32 @@ export const GAME_INFO: Record<GameId, GameInfo> = {
     placeholder: 'Ingresa tu usuario de Roblox',
     hint: 'Escribe tu usuario exactamente como aparece en tu perfil de Roblox',
     stepTitle: 'Ingresa tu Usuario de Roblox',
-    stepSub: 'Entrega de Robux por usuario · Nunca pedimos tu contraseña',
+    stepSub: 'Entrega de Robux por usuario - Nunca pedimos tu contraseña',
     packagesTitle: 'Selecciona tu Cantidad de Robux',
     packagesTab: 'Robux Roblox',
     deliveredIn: 'Tus Robux se entregan en tu cuenta de Roblox una vez confirmado el comprobante con nuestro asesor.',
   },
+  social: {
+    name: 'Social',
+    unit: 'Plan',
+    unitLower: 'planes',
+    accountShort: 'Contacto',
+    accountLabel: 'Correo o WhatsApp de entrega',
+    accountField: 'Correo o WhatsApp',
+    placeholder: 'Ej: tucorreo@gmail.com o 301 000 0000',
+    hint: 'Ingresa tu correo o WhatsApp para enviarte tu plan al confirmar el pago',
+    stepTitle: 'Ingresa tu Correo o WhatsApp',
+    stepSub: 'Entrega digital directa - Nunca pedimos tu contraseña',
+    packagesTitle: 'Selecciona tu Plan Social',
+    packagesTab: 'Servicios Social',
+    deliveredIn: 'Tu plan se activa y entrega por WhatsApp en minutos una vez confirmado el comprobante con nuestro asesor.',
+  },
 };
+
+export function getPackageLabel(pkg: DiamondPackage, tab: CatalogTab): string {
+  if (pkg.displayName) return pkg.displayName;
+  return `${formatNumber(pkg.diamonds)} ${GAME_INFO[tab].unit}`;
+}
 
 export function validateRobloxUsername(user: string): { isValid: boolean; error?: string } {
   const trimmed = user.trim();
@@ -82,8 +162,21 @@ export function validateRobloxUsername(user: string): { isValid: boolean; error?
   return { isValid: true };
 }
 
-export function validateAccount(game: GameId, id: string): { isValid: boolean; error?: string } {
-  return game === 'roblox' ? validateRobloxUsername(id) : validatePlayerId(id);
+export function validateSocialContact(contact: string): { isValid: boolean; error?: string } {
+  const trimmed = contact.trim();
+  if (!trimmed) {
+    return { isValid: false, error: 'Por favor ingresa tu correo o número de WhatsApp' };
+  }
+  if (trimmed.length < 4) {
+    return { isValid: false, error: 'Ingresa un correo o WhatsApp válido (mínimo 4 caracteres)' };
+  }
+  return { isValid: true };
+}
+
+export function validateAccount(game: CatalogTab, id: string): { isValid: boolean; error?: string } {
+  if (game === 'roblox') return validateRobloxUsername(id);
+  if (game === 'social') return validateSocialContact(id);
+  return validatePlayerId(id);
 }
 
 export const PAYMENT_METHODS: PaymentMethod[] = [
@@ -117,6 +210,50 @@ export const PAYMENT_METHODS: PaymentMethod[] = [
     iconName: 'Wallet',
   },
 ];
+
+export const VALID_COUPONS: Record<string, { code: string; discountPercent: number; label: string }> = {
+  DAAV: { code: 'DAAV', discountPercent: 5, label: '5% de descuento' },
+};
+
+export function validateCoupon(rawCode: string | null | undefined): {
+  isValid: boolean;
+  code: string;
+  discountPercent: number;
+  message?: string;
+} {
+  const normalized = (rawCode || '').trim().toUpperCase().replace(/\s/g, '');
+  if (!normalized) {
+    return { isValid: false, code: '', discountPercent: 0, message: 'Escribe un código primero.' };
+  }
+  const found = VALID_COUPONS[normalized];
+  if (!found) {
+    return { isValid: false, code: normalized, discountPercent: 0, message: 'Código no válido o expirado.' };
+  }
+  return { isValid: true, code: found.code, discountPercent: found.discountPercent };
+}
+
+export function calculateOrderPricing(
+  pkg: Pick<DiamondPackage, 'priceCOP' | 'priceUSD'>,
+  couponCode?: string | null
+): {
+  subtotalCOP: number;
+  discountCOP: number;
+  finalCOP: number;
+  discountPercent: number;
+  appliedCode: string | null;
+  finalUSD?: number;
+} {
+  const check = couponCode ? validateCoupon(couponCode) : null;
+  const discountPercent = check?.isValid ? check.discountPercent : 0;
+  const appliedCode = check?.isValid ? check.code : null;
+  const discountCOP = discountPercent > 0 ? Math.round((pkg.priceCOP * discountPercent) / 100) : 0;
+  const finalCOP = Math.max(0, pkg.priceCOP - discountCOP);
+  const finalUSD =
+    typeof pkg.priceUSD === 'number'
+      ? Number((pkg.priceUSD * (1 - discountPercent / 100)).toFixed(2))
+      : undefined;
+  return { subtotalCOP: pkg.priceCOP, discountCOP, finalCOP, discountPercent, appliedCode, finalUSD };
+}
 
 /**
  * Format Colombian Pesos (COP)
@@ -156,7 +293,7 @@ export function validatePlayerId(id: string): { isValid: boolean; error?: string
 }
 
 /**
- * Generates an Order ID in standard Nuvem Store format
+ * Generates an Order ID in standard Nuvem Shop format
  */
 export function generateOrderId(): string {
   const randomPart = Math.floor(100000 + Math.random() * 900000);
@@ -164,7 +301,7 @@ export function generateOrderId(): string {
 }
 
 /**
- * Generates direct WhatsApp message link for Nuvem Store customer support
+ * Generates direct WhatsApp message link for Nuvem Shop customer support
  * Target Phone: +57 301 688 6549
  */
 export function generateWhatsAppLink(order: {
@@ -173,15 +310,27 @@ export function generateWhatsAppLink(order: {
   diamonds: number;
   totalCOP: number;
   paymentMethod: string;
-  game?: GameId;
+  game?: CatalogTab;
+  packageName?: string;
+  couponCode?: string;
+  discountCOP?: number;
   usdTotal?: number;
 }): string {
   const phone = OFFICIAL_PHONE; // 573016886549
-  const g = GAME_INFO[order.game || 'freefire'];
+  const tab: CatalogTab = order.game || 'freefire';
+  const g = GAME_INFO[tab];
   const playerLine = order.playerId ? `🎮 ${g.accountLabel}: ${order.playerId}\n` : '';
-  const text = `👋 ¡Hola Nuvem Store! Acabo de solicitar una recarga para ${g.name}:
-${playerLine}💎 Recarga: ${formatNumber(order.diamonds)} ${g.unit}
-💰 Total: ${formatCOP(order.totalCOP)}${order.usdTotal ? ` (≈ US$ ${order.usdTotal.toFixed(2)})` : ''}
+  const itemLabel = order.packageName || `${formatNumber(order.diamonds)} ${g.unit}`;
+  const couponLine = order.couponCode
+    ? `🎟️ Cupón: ${order.couponCode}${order.discountCOP ? ` (-${formatCOP(order.discountCOP)})` : ''}\n`
+    : '';
+  const intro =
+    tab === 'social'
+      ? `👋 ¡Hola Nuvem Shop! Acabo de solicitar un plan de ${g.name}:`
+      : `👋 ¡Hola Nuvem Shop! Acabo de solicitar una recarga para ${g.name}:`;
+  const text = `${intro}
+${playerLine}💎 Producto: ${itemLabel}
+${couponLine}💰 Total: ${formatCOP(order.totalCOP)}${order.usdTotal ? ` (≈ US$ ${order.usdTotal.toFixed(2)})` : ''}
 💳 Método de Pago: ${order.paymentMethod}
 🏷️ Pedido: #${order.orderId}
 
@@ -194,14 +343,14 @@ Adjunto mi comprobante para la entrega inmediata. ¡Muchas gracias!`;
  * Direct WhatsApp link for general inquiries
  */
 export function getGeneralWhatsAppLink(message?: string): string {
-  const text = message || 'Hola Nuvem Store, quisiera realizar una recarga de diamantes para Free Fire.';
+  const text = message || 'Hola Nuvem Shop, quisiera realizar una recarga.';
   return `https://wa.me/${OFFICIAL_PHONE}?text=${encodeURIComponent(text)}`;
 }
 
 /**
  * Local Storage helpers for persisting customer orders
  */
-const ORDERS_STORAGE_KEY = 'nuvem_store_orders_v1';
+const ORDERS_STORAGE_KEY = 'nuvem_shop_orders_v1';
 
 export function getSavedOrders(): OrderRecord[] {
   try {
@@ -221,12 +370,4 @@ export function saveOrder(order: OrderRecord): void {
   } catch (err) {
     console.error('Error saving order', err);
   }
-}
-
-export function findOrder(query: string): OrderRecord | undefined {
-  const trimmed = query.trim().toUpperCase();
-  const orders = getSavedOrders();
-  return orders.find(
-    (o) => o.orderId.toUpperCase() === trimmed || o.playerId === query.trim()
-  );
 }

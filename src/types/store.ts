@@ -11,7 +11,13 @@ export interface DiamondPackage {
   priceCOP: number;
   priceUSD?: number; // precio fijo en USD (si no existe se calcula con la tasa)
   tag?: string;
+  tagTone?: 'hot' | 'fav' | 'value' | 'popular';
+  incentive?: string;
   highlight?: boolean;
+  title?: string;
+  subtitle?: string;
+  displayName?: string;
+  image?: string;
 }
 
 export interface PaymentMethod {
@@ -33,11 +39,13 @@ export interface OrderRecord {
   diamonds: number;
   totalCOP: number;
   totalUSD?: number;
+  couponCode?: string;
+  discountCOP?: number;
   paymentMethodId: string;
   paymentMethodName: string;
   customerPhone: string;
   customerEmail?: string;
-  game?: GameId;
+  game?: CatalogTab;
   status: 'PENDIENTE' | 'PROCESANDO' | 'ENTREGADO';
   createdAt: string;
 }

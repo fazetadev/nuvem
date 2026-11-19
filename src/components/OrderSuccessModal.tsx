@@ -35,6 +35,9 @@ export const OrderSuccessModal: React.FC<OrderSuccessModalProps> = ({
     totalCOP: order.totalCOP,
     paymentMethod: order.paymentMethodName,
     game: order.game,
+    packageName: order.packageName,
+    couponCode: order.couponCode,
+    discountCOP: order.discountCOP,
     usdTotal: lang === 'en' ? toUSD(order.totalCOP, order.totalUSD) : undefined,
   });
 
@@ -115,8 +118,18 @@ export const OrderSuccessModal: React.FC<OrderSuccessModalProps> = ({
             )}
             <div className="flex items-center justify-between py-1 border-b border-blue-950">
               <span className="text-slate-400">{t("Recarga:")}</span>
-              <span className="font-bold text-white">{formatNumber(order.diamonds)} {t(info.unit)}</span>
+              <span className="font-bold text-white">
+                {order.diamonds > 0 ? `${formatNumber(order.diamonds)} ${t(info.unit)}` : order.packageName}
+              </span>
             </div>
+            {order.couponCode && (
+              <div className="flex items-center justify-between py-1 border-b border-blue-950">
+                <span className="text-slate-400">Cupón:</span>
+                <span className="font-bold text-emerald-400">
+                  {order.couponCode}{order.discountCOP ? ` (-${formatPrice(order.discountCOP)})` : ''}
+                </span>
+              </div>
+            )}
             <div className="flex items-center justify-between py-1 border-b border-blue-950">
               <span className="text-slate-400">{t("Total a Pagar:")}</span>
               <span className="font-mono font-bold text-emerald-400">{formatPrice(order.totalCOP, order.totalUSD)}</span>

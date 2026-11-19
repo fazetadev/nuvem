@@ -1,9 +1,14 @@
 import React from 'react';
 import { IMAGES } from '../config/images';
 import type { DiamondPackage, GameId } from '../types/store.ts';
-import { GAME_INFO, formatNumber, formatCOP, DIAMOND_PACKAGES as FREEFIRE, ROBLOX_PACKAGES as ROBLOX } from '../utils/rechargeLogic.ts';
-import { Check, Sparkles, Gift, ArrowUpRight } from 'lucide-react';
-import { OFFICIAL_PHONE } from '../utils/rechargeLogic.ts';
+import {
+  formatNumber,
+  formatCOP,
+  DIAMOND_PACKAGES as FREEFIRE,
+  ROBLOX_PACKAGES as ROBLOX,
+  FREE_FIRE_PASS_PACKAGE,
+} from '../utils/rechargeLogic.ts';
+import { Check, Sparkles, Gift, Flame, Heart, Crown } from 'lucide-react';
 
 interface PackagesGridProps {
   game: GameId;
@@ -11,8 +16,14 @@ interface PackagesGridProps {
   onSelectPackage: (pkg: DiamondPackage) => void;
 }
 
+const renderTagIcon = (tone?: DiamondPackage['tagTone']) => {
+  if (tone === 'hot') return <Flame size={10} />;
+  if (tone === 'fav') return <Heart size={10} />;
+  if (tone === 'value') return <Crown size={10} />;
+  return <Sparkles size={10} />;
+};
+
 export const PackagesGrid: React.FC<PackagesGridProps> = ({ game, selectedPackage, onSelectPackage }) => {
-  const info = GAME_INFO[game];
   const packages = game === 'roblox' ? ROBLOX : FREEFIRE;
   const isRoblox = game === 'roblox';
   const diamondArtByPackage: Record<string, string> = {
@@ -23,6 +34,8 @@ export const PackagesGrid: React.FC<PackagesGridProps> = ({ game, selectedPackag
     'ff-2398': 'https://i.ibb.co/GvFCrV2t/2000.png',
     'ff-6160': 'https://i.ibb.co/G3T1TXFQ/5000.png',
   };
+
+  const passSelected = selectedPackage?.id === FREE_FIRE_PASS_PACKAGE.id;
 
   return (
     <div className={`packages-grid ${isRoblox ? 'theme-robux' : 'theme-diamonds'}`}>
@@ -40,8 +53,8 @@ export const PackagesGrid: React.FC<PackagesGridProps> = ({ game, selectedPackag
             style={{ animationDelay: `${index * 55}ms` }}
           >
             {pkg.tag && (
-              <span className="package-tag">
-                <Sparkles size={10} />
+              <span className={`package-tag ${pkg.tagTone ? `tag-${pkg.tagTone}` : ''}`}>
+                {renderTagIcon(pkg.tagTone)}
                 {pkg.tag.toUpperCase()}
               </span>
             )}
@@ -79,29 +92,47 @@ export const PackagesGrid: React.FC<PackagesGridProps> = ({ game, selectedPackag
               {formatCOP(pkg.priceCOP).replace(' COP', '')}
               <small> COP</small>
             </div>
+            {pkg.incentive && (
+              <div className="package-incentive">{pkg.incentive}</div>
+            )}
           </button>
         );
       })}
       {!isRoblox && (
-        <a
-          className="package-card pass-package-card"
-          href={`https://wa.me/${OFFICIAL_PHONE}?text=${encodeURIComponent('Hola Nuvem Shop, quiero comprar el Pase de Free Fire por $6.800 COP.')}`}
-          target="_blank"
-          rel="noreferrer"
+        <button
+          type="button"
+          onClick={() => onSelectPackage(FREE_FIRE_PASS_PACKAGE)}
+          aria-pressed={passSelected}
+          aria-label="Pase de Free Fire $ 6.800 COP"
+          className={`package-card pass-package-card ${passSelected ? 'is-selected' : ''}`}
+          style={{ animationDelay: `${packages.length * 55}ms` }}
         >
-          <span className="package-tag pass-tag">PASE FREE FIRE</span>
+          <span className="package-tag pass-tag">
+            <Sparkles size={10} />
+            PASE FREE FIRE
+          </span>
+          {passSelected && (
+            <span className="package-check">
+              <Check size={12} strokeWidth={3} />
+            </span>
+          )}
           <div className="package-art pass-art">
             <img
-              src="https://i.ibb.co/Z1hyMTxF/pase-card-removebg-preview.png"
+              src={FREE_FIRE_PASS_PACKAGE.image}
               alt="Pase de Free Fire"
               loading="lazy"
             />
           </div>
-          <div className="package-amount pass-title">Pase</div>
-          <div className="package-bonus muted">Pase de temporada</div>
-          <div className="package-price">$ 6.800<small> COP</small></div>
-          <span className="pass-buy-link">Comprar pase <ArrowUpRight size={13} /></span>
-        </a>
+          <div className="package-amount pass-title">{FREE_FIRE_PASS_PACKAGE.title}</div>
+          <div className="package-bonus muted">{FREE_FIRE_PASS_PACKAGE.subtitle}</div>
+          <div className="package-price">
+            {formatCOP(FREE_FIRE_PASS_PACKAGE.priceCOP).replace(' COP', '')}
+            <small> COP</small>
+          </div>
+          {FREE_FIRE_PASS_PACKAGE.incentive && (
+            <div className="package-incentive">{FREE_FIRE_PASS_PACKAGE.incentive}</div>
+          )}
+        </button>
       )}
     </div>
   );

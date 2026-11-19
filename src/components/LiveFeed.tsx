@@ -1,18 +1,18 @@
 import React from 'react';
 
 const ITEMS = [
-  'Pagos seguros · Nequi & Bancolombia',
-  'Soporte 24/7 · respuesta rápida',
-  'Diamantes baratos · mejor precio',
-  'Robux baratos · entrega inmediata',
-  'Venta de cuentas · verificadas',
-  'Comprobante de diamantes · siempre',
-  'Promociones activas · no te las pierdas',
-  'Sin contraseñas · solo ID o usuario',
-  'Recargas digitales · stock listo',
-  'Entrega prioritaria · en minutos',
-  'Bonos incluidos · más diamantes',
-  'Robux oficial · 100% seguro',
+  'Nuvem Shop - Seguro Y Rapido',
+  'Atención rápida - todos los días',
+  'Pagos seguros - Nequi & Bancolombia',
+  'Soporte 24/7 - respuesta rápida',
+  'Diamantes baratos - mejor precio',
+  'Robux baratos - entrega inmediata',
+  'Bonos incluidos - más diamantes',
+  'Sin contraseñas - solo ID o usuario',
+  'Entrega prioritaria - en minutos',
+  'Comprobante de recarga - siempre',
+  'Netflix & CapCut - activación rápida',
+  'Robux oficial - 100% seguro',
 ];
 
 function Row() {

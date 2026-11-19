@@ -2,8 +2,8 @@ import { useI18n } from '../i18n.tsx';
 import React from 'react';
 import { X, ShieldCheck, CheckCircle2, ArrowRight, Gem } from 'lucide-react';
 import { DiamondPackage, PaymentMethod } from '../types/store.ts';
-import { formatNumber, GAME_INFO } from '../utils/rechargeLogic.ts';
-import type { GameId } from '../types/store.ts';
+import { getPackageLabel, GAME_INFO } from '../utils/rechargeLogic.ts';
+import type { CatalogTab } from '../types/store.ts';
 
 interface CheckoutSummaryModalProps {
   isOpen: boolean;
@@ -13,9 +13,13 @@ interface CheckoutSummaryModalProps {
   selectedPayment: PaymentMethod;
   phone: string;
   email?: string;
+  couponCode?: string | null;
+  discountCOP?: number;
+  finalCOP?: number;
+  finalUSD?: number;
   onConfirmOrder: () => void;
   isSubmitting: boolean;
-  game: GameId;
+  game: CatalogTab;
 }
 
 export const CheckoutSummaryModal: React.FC<CheckoutSummaryModalProps> = ({
@@ -26,6 +30,10 @@ export const CheckoutSummaryModal: React.FC<CheckoutSummaryModalProps> = ({
   selectedPayment,
   phone,
   email,
+  couponCode,
+  discountCOP = 0,
+  finalCOP,
+  finalUSD,
   onConfirmOrder,
   isSubmitting,
   game,
@@ -33,6 +41,8 @@ export const CheckoutSummaryModal: React.FC<CheckoutSummaryModalProps> = ({
   const { t, formatPrice, rate, lang } = useI18n();
   const info = GAME_INFO[game];
   if (!isOpen) return null;
+  const effectiveCOP = typeof finalCOP === 'number' ? finalCOP : selectedPackage.priceCOP;
+  const effectiveUSD = typeof finalUSD === 'number' ? finalUSD : selectedPackage.priceUSD;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
@@ -72,7 +82,11 @@ export const CheckoutSummaryModal: React.FC<CheckoutSummaryModalProps> = ({
               <span>{t('Cuenta {game}', { game: info.name })}</span>
               <span className="text-emerald-400 font-bold normal-case flex items-center gap-1">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                {game === 'roblox' ? t("Usuario Verificado") : t("ID Verificado")}
+                {game === 'roblox'
+                  ? t("Usuario Verificado")
+                  : game === 'social'
+                    ? t("Contacto Verificado")
+                    : t("ID Verificado")}
               </span>
             </div>
 
@@ -95,7 +109,9 @@ export const CheckoutSummaryModal: React.FC<CheckoutSummaryModalProps> = ({
               <div className="flex items-center gap-2">
                 <Gem className="w-4 h-4 text-blue-400" />
                 <span className="font-bold text-white">
-                  {formatNumber(selectedPackage.diamonds)} {t(info.unit)} {info.name}
+                  {selectedPackage.displayName
+                    ? selectedPackage.displayName
+                    : `${getPackageLabel(selectedPackage, game)} ${info.name}`}
                 </span>
               </div>
               <span className="font-mono font-bold text-white">
@@ -104,11 +120,18 @@ export const CheckoutSummaryModal: React.FC<CheckoutSummaryModalProps> = ({
             </div>
             {lang === 'en' && (
               <p className="text-[11px] text-slate-500 text-right">
-                {t('Precio base: {cop} COP · tasa referencial 1 USD ≈ {rate} COP', {
-                  cop: new Intl.NumberFormat('es-CO').format(selectedPackage.priceCOP),
+                {t('Precio base: {cop} COP - tasa referencial 1 USD ≈ {rate} COP', {
+                  cop: new Intl.NumberFormat('es-CO').format(effectiveCOP),
                   rate: new Intl.NumberFormat('es-CO', { maximumFractionDigits: 0 }).format(rate),
                 })}
               </p>
+            )}
+
+            {couponCode && discountCOP > 0 && (
+              <div className="flex items-center justify-between text-xs text-emerald-400 pt-2 border-t border-blue-950/60">
+                <span>Cupón {couponCode} (5% OFF):</span>
+                <span className="font-mono font-bold">- {formatPrice(discountCOP)}</span>
+              </div>
             )}
 
             <div className="flex items-center justify-between text-xs text-slate-400 pt-2 border-t border-blue-950/60">
@@ -135,7 +158,7 @@ export const CheckoutSummaryModal: React.FC<CheckoutSummaryModalProps> = ({
                 {lang === 'en' ? t('Total a Pagar (USD)') : t('Total a Pagar (COP)')}
               </span>
               <span className="font-mono text-2xl font-black text-blue-400 tabular-nums">
-                {formatPrice(selectedPackage.priceCOP, selectedPackage.priceUSD)}
+                {formatPrice(effectiveCOP, effectiveUSD)}
               </span>
             </div>
           </div>

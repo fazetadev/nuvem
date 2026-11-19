@@ -18,15 +18,17 @@ import { OrderSuccessModal } from './components/OrderSuccessModal.tsx';
 import { Footer } from './components/Footer.tsx';
 import { LiveFeed } from './components/LiveFeed.tsx';
 import { ServiceCatalogGrid } from './components/ServiceCatalog.tsx';
+import { WelcomeModal } from './components/WelcomeModal.tsx';
 import type { DiamondPackage, PaymentMethod, OrderRecord, GameId, CatalogTab } from './types/store.ts';
 import {
-  GAME_INFO,
   validateAccount,
+  validateCoupon,
+  calculateOrderPricing,
   generateOrderId,
   saveOrder,
-  formatNumber,
   formatCOP,
   getGeneralWhatsAppLink,
+  getPackageLabel,
 } from './utils/rechargeLogic.ts';
 
 export default function App() {
@@ -39,11 +41,12 @@ export default function App() {
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [currentOrder, setCurrentOrder] = useState<OrderRecord | null>(null);
+  const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const info = GAME_INFO[game];
   const isSocialTab = activeTab === 'social';
+  const pricing = selectedPackage ? calculateOrderPricing(selectedPackage, appliedCoupon) : null;
 
   const handleSelectTab = (next: CatalogTab) => {
     if (next === activeTab) return;
@@ -76,7 +79,7 @@ export default function App() {
   };
 
   const handleProceed = () => {
-    const result = validateAccount(game, playerId);
+    const result = validateAccount(activeTab, playerId);
     if (!result.isValid) {
       setError(result.error || 'Revisa los datos de tu cuenta');
       return;
@@ -86,19 +89,30 @@ export default function App() {
     setIsSummaryOpen(true);
   };
 
+  const handleApplyCoupon = (rawCode: string) => {
+    const res = validateCoupon(rawCode);
+    if (res.isValid) {
+      setAppliedCoupon(res.code);
+    }
+    return res;
+  };
+
   const handleConfirmOrder = () => {
     if (!selectedPackage || !selectedPayment) return;
+    const orderPricing = calculateOrderPricing(selectedPackage, appliedCoupon);
     setIsSubmitting(true);
     window.setTimeout(() => {
       const order: OrderRecord = {
         orderId: generateOrderId(),
         playerId: playerId.trim(),
         packageId: selectedPackage.id,
-        packageName: `${selectedPackage.diamonds} ${info.unit}`,
-        game,
+        packageName: getPackageLabel(selectedPackage, activeTab),
+        game: activeTab,
         diamonds: selectedPackage.diamonds,
-        totalCOP: selectedPackage.priceCOP,
-        totalUSD: selectedPackage.priceUSD,
+        totalCOP: orderPricing.finalCOP,
+        totalUSD: orderPricing.finalUSD,
+        couponCode: orderPricing.appliedCode || undefined,
+        discountCOP: orderPricing.discountCOP > 0 ? orderPricing.discountCOP : undefined,
         paymentMethodId: selectedPayment.id,
         paymentMethodName: selectedPayment.name,
         customerPhone: 'WhatsApp',
@@ -115,6 +129,7 @@ export default function App() {
 
   return (
     <div className="app-shell min-h-screen flex flex-col">
+      <WelcomeModal />
       <Header activeTab={activeTab} onSelectTab={handleSelectTab} />
       <LiveFeed />
 
@@ -125,14 +140,14 @@ export default function App() {
               <div className="hero-intro">
                 <div className="hero-badge">
                   <span className="live-dot" />
-                  Entrega en minutos · Soporte real
+                  Nuvem Shop - Seguro Y Rapido
                 </div>
                 <h1 className="hero-title">
                   {isSocialTab ? (
                     <>
-                      SERVICIOS
+                      NUVEM
                       <br />
-                      <em>DIGITALES</em>
+                      <em>SOCIAL</em>
                     </>
                   ) : game === 'roblox' ? (
                     <>
@@ -150,7 +165,7 @@ export default function App() {
                 </h1>
                 <p className="hero-sub">
                   {isSocialTab ? (
-                    <>Elige tu plan de Netflix o CapCut y recíbelo por WhatsApp sin complicaciones. Sin vueltas.</>
+                    <>Elige tu plan de Netflix o CapCut, paga como quieras y recíbelo sin complicaciones. Sin contraseñas. Sin vueltas.</>
                   ) : (
                     <>
                       Elige tu paquete, paga como quieras y recibe tus {game === 'roblox' ? 'Robux' : 'diamantes'} sin
@@ -171,7 +186,7 @@ export default function App() {
                     <span className="step-num">2</span>
                     <div>
                       <strong>Paga fácil</strong>
-                      <small>Nequi · Bancolombia · PayPal</small>
+                      <small>Nequi - Bancolombia - PayPal</small>
                     </div>
                   </li>
                   <li>
@@ -188,10 +203,10 @@ export default function App() {
                     <LockKeyhole size={14} /> Sin contraseña
                   </span>
                   <span>
-                    <Clock size={14} /> Rápido
+                    <Clock size={14} /> 1 - 5 min
                   </span>
                   <span>
-                    <BadgeCheck size={14} /> Seguro
+                    <BadgeCheck size={14} /> 100% Seguro
                   </span>
                 </div>
               </div>
@@ -199,54 +214,55 @@ export default function App() {
               <div className="hero-catalog" id="recargas">
                 <div className="choose-label">
                   <div>
-                    <span>{isSocialTab ? 'ELIGE TU SERVICIO' : 'ELIGE TU RECARGA'}</span>
-                    <small>
-                      {isSocialTab ? 'Selecciona un plan y escríbenos por WhatsApp' : 'Selecciona un paquete para continuar'}
-                    </small>
+                    <span>{isSocialTab ? 'ELIGE TU PLAN SOCIAL' : 'ELIGE TU RECARGA'}</span>
+                    <small>Selecciona un paquete para continuar</small>
                   </div>
                   <div className="choose-meta">
                     <Star size={12} />
-                    {isSocialTab ? 'Entrega por WhatsApp' : 'Más vendido marcado'}
+                    {isSocialTab ? 'Activación rápida' : 'Más vendido marcado'}
                   </div>
                 </div>
 
                 {isSocialTab ? (
-                  <ServiceCatalogGrid />
+                  <ServiceCatalogGrid
+                    selectedPackage={selectedPackage}
+                    onSelectPackage={(pkg) => {
+                      setSelectedPackage(pkg);
+                      setError(null);
+                    }}
+                  />
                 ) : (
-                  <>
-                    <PackagesGrid
-                      game={game}
-                      selectedPackage={selectedPackage}
-                      onSelectPackage={(pkg) => {
-                        setSelectedPackage(pkg);
-                        setError(null);
-                      }}
-                    />
-                    <div className="hero-cta-row">
-                      <div className="selected-summary">
-                        {selectedPackage ? (
-                          <>
-                            <span className="sel-amount">
-                              {formatNumber(selectedPackage.diamonds)} {info.unit}
-                            </span>
-                            <span className="sel-price">{formatCOP(selectedPackage.priceCOP)}</span>
-                          </>
-                        ) : (
-                          <span className="sel-empty">Selecciona un paquete</span>
-                        )}
-                      </div>
-                      <button
-                        type="button"
-                        className="btn-continue"
-                        onClick={handleStartCheckout}
-                        disabled={!selectedPackage}
-                      >
-                        CONTINUAR
-                        <ArrowRight size={16} />
-                      </button>
-                    </div>
-                  </>
+                  <PackagesGrid
+                    game={game}
+                    selectedPackage={selectedPackage}
+                    onSelectPackage={(pkg) => {
+                      setSelectedPackage(pkg);
+                      setError(null);
+                    }}
+                  />
                 )}
+
+                <div className="hero-cta-row">
+                  <div className="selected-summary">
+                    {selectedPackage && pricing ? (
+                      <>
+                        <span className="sel-amount">{getPackageLabel(selectedPackage, activeTab)}</span>
+                        <span className="sel-price">{formatCOP(pricing.finalCOP)}</span>
+                      </>
+                    ) : (
+                      <span className="sel-empty">Selecciona un paquete</span>
+                    )}
+                  </div>
+                  <button
+                    type="button"
+                    className="btn-continue"
+                    onClick={handleStartCheckout}
+                    disabled={!selectedPackage}
+                  >
+                    CONTINUAR AL PAGO
+                    <ArrowRight size={16} />
+                  </button>
+                </div>
               </div>
             </section>
 
@@ -336,7 +352,7 @@ export default function App() {
               </span>
             </div>
             <CheckoutPanel
-              game={game}
+              game={activeTab}
               playerId={playerId}
               onPlayerIdChange={(id) => {
                 setPlayerId(id);
@@ -345,6 +361,9 @@ export default function App() {
               selectedPackage={selectedPackage}
               selectedPayment={selectedPayment}
               onSelectPayment={setSelectedPayment}
+              appliedCoupon={appliedCoupon}
+              onApplyCoupon={handleApplyCoupon}
+              onRemoveCoupon={() => setAppliedCoupon(null)}
               onProceed={handleProceed}
               error={error}
             />
@@ -363,18 +382,22 @@ export default function App() {
         )}
       </main>
 
-      <Footer />
+      <Footer onSelectTab={handleSelectTab} />
 
-      {isSummaryOpen && selectedPackage && selectedPayment && (
+      {isSummaryOpen && selectedPackage && selectedPayment && pricing && (
         <CheckoutSummaryModal
           isOpen={isSummaryOpen}
           onClose={() => setIsSummaryOpen(false)}
           onConfirmOrder={handleConfirmOrder}
           isSubmitting={isSubmitting}
-          game={game}
+          game={activeTab}
           playerId={playerId}
           selectedPackage={selectedPackage}
           selectedPayment={selectedPayment}
+          couponCode={pricing.appliedCode}
+          discountCOP={pricing.discountCOP}
+          finalCOP={pricing.finalCOP}
+          finalUSD={pricing.finalUSD}
           phone=""
         />
       )}

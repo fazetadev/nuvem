@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-import { X, Send, ShieldCheck, CircleCheck, LockKeyhole, Smartphone, Building2, Wallet, Gem } from 'lucide-react';
-import type { DiamondPackage, GameId, PaymentMethod } from '../types/store.ts';
-import { GAME_INFO, PAYMENT_METHODS, formatCOP, formatNumber } from '../utils/rechargeLogic.ts';
+import { X, Send, ShieldCheck, CircleCheck, LockKeyhole, Smartphone, Building2, Wallet, Gem, Check } from 'lucide-react';
+import type { DiamondPackage, CatalogTab, PaymentMethod } from '../types/store.ts';
+import { GAME_INFO, PAYMENT_METHODS, formatCOP, getPackageLabel, calculateOrderPricing } from '../utils/rechargeLogic.ts';
 
 interface CheckoutPanelProps {
-  game: GameId;
+  game: CatalogTab;
   playerId: string;
   onPlayerIdChange: (id: string) => void;
   selectedPackage: DiamondPackage | null;
   selectedPayment: PaymentMethod | null;
   onSelectPayment: (m: PaymentMethod) => void;
+  appliedCoupon: string | null;
+  onApplyCoupon: (code: string) => { isValid: boolean; code: string; discountPercent: number; message?: string };
+  onRemoveCoupon: () => void;
   onProceed: () => void;
   error: string | null;
 }
@@ -27,19 +30,52 @@ export const CheckoutPanel: React.FC<CheckoutPanelProps> = ({
   selectedPackage,
   selectedPayment,
   onSelectPayment,
+  appliedCoupon,
+  onApplyCoupon,
+  onRemoveCoupon,
   onProceed,
   error,
 }) => {
-  const [coupon, setCoupon] = useState('');
-  const [couponMessage, setCouponMessage] = useState('');
+  const [coupon, setCoupon] = useState(appliedCoupon || '');
+  const [couponFeedback, setCouponFeedback] = useState<{ type: 'ok' | 'err'; text: string } | null>(
+    appliedCoupon ? { type: 'ok', text: `Código ${appliedCoupon} aplicado - 5% de descuento activo` } : null
+  );
   const info = GAME_INFO[game];
   const isRoblox = game === 'roblox';
+  const isSocial = game === 'social';
+  const pricing = selectedPackage ? calculateOrderPricing(selectedPackage, appliedCoupon) : null;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const v = e.target.value;
+    if (isSocial) {
+      onPlayerIdChange(v.slice(0, 80));
+      return;
+    }
     onPlayerIdChange(
       isRoblox ? v.replace(/[^a-zA-Z0-9_]/g, '').slice(0, 20) : v.replace(/\D/g, '').slice(0, 12)
     );
+  };
+
+  const applyCode = (raw: string) => {
+    const result = onApplyCoupon(raw);
+    if (result.isValid) {
+      setCoupon(result.code);
+      setCouponFeedback({
+        type: 'ok',
+        text: `Código ${result.code} aplicado - ${result.discountPercent}% de descuento en tu compra`,
+      });
+    } else {
+      setCouponFeedback({
+        type: 'err',
+        text: result.message || 'Código no válido o expirado.',
+      });
+    }
+  };
+
+  const handleClearCoupon = () => {
+    setCoupon('');
+    setCouponFeedback(null);
+    onRemoveCoupon();
   };
 
   return (
@@ -60,7 +96,7 @@ export const CheckoutPanel: React.FC<CheckoutPanelProps> = ({
           <input
             id="player-id"
             type="text"
-            inputMode={isRoblox ? 'text' : 'numeric'}
+            inputMode={isSocial ? 'email' : isRoblox ? 'text' : 'numeric'}
             autoCapitalize="none"
             autoCorrect="off"
             placeholder={info.placeholder}
@@ -75,9 +111,11 @@ export const CheckoutPanel: React.FC<CheckoutPanelProps> = ({
         </div>
         <p className="field-helper">
           <ShieldCheck size={13} />
-          {isRoblox
-            ? 'No necesitamos tu contraseña, solo tu usuario.'
-            : 'Copia tu UID directamente desde tu perfil.'}
+          {isSocial
+            ? 'No pedimos contraseñas. Te enviamos el acceso por WhatsApp o correo.'
+            : isRoblox
+              ? 'No necesitamos tu contraseña, solo tu usuario.'
+              : 'Copia tu UID directamente desde tu perfil.'}
         </p>
         {error && <p className="checkout-error">{error}</p>}
       </div>
@@ -116,15 +154,38 @@ export const CheckoutPanel: React.FC<CheckoutPanelProps> = ({
             id="coupon-code"
             type="text"
             value={coupon}
-            onChange={(e) => { setCoupon(e.target.value.toUpperCase().replace(/\\s/g, '').slice(0, 24)); setCouponMessage(''); }}
+            onChange={(e) => {
+              const next = e.target.value.toUpperCase().replace(/\s/g, '').slice(0, 24);
+              setCoupon(next);
+              if (!next && appliedCoupon) onRemoveCoupon();
+              setCouponFeedback(null);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                applyCode(coupon);
+              }
+            }}
             placeholder="ESCRIBE TU CÓDIGO"
             autoCapitalize="characters"
           />
-          <button type="button" onClick={() => setCouponMessage(coupon.trim() ? 'Compártelo con nuestro asesor al confirmar por WhatsApp.' : 'Escribe tu código primero.')}>
-            Usar código
-          </button>
+          {appliedCoupon ? (
+            <button type="button" onClick={handleClearCoupon}>
+              Quitar
+            </button>
+          ) : (
+            <button type="button" onClick={() => applyCode(coupon)}>
+              Aplicar
+            </button>
+          )}
         </div>
-        <small>{couponMessage || 'Los cupones se verifican al confirmar tu compra por WhatsApp.'}</small>
+        {couponFeedback ? (
+          <small className={couponFeedback.type === 'ok' ? 'coupon-msg-ok' : 'coupon-msg-err'}>
+            {couponFeedback.type === 'ok' && <Check size={12} />} {couponFeedback.text}
+          </small>
+        ) : (
+          <small>Ingresa tu código promocional si cuentas con uno.</small>
+        )}
       </div>
 
       <div className="checkout-total">
@@ -140,25 +201,36 @@ export const CheckoutPanel: React.FC<CheckoutPanelProps> = ({
           </div>
           <div>
             <b>
-              {selectedPackage ? formatNumber(selectedPackage.diamonds) : '—'} {info.unit}
+              {selectedPackage ? getPackageLabel(selectedPackage, game) : `- ${info.unit}`}
             </b>
-            <small>{selectedPackage ? 'Paquete seleccionado' : 'Elige un paquete para continuar'}</small>
+            <small>{selectedPackage ? 'Entrega rápida garantizada' : 'Elige un paquete para continuar'}</small>
           </div>
         </div>
+        {pricing && pricing.discountCOP > 0 && (
+          <div className="total-discount-row">
+            <span>Descuento ({pricing.appliedCode} - {pricing.discountPercent}%)</span>
+            <strong>- {formatCOP(pricing.discountCOP)}</strong>
+          </div>
+        )}
         <div className="total-price-row">
           <span>Total a pagar</span>
-          <strong>{selectedPackage ? formatCOP(selectedPackage.priceCOP) : '$ 0 COP'}</strong>
+          <div className="total-price-values">
+            {pricing && pricing.discountCOP > 0 && (
+              <s className="total-old-price">{formatCOP(pricing.subtotalCOP)}</s>
+            )}
+            <strong>{pricing ? formatCOP(pricing.finalCOP) : '$ 0 COP'}</strong>
+          </div>
         </div>
       </div>
 
       <button type="button" onClick={onProceed} className="checkout-submit">
         <Send size={17} />
-        REVISAR Y CONTINUAR
+        CONTINUAR AL PAGO
         <span>→</span>
       </button>
       <div className="checkout-reassurance">
         <ShieldCheck size={14} />
-        Primero revisarás tu pedido. El mensaje de WhatsApp se abrirá al generar la orden.
+        Primero revisarás tu pedido. El mensaje de WhatsApp se abrirá al confirmar.
       </div>
     </div>
   );

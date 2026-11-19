@@ -4,6 +4,7 @@ import {
   DIAMOND_PACKAGES,
   OFFICIAL_PHONE,
   OFFICIAL_PHONE_FORMATTED,
+  OFFICIAL_COMMUNITY_URL,
   formatCOP,
   formatNumber,
   validatePlayerId,
@@ -13,6 +14,11 @@ import {
   ROBLOX_PACKAGES,
   PAYMENT_METHODS,
   validateAccount,
+  FREE_FIRE_PASS_PACKAGE,
+  SOCIAL_PACKAGES,
+  getPackageLabel,
+  validateCoupon,
+  calculateOrderPricing,
 } from './rechargeLogic.ts';
 import { EN } from '../translations.ts';
 import { readdirSync, readFileSync } from 'node:fs';
@@ -36,9 +42,10 @@ test('diamond packages match the price list exactly', () => {
   }
 });
 
-test('official phone number matches user request +57 301 688 6549', () => {
+test('official phone number and WhatsApp channel match configured links', () => {
   assert.equal(OFFICIAL_PHONE, '573016886549');
   assert.equal(OFFICIAL_PHONE_FORMATTED, '+57 301 688 6549');
+  assert.equal(OFFICIAL_COMMUNITY_URL, 'https://whatsapp.com/channel/0029VbDccG0LNSa8QZ2BYe1o');
 });
 
 test('formatCOP produces Colombian Peso format', () => {
@@ -116,4 +123,89 @@ test('every t("...") text in the source has an English translation', () => {
     }
   }
   assert.deepEqual(missing, []);
+});
+
+test('Free Fire Pass and Social packages behave as selectable checkout packages', () => {
+  assert.equal(FREE_FIRE_PASS_PACKAGE.id, 'ff-pass');
+  assert.equal(FREE_FIRE_PASS_PACKAGE.priceCOP, 6800);
+  assert.equal(getPackageLabel(FREE_FIRE_PASS_PACKAGE, 'freefire'), 'Pase de Free Fire');
+
+  assert.equal(SOCIAL_PACKAGES.length, 4);
+  const netflix = SOCIAL_PACKAGES.find((p) => p.id === 'netflix-estandar');
+  assert.ok(netflix);
+  assert.equal(netflix.priceCOP, 14000);
+  assert.equal(getPackageLabel(netflix, 'social'), 'Netflix Estándar');
+});
+
+test('validateAccount validates social contact and generateWhatsAppLink handles pass/social', () => {
+  assert.equal(validateAccount('social', '').isValid, false);
+  assert.equal(validateAccount('social', 'ab').isValid, false);
+  assert.equal(validateAccount('social', 'cliente@gmail.com').isValid, true);
+
+  const passLink = generateWhatsAppLink({
+    orderId: 'NUVEM-123456',
+    playerId: '1048291048',
+    diamonds: 0,
+    totalCOP: 6800,
+    paymentMethod: 'Nequi',
+    game: 'freefire',
+    packageName: 'Pase de Free Fire',
+  });
+  assert.ok(passLink.includes('Pase%20de%20Free%20Fire'));
+
+  const socialLink = generateWhatsAppLink({
+    orderId: 'NUVEM-654321',
+    playerId: 'cliente@gmail.com',
+    diamonds: 0,
+    totalCOP: 14000,
+    paymentMethod: 'Bancolombia',
+    game: 'social',
+    packageName: 'Netflix Estándar',
+  });
+  assert.ok(socialLink.includes('Netflix%20Est%C3%A1ndar'));
+  assert.ok(socialLink.includes('Social'));
+});
+
+test('diamond packages carry purchase-incentive badges and micro-copy', () => {
+  for (const pkg of DIAMOND_PACKAGES) {
+    assert.ok(pkg.tag && pkg.tag.trim().length > 0, `${pkg.id} should have an incentive tag`);
+    assert.ok(pkg.incentive && pkg.incentive.trim().length > 0, `${pkg.id} should have incentive copy`);
+  }
+  const tags = DIAMOND_PACKAGES.map((p) => p.tag);
+  assert.ok(tags.includes('Más comprado'));
+  assert.ok(tags.includes('Favorito'));
+});
+
+test('DAAV coupon validates case-insensitively and applies 5% discount', () => {
+  assert.equal(validateCoupon('').isValid, false);
+  const invalid = validateCoupon('NOPE');
+  assert.equal(invalid.isValid, false);
+  assert.equal(invalid.message?.includes('DAAV'), false);
+
+  const ok = validateCoupon(' daav ');
+  assert.equal(ok.isValid, true);
+  assert.equal(ok.code, 'DAAV');
+  assert.equal(ok.discountPercent, 5);
+
+  const pack572 = DIAMOND_PACKAGES.find((p) => p.id === 'ff-572');
+  assert.ok(pack572);
+  const priced = calculateOrderPricing(pack572, 'DAAV');
+  assert.equal(priced.subtotalCOP, 16000);
+  assert.equal(priced.discountCOP, 800);
+  assert.equal(priced.finalCOP, 15200);
+  assert.equal(priced.appliedCode, 'DAAV');
+
+  const wa = generateWhatsAppLink({
+    orderId: 'NUVEM-999111',
+    playerId: '1048291048',
+    diamonds: 572,
+    totalCOP: priced.finalCOP,
+    paymentMethod: 'Nequi',
+    game: 'freefire',
+    packageName: '572 Diamantes',
+    couponCode: priced.appliedCode || undefined,
+    discountCOP: priced.discountCOP,
+  });
+  assert.ok(wa.includes('Nuvem%20Shop'));
+  assert.ok(wa.includes('DAAV'));
 });

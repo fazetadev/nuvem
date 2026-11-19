@@ -12,18 +12,18 @@ interface HeaderProps {
 const TABS: { id: CatalogTab; label: string }[] = [
   { id: 'freefire', label: 'DIAMANTES' },
   { id: 'roblox', label: 'ROBUX' },
-  { id: 'social', label: 'SOCIALES' },
+  { id: 'social', label: 'SOCIAL' },
 ];
 
 export const Header: React.FC<HeaderProps> = ({ activeTab, onSelectTab }) => (
   <header className="site-header sticky top-0 z-50 w-full">
     <div className="header-bar max-w-6xl mx-auto px-4 sm:px-6">
-      <a href="/" className="brand-lockup" aria-label="Nuvem Store inicio">
+      <a href="/" className="brand-lockup" aria-label="Nuvem Shop inicio">
         <span className="brand-logo">
           <img src={IMAGES.logo} alt="" />
         </span>
         <span className="brand-name">
-          Nuvem <span>Store</span>
+          Nuvem <span>Shop</span>
         </span>
       </a>
 
