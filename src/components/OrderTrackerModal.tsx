@@ -16,6 +16,7 @@ export const OrderTrackerModal: React.FC<OrderTrackerModalProps> = ({
   const { t, formatPrice, toUSD, lang } = useI18n();
   const [query, setQuery] = useState('');
   const [orders, setOrders] = useState<OrderRecord[]>([]);
+  const [activeTab, setActiveTab] = useState<'all' | 'pending' | 'completed'>('all');
 
   useEffect(() => {
     if (isOpen) {
@@ -25,15 +26,19 @@ export const OrderTrackerModal: React.FC<OrderTrackerModalProps> = ({
 
   if (!isOpen) return null;
 
-  const filteredOrders = orders.filter((o) => {
+  const normalizedStatus = (status: string) => status.toLowerCase();
+  const pendingOrders = orders.filter((o) => !['completado', 'completada', 'entregado', 'completed', 'delivered'].includes(normalizedStatus(o.status)));
+  const completedOrders = orders.filter((o) => ['completado', 'completada', 'entregado', 'completed', 'delivered'].includes(normalizedStatus(o.status)));
+  const sourceOrders = activeTab === 'pending' ? pendingOrders : activeTab === 'completed' ? completedOrders : orders;
+  const filteredOrders = sourceOrders.filter((o) => {
     if (!query.trim()) return true;
     const q = query.trim().toUpperCase();
     return o.orderId.toUpperCase().includes(q) || o.playerId.toUpperCase().includes(q);
-  });
+  }).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-xl max-h-[90vh] flex flex-col rounded-3xl bg-[#120609] border border-blue-800/70 shadow-2xl shadow-blue-950/90 overflow-hidden text-slate-100">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-xl max-h-[calc(100dvh-16px)] sm:max-h-[90vh] flex flex-col rounded-3xl bg-[#120609] border border-blue-800/70 shadow-2xl shadow-blue-950/90 overflow-hidden text-slate-100">
         
         {/* Header */}
         <div className="p-6 pb-4 border-b border-blue-950/60 flex items-center justify-between">
@@ -61,7 +66,7 @@ export const OrderTrackerModal: React.FC<OrderTrackerModalProps> = ({
         </div>
 
         {/* Search input */}
-        <div className="p-6 pb-2">
+        <div className="p-5 sm:p-6 pb-3">
           <div className="relative">
             <input
               type="text"
@@ -74,14 +79,29 @@ export const OrderTrackerModal: React.FC<OrderTrackerModalProps> = ({
           </div>
         </div>
 
+        <div className="px-5 sm:px-6 pb-3">
+          <div className="order-filter-tabs" role="tablist" aria-label={t('Filtrar pedidos')}>
+            {[
+              { id: 'all' as const, label: 'Todos', count: orders.length },
+              { id: 'pending' as const, label: 'Pendientes', count: pendingOrders.length },
+              { id: 'completed' as const, label: 'Completados', count: completedOrders.length },
+            ].map((tab) => (
+              <button key={tab.id} type="button" role="tab" aria-selected={activeTab === tab.id}
+                className={activeTab === tab.id ? 'active' : ''} onClick={() => setActiveTab(tab.id)}>
+                {tab.label}<span>{tab.count}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Orders list container */}
-        <div className="p-6 pt-2 flex-1 overflow-y-auto space-y-3">
+        <div className="order-list-scroll px-5 sm:px-6 pt-1 pb-5 flex-1 overflow-y-auto space-y-3">
           {filteredOrders.length === 0 ? (
             <div className="py-12 text-center space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-blue-950/40 border border-blue-800/40 flex items-center justify-center text-blue-400 mx-auto">
                 <AlertCircle className="w-6 h-6" />
               </div>
-              <p className="text-sm font-bold text-white">{t("No se encontraron pedidos")}</p>
+              <p className="text-sm font-bold text-white">{query.trim() ? t("No se encontraron pedidos") : activeTab === 'completed' ? 'Aún no tienes pedidos completados' : activeTab === 'pending' ? 'No tienes pedidos pendientes' : t("No se encontraron pedidos")}</p>
               <p className="text-xs text-slate-400 max-w-xs mx-auto">
                 {t("Si acabas de realizar una recarga en otro dispositivo, puedes consultar directamente por WhatsApp a soporte.")}
               </p>
@@ -97,9 +117,9 @@ export const OrderTrackerModal: React.FC<OrderTrackerModalProps> = ({
             </div>
           ) : (
             filteredOrders.map((ord) => (
-              <div
+              <article
                 key={ord.orderId}
-                className="p-4 rounded-2xl bg-[#090305] border border-blue-950/60 hover:border-blue-700/60 transition-colors space-y-3"
+                className="order-history-card p-4 rounded-2xl bg-[#090305] border border-blue-950/60 hover:border-blue-700/60 transition-colors space-y-3"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -162,13 +182,13 @@ export const OrderTrackerModal: React.FC<OrderTrackerModalProps> = ({
                     <ExternalLink className="w-3 h-3" />
                   </a>
                 </div>
-              </div>
+              </article>
             ))
           )}
         </div>
 
         {/* Footer */}
-        <div className="p-4 bg-[#080204] border-t border-blue-950/60 text-center">
+        <div className="p-4 bg-[#080204] border-t border-blue-950/60 text-center shrink-0">
           <button
             type="button"
             onClick={onClose}

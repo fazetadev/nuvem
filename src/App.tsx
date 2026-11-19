@@ -21,7 +21,6 @@ import { ServiceCatalog } from './components/ServiceCatalog.tsx';
 import type { DiamondPackage, PaymentMethod, OrderRecord, GameId } from './types/store.ts';
 import {
   GAME_INFO,
-  PAYMENT_METHODS,
   validateAccount,
   generateOrderId,
   saveOrder,
@@ -34,7 +33,7 @@ export default function App() {
   const [game, setGame] = useState<GameId>('freefire');
   const [playerId, setPlayerId] = useState('');
   const [selectedPackage, setSelectedPackage] = useState<DiamondPackage | null>(null);
-  const [selectedPayment, setSelectedPayment] = useState<PaymentMethod | null>(PAYMENT_METHODS[0]);
+  const [selectedPayment, setSelectedPayment] = useState<PaymentMethod | null>(null);
   const [isCheckoutVisible, setIsCheckoutVisible] = useState(false);
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
@@ -57,18 +56,18 @@ export default function App() {
     if (!selectedPackage) return;
     setIsCheckoutVisible(true);
     window.setTimeout(() => {
-      document.getElementById('checkout')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const checkout = document.getElementById('checkout');
+      checkout?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
       document.getElementById('player-id')?.focus({ preventScroll: true });
-    }, 180);
+    }, 60);
   };
 
   const handleBackToPackages = () => {
     setIsCheckoutVisible(false);
     setError(null);
-    window.setTimeout(
-      () => document.getElementById('recargas')?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
-      80
-    );
+    window.setTimeout(() => {
+      document.getElementById('recargas')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+    }, 60);
   };
 
   const handleProceed = () => {
