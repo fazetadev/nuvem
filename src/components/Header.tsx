@@ -2,19 +2,20 @@ import React from 'react';
 import { IMAGES } from '../config/images';
 import { getGeneralWhatsAppLink } from '../utils/rechargeLogic.ts';
 import { MessageCircle } from 'lucide-react';
-import type { GameId } from '../types/store.ts';
+import type { CatalogTab } from '../types/store.ts';
 
 interface HeaderProps {
-  game: GameId;
-  onSelectGame: (g: GameId) => void;
+  activeTab: CatalogTab;
+  onSelectTab: (g: CatalogTab) => void;
 }
 
-const GAMES: { id: GameId; label: string }[] = [
-  { id: 'freefire', label: 'DIAMONDS' },
+const TABS: { id: CatalogTab; label: string }[] = [
+  { id: 'freefire', label: 'DIAMANTES' },
   { id: 'roblox', label: 'ROBUX' },
+  { id: 'social', label: 'SOCIALES' },
 ];
 
-export const Header: React.FC<HeaderProps> = ({ game, onSelectGame }) => (
+export const Header: React.FC<HeaderProps> = ({ activeTab, onSelectTab }) => (
   <header className="site-header sticky top-0 z-50 w-full">
     <div className="header-bar max-w-6xl mx-auto px-4 sm:px-6">
       <a href="/" className="brand-lockup" aria-label="Nuvem Store inicio">
@@ -28,15 +29,15 @@ export const Header: React.FC<HeaderProps> = ({ game, onSelectGame }) => (
 
       <div className="header-right">
         <div className="game-pills">
-          {GAMES.map((g) => (
+          {TABS.map((tab) => (
             <button
-              key={g.id}
+              key={tab.id}
               type="button"
-              onClick={() => onSelectGame(g.id)}
-              className={game === g.id ? 'pill-active' : ''}
-              aria-pressed={game === g.id}
+              onClick={() => onSelectTab(tab.id)}
+              className={activeTab === tab.id ? 'pill-active' : ''}
+              aria-pressed={activeTab === tab.id}
             >
-              {g.label}
+              {tab.label}
             </button>
           ))}
         </div>

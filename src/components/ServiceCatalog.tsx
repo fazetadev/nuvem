@@ -2,52 +2,85 @@ import React from 'react';
 import { ArrowUpRight, Sparkles } from 'lucide-react';
 import { OFFICIAL_PHONE } from '../utils/rechargeLogic.ts';
 
-const services = [
+interface ServicePlan {
+  id: string;
+  serviceName: string;
+  planName: string;
+  description: string;
+  image: string;
+  price: string;
+}
+
+const PLANS: ServicePlan[] = [
   {
-    name: 'Netflix',
-    image: 'https://i.ibb.co/ksLWm7Cw/netflix.jpg',
+    id: 'netflix-estandar',
+    serviceName: 'Netflix',
+    planName: 'Estándar',
     description: 'Planes de entretenimiento',
-    plans: [{ name: 'Estándar', price: '14.000' }, { name: 'Premium', price: '28.000' }],
+    image: 'https://i.ibb.co/ksLWm7Cw/netflix.jpg',
+    price: '14.000',
   },
   {
-    name: 'CapCut',
-    image: 'https://i.ibb.co/DXDPjfZ/capcut.jpg',
+    id: 'netflix-premium',
+    serviceName: 'Netflix',
+    planName: 'Premium',
+    description: 'Planes de entretenimiento',
+    image: 'https://i.ibb.co/ksLWm7Cw/netflix.jpg',
+    price: '28.000',
+  },
+  {
+    id: 'capcut-estandar',
+    serviceName: 'CapCut',
+    planName: 'Estándar',
     description: 'Herramientas para crear contenido',
-    plans: [{ name: 'Estándar', price: '20.000' }, { name: 'Pro', price: '40.000' }],
+    image: 'https://i.ibb.co/DXDPjfZ/capcut.jpg',
+    price: '20.000',
+  },
+  {
+    id: 'capcut-pro',
+    serviceName: 'CapCut',
+    planName: 'Pro',
+    description: 'Herramientas para crear contenido',
+    image: 'https://i.ibb.co/DXDPjfZ/capcut.jpg',
+    price: '40.000',
   },
 ];
 
-export const ServiceCatalog: React.FC = () => (
-  <section className="service-section max-w-6xl mx-auto px-4 sm:px-6" id="servicios-digitales">
-    <div className="service-heading">
-      <div>
-        <span className="service-eyebrow"><Sparkles size={13} /> SERVICIOS DIGITALES</span>
-        <h2>También encuentras en <em>Nuvem</em><span>.</span></h2>
-        <p>Elige un plan y consúltalo directamente con nuestro equipo.</p>
-      </div>
-    </div>
-    <div className="service-grid">
-      {services.map((service) => (
-        <article className="service-card" key={service.name}>
-          <div className="service-brand">
-            <div className="service-image"><img src={service.image} alt={service.name} loading="lazy" /></div>
-            <div className="service-brand-copy"><h3>{service.name}</h3><span>{service.description}</span></div>
-          </div>
-          <div className="service-plans">
-            {service.plans.map((plan) => (
-              <div className="service-plan" key={plan.name}>
-                <div><span>{plan.name}</span><strong>$ {plan.price} <small>COP</small></strong></div>
-                <a
-                  aria-label={`Consultar ${service.name} ${plan.name}`}
-                  href={`https://wa.me/${OFFICIAL_PHONE}?text=${encodeURIComponent(`Hola Nuvem Shop, quiero ${service.name} ${plan.name} por $${plan.price} COP.`)}`}
-                  target="_blank"
-                  rel="noreferrer"
-                ><ArrowUpRight size={16} /></a>
-              </div>
-            ))}
-          </div>
-        </article>
-      ))}
-    </div>
-  </section>
+/**
+ * Catálogo de servicios digitales, mostrado con el mismo "método" visual que las
+ * tarjetas de diamantes/Robux: cada plan es una tarjeta seleccionable que lleva
+ * directo a WhatsApp, igual que la tarjeta del Pase de Free Fire.
+ */
+export const ServiceCatalogGrid: React.FC = () => (
+  <div className="packages-grid theme-social">
+    {PLANS.map((plan, index) => (
+      <a
+        key={plan.id}
+        className="package-card pass-package-card"
+        href={`https://wa.me/${OFFICIAL_PHONE}?text=${encodeURIComponent(
+          `Hola Nuvem Shop, quiero ${plan.serviceName} ${plan.planName} por $${plan.price} COP.`
+        )}`}
+        target="_blank"
+        rel="noreferrer"
+        style={{ animationDelay: `${index * 55}ms` }}
+      >
+        <span className="package-tag pass-tag">
+          <Sparkles size={10} />
+          {plan.serviceName.toUpperCase()}
+        </span>
+        <div className="package-art pass-art">
+          <img src={plan.image} alt={plan.serviceName} loading="lazy" />
+        </div>
+        <div className="package-amount pass-title">{plan.planName}</div>
+        <div className="package-bonus muted">{plan.description}</div>
+        <div className="package-price">
+          $ {plan.price}
+          <small> COP</small>
+        </div>
+        <span className="pass-buy-link">
+          Consultar <ArrowUpRight size={13} />
+        </span>
+      </a>
+    ))}
+  </div>
 );

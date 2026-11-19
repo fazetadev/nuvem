@@ -17,8 +17,8 @@ import { CheckoutSummaryModal } from './components/CheckoutSummaryModal.tsx';
 import { OrderSuccessModal } from './components/OrderSuccessModal.tsx';
 import { Footer } from './components/Footer.tsx';
 import { LiveFeed } from './components/LiveFeed.tsx';
-import { ServiceCatalog } from './components/ServiceCatalog.tsx';
-import type { DiamondPackage, PaymentMethod, OrderRecord, GameId } from './types/store.ts';
+import { ServiceCatalogGrid } from './components/ServiceCatalog.tsx';
+import type { DiamondPackage, PaymentMethod, OrderRecord, GameId, CatalogTab } from './types/store.ts';
 import {
   GAME_INFO,
   validateAccount,
@@ -31,6 +31,7 @@ import {
 
 export default function App() {
   const [game, setGame] = useState<GameId>('freefire');
+  const [activeTab, setActiveTab] = useState<CatalogTab>('freefire');
   const [playerId, setPlayerId] = useState('');
   const [selectedPackage, setSelectedPackage] = useState<DiamondPackage | null>(null);
   const [selectedPayment, setSelectedPayment] = useState<PaymentMethod | null>(null);
@@ -42,14 +43,18 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
 
   const info = GAME_INFO[game];
+  const isSocialTab = activeTab === 'social';
 
-  const handleSelectGame = (next: GameId) => {
-    if (next === game) return;
-    setGame(next);
+  const handleSelectTab = (next: CatalogTab) => {
+    if (next === activeTab) return;
+    setActiveTab(next);
     setPlayerId('');
     setError(null);
     setSelectedPackage(null);
     setIsCheckoutVisible(false);
+    if (next !== 'social') {
+      setGame(next);
+    }
   };
 
   const handleStartCheckout = () => {
@@ -110,7 +115,7 @@ export default function App() {
 
   return (
     <div className="app-shell min-h-screen flex flex-col">
-      <Header game={game} onSelectGame={handleSelectGame} />
+      <Header activeTab={activeTab} onSelectTab={handleSelectTab} />
       <LiveFeed />
 
       <main className="flex-1">
@@ -123,7 +128,13 @@ export default function App() {
                   Entrega en minutos · Soporte real
                 </div>
                 <h1 className="hero-title">
-                  {game === 'roblox' ? (
+                  {isSocialTab ? (
+                    <>
+                      SERVICIOS
+                      <br />
+                      <em>DIGITALES</em>
+                    </>
+                  ) : game === 'roblox' ? (
                     <>
                       ROBLOX
                       <br />
@@ -138,16 +149,22 @@ export default function App() {
                   )}
                 </h1>
                 <p className="hero-sub">
-                  Elige tu paquete, paga como quieras y recibe tus {game === 'roblox' ? 'Robux' : 'diamantes'} sin
-                  complicaciones. Sin contraseñas. Sin vueltas.
+                  {isSocialTab ? (
+                    <>Elige tu plan de Netflix o CapCut y recíbelo por WhatsApp sin complicaciones. Sin vueltas.</>
+                  ) : (
+                    <>
+                      Elige tu paquete, paga como quieras y recibe tus {game === 'roblox' ? 'Robux' : 'diamantes'} sin
+                      complicaciones. Sin contraseñas. Sin vueltas.
+                    </>
+                  )}
                 </p>
 
                 <ol className="hero-steps">
                   <li>
                     <span className="step-num">1</span>
                     <div>
-                      <strong>Elige tu paquete</strong>
-                      <small>Precios claros, bonos incluidos</small>
+                      <strong>{isSocialTab ? 'Elige tu plan' : 'Elige tu paquete'}</strong>
+                      <small>{isSocialTab ? 'Netflix, CapCut y más' : 'Precios claros, bonos incluidos'}</small>
                     </div>
                   </li>
                   <li>
@@ -182,45 +199,54 @@ export default function App() {
               <div className="hero-catalog" id="recargas">
                 <div className="choose-label">
                   <div>
-                    <span>ELIGE TU RECARGA</span>
-                    <small>Selecciona un paquete para continuar</small>
+                    <span>{isSocialTab ? 'ELIGE TU SERVICIO' : 'ELIGE TU RECARGA'}</span>
+                    <small>
+                      {isSocialTab ? 'Selecciona un plan y escríbenos por WhatsApp' : 'Selecciona un paquete para continuar'}
+                    </small>
                   </div>
                   <div className="choose-meta">
                     <Star size={12} />
-                    Más vendido marcado
+                    {isSocialTab ? 'Entrega por WhatsApp' : 'Más vendido marcado'}
                   </div>
                 </div>
-                <PackagesGrid
-                  game={game}
-                  selectedPackage={selectedPackage}
-                  onSelectPackage={(pkg) => {
-                    setSelectedPackage(pkg);
-                    setError(null);
-                  }}
-                />
-                <div className="hero-cta-row">
-                  <div className="selected-summary">
-                    {selectedPackage ? (
-                      <>
-                        <span className="sel-amount">
-                          {formatNumber(selectedPackage.diamonds)} {info.unit}
-                        </span>
-                        <span className="sel-price">{formatCOP(selectedPackage.priceCOP)}</span>
-                      </>
-                    ) : (
-                      <span className="sel-empty">Selecciona un paquete</span>
-                    )}
-                  </div>
-                  <button
-                    type="button"
-                    className="btn-continue"
-                    onClick={handleStartCheckout}
-                    disabled={!selectedPackage}
-                  >
-                    CONTINUAR
-                    <ArrowRight size={16} />
-                  </button>
-                </div>
+
+                {isSocialTab ? (
+                  <ServiceCatalogGrid />
+                ) : (
+                  <>
+                    <PackagesGrid
+                      game={game}
+                      selectedPackage={selectedPackage}
+                      onSelectPackage={(pkg) => {
+                        setSelectedPackage(pkg);
+                        setError(null);
+                      }}
+                    />
+                    <div className="hero-cta-row">
+                      <div className="selected-summary">
+                        {selectedPackage ? (
+                          <>
+                            <span className="sel-amount">
+                              {formatNumber(selectedPackage.diamonds)} {info.unit}
+                            </span>
+                            <span className="sel-price">{formatCOP(selectedPackage.priceCOP)}</span>
+                          </>
+                        ) : (
+                          <span className="sel-empty">Selecciona un paquete</span>
+                        )}
+                      </div>
+                      <button
+                        type="button"
+                        className="btn-continue"
+                        onClick={handleStartCheckout}
+                        disabled={!selectedPackage}
+                      >
+                        CONTINUAR
+                        <ArrowRight size={16} />
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
             </section>
 
@@ -232,7 +258,11 @@ export default function App() {
                   </div>
                   <div>
                     <strong>Entrega rápida</strong>
-                    <p>Tus {game === 'roblox' ? 'Robux' : 'diamantes'} en minutos tras confirmar el pago.</p>
+                    <p>
+                      {isSocialTab
+                        ? 'Tu plan queda activo en minutos tras confirmar el pago.'
+                        : `Tus ${game === 'roblox' ? 'Robux' : 'diamantes'} en minutos tras confirmar el pago.`}
+                    </p>
                   </div>
                 </div>
                 <div className="benefit-card">
@@ -264,8 +294,6 @@ export default function App() {
                 </div>
               </div>
             </section>
-
-            <ServiceCatalog />
 
             <section className="cta-banner max-w-6xl mx-auto px-4 sm:px-6">
               <div className="cta-banner-inner">

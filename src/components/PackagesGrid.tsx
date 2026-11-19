@@ -91,7 +91,11 @@ export const PackagesGrid: React.FC<PackagesGridProps> = ({ game, selectedPackag
         >
           <span className="package-tag pass-tag">PASE FREE FIRE</span>
           <div className="package-art pass-art">
-            <img src="https://i.ibb.co/HJ8h56n/pase-card.jpg" alt="Pase de Free Fire" loading="lazy" />
+            <img
+              src="https://i.ibb.co/Z1hyMTxF/pase-card-removebg-preview.png"
+              alt="Pase de Free Fire"
+              loading="lazy"
+            />
           </div>
           <div className="package-amount pass-title">Pase</div>
           <div className="package-bonus muted">Pase de temporada</div>

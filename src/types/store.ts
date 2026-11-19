@@ -1,5 +1,8 @@
 export type GameId = 'freefire' | 'roblox';
 
+/** Pestaña activa del catálogo: los dos juegos con flujo de compra, más el catálogo de servicios. */
+export type CatalogTab = GameId | 'social';
+
 export interface DiamondPackage {
   id: string;
   /** Total que recibe el cliente (incluye bono si lo hay) */
