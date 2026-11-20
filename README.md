@@ -9,5 +9,5 @@ Desarrollada con Vite + React 19 + TypeScript + Tailwind CSS v4.
 - Recargas inmediatas de Robux por nombre de usuario (Roblox).
 - Validación de formato en cliente (rápido, sin dependencias de bases de datos externas ni cuotas).
 - Métodos de pago populares en Colombia: Nequi, Bancolombia y PayPal.
-- Generación automática de comprobantes y pedidos directos a WhatsApp (+57 301 688 6549).
+- Generación automática de comprobantes y pedidos directos a WhatsApp (+57 301 420 0366).
 - Rendimiento ultra fluido optimizado a 60+ FPS para dispositivos móviles.

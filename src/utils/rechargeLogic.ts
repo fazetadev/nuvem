@@ -1,7 +1,7 @@
 import type { DiamondPackage, PaymentMethod, OrderRecord, CatalogTab } from '../types/store.ts';
 
-export const OFFICIAL_PHONE = '573016886549';
-export const OFFICIAL_PHONE_FORMATTED = '+57 301 688 6549';
+export const OFFICIAL_PHONE = '573014200366';
+export const OFFICIAL_PHONE_FORMATTED = '+57 301 420 0366';
 export const OFFICIAL_COMMUNITY_URL = 'https://whatsapp.com/channel/0029VbDccG0LNSa8QZ2BYe1o';
 
 // Diamantes: `diamonds` = total que recibe el cliente (base + bono).
@@ -302,7 +302,7 @@ export function generateOrderId(): string {
 
 /**
  * Generates direct WhatsApp message link for Nuvem Shop customer support
- * Target Phone: +57 301 688 6549
+ * Target Phone: +57 301 420 0366
  */
 export function generateWhatsAppLink(order: {
   orderId: string;
@@ -316,7 +316,7 @@ export function generateWhatsAppLink(order: {
   discountCOP?: number;
   usdTotal?: number;
 }): string {
-  const phone = OFFICIAL_PHONE; // 573016886549
+  const phone = OFFICIAL_PHONE; // 573014200366
   const tab: CatalogTab = order.game || 'freefire';
   const g = GAME_INFO[tab];
   const playerLine = order.playerId ? `🎮 ${g.accountLabel}: ${order.playerId}\n` : '';

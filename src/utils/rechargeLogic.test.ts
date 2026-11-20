@@ -43,8 +43,8 @@ test('diamond packages match the price list exactly', () => {
 });
 
 test('official phone number and WhatsApp channel match configured links', () => {
-  assert.equal(OFFICIAL_PHONE, '573016886549');
-  assert.equal(OFFICIAL_PHONE_FORMATTED, '+57 301 688 6549');
+  assert.equal(OFFICIAL_PHONE, '573014200366');
+  assert.equal(OFFICIAL_PHONE_FORMATTED, '+57 301 420 0366');
   assert.equal(OFFICIAL_COMMUNITY_URL, 'https://whatsapp.com/channel/0029VbDccG0LNSa8QZ2BYe1o');
 });
 
@@ -64,7 +64,7 @@ test('validatePlayerId handles numeric Free Fire UIDs', () => {
   assert.equal(validatePlayerId('87261928').isValid, true);
 });
 
-test('generateWhatsAppLink sends message to +57 301 688 6549', () => {
+test('generateWhatsAppLink sends message to +57 301 420 0366', () => {
   const link = generateWhatsAppLink({
     orderId: 'NUVEM-902184',
     playerId: '1048291048',
@@ -72,14 +72,14 @@ test('generateWhatsAppLink sends message to +57 301 688 6549', () => {
     totalCOP: 16000,
     paymentMethod: 'Nequi',
   });
-  assert.ok(link.includes('573016886549'), 'Must contain official target phone number');
+  assert.ok(link.includes('573014200366'), 'Must contain official target phone number');
   assert.ok(link.includes('NUVEM-902184'));
   assert.ok(link.includes('1048291048'));
 });
 
-test('getGeneralWhatsAppLink points to +57 301 688 6549', () => {
+test('getGeneralWhatsAppLink points to +57 301 420 0366', () => {
   const link = getGeneralWhatsAppLink();
-  assert.ok(link.startsWith('https://wa.me/573016886549'));
+  assert.ok(link.startsWith('https://wa.me/573014200366'));
 });
 
 test('Robux packages exist for Roblox store', () => {

@@ -106,7 +106,7 @@ export const OrderTrackerModal: React.FC<OrderTrackerModalProps> = ({
                 {t("Si acabas de realizar una recarga en otro dispositivo, puedes consultar directamente por WhatsApp a soporte.")}
               </p>
               <a
-                href="https://wa.me/573016886549?text=Hola%20Nuvem%20Store%2C%20quisiera%20consultar%20el%20estado%20de%20mi%20recarga%20de%20Free%20Fire"
+                href="https://wa.me/573014200366?text=Hola%20Nuvem%20Store%2C%20quisiera%20consultar%20el%20estado%20de%20mi%20recarga%20de%20Free%20Fire"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-emerald-300 bg-emerald-950/60 border border-emerald-500/30 rounded-xl hover:bg-emerald-900/60 transition-colors"

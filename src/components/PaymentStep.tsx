@@ -148,7 +148,7 @@ export const PaymentStep: React.FC<PaymentStepProps> = ({
           <input
             id="customer-phone"
             type="tel"
-            placeholder={t("Ej: 301 688 6549")}
+            placeholder={t("Ej: 301 420 0366")}
             value={phone}
             onChange={(e) => onPhoneChange(e.target.value)}
             className="w-full h-11 px-3.5 rounded-xl bg-[#080305] border border-blue-950/70 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 text-white placeholder-slate-500 text-xs sm:text-sm font-medium outline-none"

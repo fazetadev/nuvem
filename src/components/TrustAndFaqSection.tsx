@@ -29,7 +29,7 @@ export const TrustAndFaqSection: React.FC = () => {
     },
     {
       q: t('¿Qué hago si escribí mal mi ID o tengo un problema?'),
-      a: t('Nuestro equipo de soporte humano está disponible todos los días en WhatsApp (+57 301 688 6549). Si nos contactas inmediatamente antes de procesar el pedido, corregimos tu ID al instante.'),
+      a: t('Nuestro equipo de soporte humano está disponible todos los días en WhatsApp (+57 301 420 0366). Si nos contactas inmediatamente antes de procesar el pedido, corregimos tu ID al instante.'),
     },
   ];
 
